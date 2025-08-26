@@ -1,0 +1,5 @@
+# Ignore EWARM debug directory
+EWARM/Gateway_407/
+
+# Ignore VS Code settings
+.vscode/
