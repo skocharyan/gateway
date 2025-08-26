@@ -25,7 +25,7 @@ if not "%~1" == "" goto debugFile
 
 @echo on 
 
-"C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" --backend -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
+"C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" --backend -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
 
 @echo off 
 goto end 
@@ -34,7 +34,7 @@ goto end
 
 @echo on 
 
-"C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
+"C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" "--debug_file=%~1" --backend -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
 
 @echo off 
 :end

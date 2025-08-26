@@ -1,47 +1,51 @@
-"C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\NetworkInterface\STM32Fxx\stm32fxx_hal_eth.c"
+"C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\NetworkInterface\STM32Fxx\stm32fxx_hal_eth.c"
 -std=c11
 -ferror-limit=0
 -fbracket-depth=512
 -funsigned-char
 -MD
 -MF
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\BrowseInfo\portable_7947777220660125680.dir\stm32fxx_hal_eth.pbi.dep
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\BrowseInfo\portable_7947777220660125680.dir\stm32fxx_hal_eth.pbi.dep
 -o
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\BrowseInfo\portable_7947777220660125680.dir\stm32fxx_hal_eth.pbi
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\BrowseInfo\portable_7947777220660125680.dir\stm32fxx_hal_eth.pbi
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\NetworkInterface\STM32Fxx
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\NetworkInterface\STM32Fxx
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../Core/Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Inc\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../USB_DEVICE/App
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Ethernet\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../USB_DEVICE/Target
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Cli\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../USB_DEVICE/App\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../USB_DEVICE/Target\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../ThirdParty/FreeRTOS/Source
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../ThirdParty/FreeRTOS/Source/include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../ThirdParty/FreeRTOS/Source/portable/IAR/ARM_CM4F
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../ThirdParty/FreeRTOS/Source\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../ThirdParty/FreeRTOS-Plus-Cli
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../ThirdParty/FreeRTOS/Source/include\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../ThirdParty/FreeRTOS-Plus-TCP/source/portable/Compiler/IAR
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../ThirdParty/FreeRTOS/Source/portable/IAR/ARM_CM4F\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../ThirdParty/FreeRTOS-Plus-TCP/source/include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../ThirdParty/FreeRTOS-Plus-Cli\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../ThirdParty/FreeRTOS-Plus-TCP/source/portable/NetworkInterface/include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../ThirdParty/FreeRTOS-Plus-TCP/source/portable/Compiler/IAR\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../Drivers/CMSIS/Device/ST/STM32F4xx/Include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../ThirdParty/FreeRTOS-Plus-TCP/source/include\
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/../Drivers/CMSIS/Include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../ThirdParty/FreeRTOS-Plus-TCP/source/portable/NetworkInterface/include\
+-I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Drivers/CMSIS/Device/ST/STM32F4xx/Include\
+-I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Drivers/CMSIS/Include\
 -I
 C:\iar\ewarm-9.60.3\arm\inc\c\aarch32
 -I
@@ -49,37 +53,41 @@ C:\iar\ewarm-9.60.3\arm\inc
 -I
 C:\iar\ewarm-9.60.3\arm\inc\c
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\Core\Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Inc
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\USB_DEVICE\App
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Ethernet
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\USB_DEVICE\Target
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Cli
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\Drivers\STM32F4xx_HAL_Driver\Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\USB_DEVICE\App
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\USB_DEVICE\Target
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\Middlewares\ST\STM32_USB_Device_Library\Core\Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Drivers\STM32F4xx_HAL_Driver\Inc
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Drivers\STM32F4xx_HAL_Driver\Inc\Legacy
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS\Source
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Middlewares\ST\STM32_USB_Device_Library\Core\Inc
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS\Source\include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS\Source\portable\IAR\ARM_CM4F
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS\Source
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS-Plus-Cli
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS\Source\include
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\Compiler\IAR
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS\Source\portable\IAR\ARM_CM4F
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS-Plus-TCP\source\include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS-Plus-Cli
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\NetworkInterface\include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\Compiler\IAR
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS-Plus-TCP\source\include
 -I
-C:\Users\Admin\Desktop\Dispenser\Gateway\Drivers\CMSIS\Include
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\ThirdParty\FreeRTOS-Plus-TCP\source\portable\NetworkInterface\include
+-I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+-I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Drivers\CMSIS\Include
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0

@@ -359,6 +359,8 @@
                 <option>
                     <name>CCIncludePath2</name>
                     <state>$PROJ_DIR$/../Core/Inc</state>
+                    <state>$PROJ_DIR$/../Core/Ethernet</state>
+                    <state>$PROJ_DIR$/../Core/Cli</state>
                     <state>$PROJ_DIR$/../USB_DEVICE/App</state>
                     <state>$PROJ_DIR$/../USB_DEVICE/Target</state>
                     <state>$PROJ_DIR$/../Drivers/STM32F4xx_HAL_Driver/Inc</state>
@@ -1136,7 +1138,34 @@
             <group>
                 <name>Core</name>
                 <group>
+                    <name>Cli</name>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Cli\cli.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Cli\cli.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Cli\cli_helper.c</name>
+                    </file>
+                </group>
+                <group>
+                    <name>Ethernet</name>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Ethernet\eth.h</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Ethernet\eth_helper.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Ethernet\eth_init.c</name>
+                    </file>
+                </group>
+                <group>
                     <name>include</name>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Inc\AppConfig.h</name>
+                    </file>
                     <file>
                         <name>$PROJ_DIR$\..\Core\Inc\FreeRTOSConfig.h</name>
                     </file>

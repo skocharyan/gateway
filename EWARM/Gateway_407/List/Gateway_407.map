@@ -1,124 +1,229 @@
 ###############################################################################
 #
-# IAR ELF Linker V9.60.3.422/W64 for ARM                  26/Aug/2025  18:28:23
+# IAR ELF Linker V9.60.3.422/W64 for ARM                  26/Aug/2025  22:47:10
 # Copyright 2007-2024 IAR Systems AB.
 #
 #    Output file  =
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Exe\Gateway_407.out
+#        C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Exe\Gateway_407.out
 #    Map file     =
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\List\Gateway_407.map
+#        C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\List\Gateway_407.map
 #    Command line =
-#        -f
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Exe\Gateway_407.out.rsp
-#        (C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\BufferAllocation_2.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\event_groups.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_ARP.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_BitConfig.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plu-Cli_11501085631675054166.dir\FreeRTOS_CLI.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DHCP.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DHCPv6.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Cache.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Callback.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Networking.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Parser.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_ICMP.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IP.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IP_Timers.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IP_Utils.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv4.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv4_Sockets.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv4_Utils.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv6.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv6_Sockets.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv6_Utils.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_ND.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_RA.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Routing.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Sockets.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Stream_Buffer.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_IP.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_IP_IPv4.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_IP_IPv6.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Reception.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_State_Handling.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_State_Handling_IPv4.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_State_Handling_IPv6.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Transmission.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Transmission_IPv4.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Transmission_IPv6.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Utils.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Utils_IPv4.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Utils_IPv6.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_WIN.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Tiny_TCP.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_UDP_IP.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_UDP_IPv4.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_UDP_IPv6.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\gpio.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir\heap_4.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\list.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\main.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\NetworkInterface.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\phyHandling.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir\port.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir\portasm.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\queue.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\spi.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\EWARM_18443280873093131863.dir\startup_stm32f407xx.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_cortex.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_dma.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_dma_ex.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_exti.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_flash.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_flash_ex.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_flash_ramfunc.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_gpio.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\stm32f4xx_hal_msp.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pcd.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pcd_ex.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pwr.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pwr_ex.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_rcc.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_rcc_ex.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_spi.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_tim.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_tim_ex.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\stm32f4xx_hal_timebase_tim.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\stm32f4xx_it.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_dma.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_exti.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_gpio.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_rcc.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_spi.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_tim.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_usb.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_utils.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\stm32fxx_hal_eth.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\stream_buffer.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\CMSIS_6603591812247902717.dir\system_stm32f4xx.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\tasks.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\tim.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\timers.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir\usb_device.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_cdc.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir\usbd_cdc_if.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Target_2794460481546860895.dir\usbd_conf.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_core.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_ctlreq.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir\usbd_desc.o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_ioreq.o
-#        --no_out_extension -o
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Exe\Gateway_407.out
-#        --redirect _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb
-#        --map
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\List\Gateway_407.map
-#        --config
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM/stm32f407xx_flash.icf
-#        --semihosting --entry __iar_program_start --vfe --text_out locale
-#        --cpu=Cortex-M4 --fpu=VFPv4_sp) --dependencies=n
-#        C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Exe\Gateway_407.out.iar_deps
+#        -f "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Exe\Gateway_407.out.rsp"
+#        ("C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\BufferAllocation_2.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Ethernet_5605320102233052314.dir\eth_helper.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Ethernet_5605320102233052314.dir\eth_init.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\event_groups.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_ARP.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_BitConfig.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plu-Cli_11501085631675054166.dir\FreeRTOS_CLI.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DHCP.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DHCPv6.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Cache.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Callback.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Networking.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_DNS_Parser.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_ICMP.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IP.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IP_Timers.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IP_Utils.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv4.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv4_Sockets.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv4_Utils.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv6.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv6_Sockets.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_IPv6_Utils.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_ND.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_RA.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Routing.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Sockets.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Stream_Buffer.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_IP.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_IP_IPv4.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_IP_IPv6.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Reception.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_State_Handling.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_State_Handling_IPv4.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_State_Handling_IPv6.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Transmission.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Transmission_IPv4.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Transmission_IPv6.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Utils.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Utils_IPv4.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_Utils_IPv6.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_TCP_WIN.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_Tiny_TCP.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_UDP_IP.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_UDP_IPv4.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir\FreeRTOS_UDP_IPv6.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\gpio.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir\heap_4.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\list.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\main.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\NetworkInterface.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\phyHandling.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir\port.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir\portasm.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\queue.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\spi.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\EWARM_18443280873093131863.dir\startup_stm32f407xx.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_cortex.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_dma.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_dma_ex.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_exti.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_flash.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_flash_ex.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_flash_ramfunc.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_gpio.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\stm32f4xx_hal_msp.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pcd.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pcd_ex.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pwr.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_pwr_ex.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_rcc.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_rcc_ex.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_spi.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_tim.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_hal_tim_ex.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\stm32f4xx_hal_timebase_tim.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\stm32f4xx_it.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_dma.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_exti.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_gpio.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_rcc.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_spi.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_tim.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_usb.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir\stm32f4xx_ll_utils.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir\stm32fxx_hal_eth.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\stream_buffer.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\CMSIS_6603591812247902717.dir\system_stm32f4xx.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\tasks.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir\tim.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir\timers.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir\usb_device.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_cdc.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir\usbd_cdc_if.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\Target_2794460481546860895.dir\usbd_conf.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_core.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_ctlreq.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir\usbd_desc.o"
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir\usbd_ioreq.o"
+#        --no_out_extension -o "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\Exe\Gateway_407.out" --redirect
+#        _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb --map
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM\Gateway_407\List\Gateway_407.map" --config
+#        "C:\Users\Koche\Desktop\Work\Smart Dispenser
+#        PRJ\gateway\EWARM/stm32f407xx_flash.icf" --semihosting --entry
+#        __iar_program_start --vfe --text_out locale --cpu=Cortex-M4
+#        --fpu=VFPv4_sp) --dependencies=n "C:\Users\Koche\Desktop\Work\Smart
+#        Dispenser PRJ\gateway\EWARM\Gateway_407\Exe\Gateway_407.out.iar_deps"
 #
 ###############################################################################
 
@@ -160,67 +265,67 @@ initialize by copy { rw };
                              - 0x800'0188              0x188
 
 "P1":                                                 0x4136
-  .text              ro code   0x800'0188          4   0x9ec  stm32f4xx_ll_usb.o [8]
-  .text              ro code   0x800'0b74          4    0x28  stm32f4xx_hal.o [8]
-  .text              ro code   0x800'0b9c          4     0xc  stm32f4xx_hal.o [8]
-  .text              ro code   0x800'0ba8          4   0x990  stm32f4xx_hal_pcd.o [8]
-  .text              ro code   0x800'1538          4   0x24c  usbd_conf.o [9]
-  .text              ro code   0x800'1784          4    0x18  ABImemcpy_small.o [15]
-  .text              ro code   0x800'179c          2     0x2  stm32f4xx_hal_pcd_ex.o [8]
-  .text              ro code   0x800'179e          2    0x7e  lz77_init_single.o [15]
-  .text              ro code   0x800'181c          4   0x17c  stm32f4xx_hal_rcc.o [8]
-  .text              ro code   0x800'1998          4     0x6  ABImemclr4.o [15]
-  .text              ro code   0x800'19a0          4   0x1ec  stm32f4xx_hal_gpio.o [8]
-  .text              ro code   0x800'1b8c          4    0x90  stm32f4xx_hal_cortex.o [8]
-  .text              ro code   0x800'1c1c          2   0x362  usbd_core.o [10]
+  .text              ro code   0x800'0188          4   0x9ec  stm32f4xx_ll_usb.o [9]
+  .text              ro code   0x800'0b74          4    0x28  stm32f4xx_hal.o [9]
+  .text              ro code   0x800'0b9c          4     0xc  stm32f4xx_hal.o [9]
+  .text              ro code   0x800'0ba8          4   0x990  stm32f4xx_hal_pcd.o [9]
+  .text              ro code   0x800'1538          4   0x24c  usbd_conf.o [10]
+  .text              ro code   0x800'1784          4    0x18  ABImemcpy_small.o [16]
+  .text              ro code   0x800'179c          2     0x2  stm32f4xx_hal_pcd_ex.o [9]
+  .text              ro code   0x800'179e          2    0x7e  lz77_init_single.o [16]
+  .text              ro code   0x800'181c          4   0x17c  stm32f4xx_hal_rcc.o [9]
+  .text              ro code   0x800'1998          4     0x6  ABImemclr4.o [16]
+  .text              ro code   0x800'19a0          4   0x1ec  stm32f4xx_hal_gpio.o [9]
+  .text              ro code   0x800'1b8c          4    0x90  stm32f4xx_hal_cortex.o [9]
+  .text              ro code   0x800'1c1c          2   0x362  usbd_core.o [11]
   .text              ro code   0x800'1f80          4    0xd4  main.o [3]
-  .text              ro code   0x800'2054          2    0x4a  stm32f4xx_hal_pcd_ex.o [8]
-  .text              ro code   0x800'20a0          4    0x60  stm32f4xx_hal_rcc.o [8]
+  .text              ro code   0x800'2054          2    0x4a  stm32f4xx_hal_pcd_ex.o [9]
+  .text              ro code   0x800'20a0          4    0x60  stm32f4xx_hal_rcc.o [9]
   .text              ro code   0x800'2100          4    0xa0  stm32f4xx_hal_timebase_tim.o [3]
-  .text              ro code   0x800'21a0          4    0x32  ABImemset48.o [15]
-  .text              ro code   0x800'21d4          4   0x504  usbd_ctlreq.o [10]
-  .text              ro code   0x800'26d8          2    0x64  usbd_ioreq.o [10]
-  .text              ro code   0x800'273c          4    0x34  stm32f4xx_hal.o [8]
+  .text              ro code   0x800'21a0          4    0x32  ABImemset48.o [16]
+  .text              ro code   0x800'21d4          4   0x504  usbd_ctlreq.o [11]
+  .text              ro code   0x800'26d8          2    0x64  usbd_ioreq.o [11]
+  .text              ro code   0x800'273c          4    0x34  stm32f4xx_hal.o [9]
   .text              ro code   0x800'2770          4   0x3e6  gpio.o [3]
   .text              ro code   0x800'2b58          4    0x54  usb_device.o [1]
-  .text              ro code   0x800'2bac          4   0x310  stm32f4xx_hal_rcc.o [8]
-  .text              ro code   0x800'2ebc          4    0x10  stm32f4xx_hal.o [8]
-  .text              ro code   0x800'2ecc          4   0x106  I64DivMod_small.o [15]
-  .text              ro code   0x800'2fd4          4   0x2e0  stm32f4xx_hal_tim.o [8]
+  .text              ro code   0x800'2bac          4   0x310  stm32f4xx_hal_rcc.o [9]
+  .text              ro code   0x800'2ebc          4    0x10  stm32f4xx_hal.o [9]
+  .text              ro code   0x800'2ecc          4   0x106  I64DivMod_small.o [16]
+  .text              ro code   0x800'2fd4          4   0x2e0  stm32f4xx_hal_tim.o [9]
   .text              ro code   0x800'32b4          4    0x38  stm32f4xx_hal_msp.o [3]
-  .text              ro code   0x800'32ec          4    0x12  ABImemset_small.o [15]
-  .text              ro code   0x800'3300          4    0xee  stm32f4xx_ll_gpio.o [8]
-  .text              ro code   0x800'33f0          4    0xb0  stm32f4xx_ll_exti.o [8]
-  .text              ro code   0x800'34a0          4   0x3e2  usbd_cdc.o [10]
-  .text              ro code   0x800'3884          4     0x2  I64DivZer.o [15]
-  .text              ro code   0x800'3886          2     0x2  stm32f4xx_hal_tim.o [8]
-  .text              ro code   0x800'3888          2     0x2  stm32f4xx_hal_tim.o [8]
-  .text              ro code   0x800'388a          2     0x2  stm32f4xx_hal_tim.o [8]
-  .text              ro code   0x800'388c          2     0x2  stm32f4xx_hal_tim_ex.o [8]
-  .text              ro code   0x800'388e          2     0x2  stm32f4xx_hal_tim.o [8]
-  .text              ro code   0x800'3890          2     0x2  stm32f4xx_hal_tim_ex.o [8]
-  .text              ro code   0x800'3892          2     0x2  stm32f4xx_hal_tim.o [8]
-  .text              ro code   0x800'3894          4     0x6  ABImemclr.o [15]
-  .text              ro code   0x800'389c          4   0x2fc  tasks.o [7]
-  .text              ro code   0x800'3b98          4    0x76  port.o [11]
+  .text              ro code   0x800'32ec          4    0x12  ABImemset_small.o [16]
+  .text              ro code   0x800'3300          4    0xee  stm32f4xx_ll_gpio.o [9]
+  .text              ro code   0x800'33f0          4    0xb0  stm32f4xx_ll_exti.o [9]
+  .text              ro code   0x800'34a0          4   0x3e2  usbd_cdc.o [11]
+  .text              ro code   0x800'3884          4     0x2  I64DivZer.o [16]
+  .text              ro code   0x800'3886          2     0x2  stm32f4xx_hal_tim.o [9]
+  .text              ro code   0x800'3888          2     0x2  stm32f4xx_hal_tim.o [9]
+  .text              ro code   0x800'388a          2     0x2  stm32f4xx_hal_tim.o [9]
+  .text              ro code   0x800'388c          2     0x2  stm32f4xx_hal_tim_ex.o [9]
+  .text              ro code   0x800'388e          2     0x2  stm32f4xx_hal_tim.o [9]
+  .text              ro code   0x800'3890          2     0x2  stm32f4xx_hal_tim_ex.o [9]
+  .text              ro code   0x800'3892          2     0x2  stm32f4xx_hal_tim.o [9]
+  .text              ro code   0x800'3894          4     0x6  ABImemclr.o [16]
+  .text              ro code   0x800'389c          4   0x2fc  tasks.o [8]
+  .text              ro code   0x800'3b98          4    0x76  port.o [12]
   .text              ro code   0x800'3c10          4   0x100  usbd_desc.o [1]
-  CODE               ro code   0x800'3d10          4    0xb0  portasm.o [11]
-  .text              ro code   0x800'3dc0          4    0x7c  NetworkInterface.o [12]
-  .text              ro code   0x800'3e3c          4    0x40  stm32fxx_hal_eth.o [12]
-  .text              ro code   0x800'3e7c          2     0x2  stm32fxx_hal_eth.o [12]
+  CODE               ro code   0x800'3d10          4    0xb0  portasm.o [12]
+  .text              ro code   0x800'3dc0          4    0x7c  NetworkInterface.o [13]
+  .text              ro code   0x800'3e3c          4    0x40  stm32fxx_hal_eth.o [13]
+  .text              ro code   0x800'3e7c          2     0x2  stm32fxx_hal_eth.o [13]
   .text              ro code   0x800'3e80          4    0x48  usbd_cdc_if.o [1]
-  .text              ro code   0x800'3ec8          2    0x38  zero_init3.o [15]
-  .text              ro code   0x800'3f00          4    0x28  data_init.o [15]
-  .text              ro code   0x800'3f28          4    0x22  fpinit_M.o [14]
+  .text              ro code   0x800'3ec8          2    0x38  zero_init3.o [16]
+  .text              ro code   0x800'3f00          4    0x28  data_init.o [16]
+  .text              ro code   0x800'3f28          4    0x22  fpinit_M.o [15]
   .iar.init_table    const     0x800'3f4c          4    0x20  - Linker created -
   .text              ro code   0x800'3f6c          4    0x20  stm32f4xx_it.o [3]
   .text              ro code   0x800'3f8c          4    0x20  system_stm32f4xx.o [2]
-  .text              ro code   0x800'3fac          4    0x1e  cmain.o [15]
-  .text              ro code   0x800'3fca          2     0x4  low_level_init.o [13]
-  .text              ro code   0x800'3fce          2     0x4  exit.o [13]
-  .text              ro code   0x800'3fd4          4     0xa  cexit.o [15]
-  .text              ro code   0x800'3fe0          4    0x14  exit.o [16]
-  .text              ro code   0x800'3ff4          4    0x1c  cstartup_M.o [15]
+  .text              ro code   0x800'3fac          4    0x1e  cmain.o [16]
+  .text              ro code   0x800'3fca          2     0x4  low_level_init.o [14]
+  .text              ro code   0x800'3fce          2     0x4  exit.o [14]
+  .text              ro code   0x800'3fd4          4     0xa  cexit.o [16]
+  .text              ro code   0x800'3fe0          4    0x14  exit.o [17]
+  .text              ro code   0x800'3ff4          4    0x1c  cstartup_M.o [16]
   .text              ro code   0x800'4010          4    0x10  startup_stm32f407xx.o [4]
   .rodata            const     0x800'4020          4     0x8  system_stm32f4xx.o [2]
   .text              ro code   0x800'4028          2     0x4  startup_stm32f407xx.o [4]
@@ -301,21 +406,21 @@ initialize by copy { rw };
   .text              ro code   0x800'4154          2     0x4  startup_stm32f407xx.o [4]
   .text              ro code   0x800'4158          2     0x4  startup_stm32f407xx.o [4]
   .text              ro code   0x800'415c          2     0x4  startup_stm32f407xx.o [4]
-  .rodata            const     0x800'4160                0x0  zero_init3.o [15]
-  .rodata            const     0x800'4160                0x0  lz77_init_single.o [15]
+  .rodata            const     0x800'4160                0x0  zero_init3.o [16]
+  .rodata            const     0x800'4160                0x0  lz77_init_single.o [16]
   Initializer bytes  const     0x800'4160              0x15e  <for P2-1>
                              - 0x800'42be             0x4136
 
 "P2", part 1 of 3:                                    0x3200
   P2-1                        0x2000'0000             0x3200  <Init block>
-    .data            inited   0x2000'0000          4  0x3054  NetworkInterface.o [12]
-    .data            inited   0x2000'3054          4     0xc  port.o [11]
-    .data            inited   0x2000'3060          4     0xc  stm32f4xx_hal.o [8]
+    .data            inited   0x2000'0000          4  0x3054  NetworkInterface.o [13]
+    .data            inited   0x2000'3054          4     0xc  port.o [12]
+    .data            inited   0x2000'3060          4     0xc  stm32f4xx_hal.o [9]
     .data            inited   0x2000'306c          4     0x4  system_stm32f4xx.o [2]
-    .data            inited   0x2000'3070          4    0xa4  tasks.o [7]
-    .data            inited   0x2000'3114          4     0xc  usbd_cdc.o [10]
-    .data            inited   0x2000'3120          4    0x38  usbd_cdc.o [10]
-    .data            inited   0x2000'3158          4    0x44  usbd_cdc.o [10]
+    .data            inited   0x2000'3070          4    0xa4  tasks.o [8]
+    .data            inited   0x2000'3114          4     0xc  usbd_cdc.o [11]
+    .data            inited   0x2000'3120          4    0x38  usbd_cdc.o [11]
+    .data            inited   0x2000'3158          4    0x44  usbd_cdc.o [11]
     .data            inited   0x2000'319c          4    0x14  usbd_cdc_if.o [1]
     .data            inited   0x2000'31b0          4    0x1c  usbd_desc.o [1]
     .data            inited   0x2000'31cc          4    0x14  usbd_desc.o [1]
@@ -325,14 +430,14 @@ initialize by copy { rw };
 
 "P2", part 2 of 3:                                    0x1da0
   .bss               zero     0x2000'3200          4  0x1000  usbd_cdc_if.o [1]
-  .bss               zero     0x2000'4200          4   0x4e4  usbd_conf.o [9]
+  .bss               zero     0x2000'4200          4   0x4e4  usbd_conf.o [10]
   .bss               zero     0x2000'46e4          4   0x2dc  usb_device.o [1]
-  .bss               zero     0x2000'49c0          4   0x220  usbd_conf.o [9]
+  .bss               zero     0x2000'49c0          4   0x220  usbd_conf.o [10]
   .bss               zero     0x2000'4be0          4   0x200  usbd_desc.o [1]
-  .bss               zero     0x2000'4de0          4   0x12c  tasks.o [7]
-  .bss               zero     0x2000'4f0c          4    0x48  NetworkInterface.o [12]
+  .bss               zero     0x2000'4de0          4   0x12c  tasks.o [8]
+  .bss               zero     0x2000'4f0c          4    0x48  NetworkInterface.o [13]
   .bss               zero     0x2000'4f54          4    0x48  stm32f4xx_hal_timebase_tim.o [3]
-  .bss               zero     0x2000'4f9c                0x1  usbd_ctlreq.o [10]
+  .bss               zero     0x2000'4f9c                0x1  usbd_ctlreq.o [11]
                             - 0x2000'4f9d             0x1d9d
 
 "P2", part 3 of 3:                                     0x400
@@ -376,19 +481,19 @@ command line/config:
     -------------------------------------------------------
     Total:
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir: [1]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir: [1]
     usb_device.o                       84               732
     usbd_cdc_if.o                      72             4'116
     usbd_desc.o                       256        3      592
     -------------------------------------------------------
     Total:                            412        3    5'440
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\CMSIS_6603591812247902717.dir: [2]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\CMSIS_6603591812247902717.dir: [2]
     system_stm32f4xx.o                 32        9        4
     -------------------------------------------------------
     Total:                             32        9        4
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir: [3]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir: [3]
     gpio.o                            998
     main.o                            212
     stm32f4xx_hal_msp.o                56
@@ -397,25 +502,29 @@ C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_132479891687
     -------------------------------------------------------
     Total:                          1'458                72
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\EWARM_18443280873093131863.dir: [4]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\EWARM_18443280873093131863.dir: [4]
     startup_stm32f407xx.o             720
     -------------------------------------------------------
     Total:                            720
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plu-Cli_11501085631675054166.dir: [5]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\Ethernet_5605320102233052314.dir: [5]
     -------------------------------------------------------
     Total:
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir: [6]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plu-Cli_11501085631675054166.dir: [6]
     -------------------------------------------------------
     Total:
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir: [7]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir: [7]
+    -------------------------------------------------------
+    Total:
+
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir: [8]
     tasks.o                           764        4      464
     -------------------------------------------------------
     Total:                            764        4      464
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir: [8]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir: [9]
     stm32f4xx_hal.o                   120                12
     stm32f4xx_hal_cortex.o            144
     stm32f4xx_hal_gpio.o              492
@@ -430,12 +539,12 @@ C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Dri
     -------------------------------------------------------
     Total:                          8'244                12
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Target_2794460481546860895.dir: [9]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\Target_2794460481546860895.dir: [10]
     usbd_conf.o                       588             1'796
     -------------------------------------------------------
     Total:                            588             1'796
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir: [10]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir: [11]
     usbd_cdc.o                        994        4      136
     usbd_core.o                       866
     usbd_ctlreq.o                   1'284                 1
@@ -443,30 +552,30 @@ C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\USB_Device_Librar
     -------------------------------------------------------
     Total:                          3'244        4      137
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir: [11]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir: [12]
     port.o                            118                12
     portasm.o                         176
     -------------------------------------------------------
     Total:                            294                12
 
-C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir: [12]
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir: [13]
     NetworkInterface.o                124      338   12'444
     stm32fxx_hal_eth.o                 66
     -------------------------------------------------------
     Total:                            190      338   12'444
 
-dl7M_tlf.a: [13]
+dl7M_tlf.a: [14]
     exit.o                              4
     low_level_init.o                    4
     -------------------------------------------------------
     Total:                              8
 
-m7M_tls.a: [14]
+m7M_tls.a: [15]
     fpinit_M.o                         34
     -------------------------------------------------------
     Total:                             34
 
-rt7M_tl.a: [15]
+rt7M_tl.a: [16]
     ABImemclr.o                         6
     ABImemclr4.o                        6
     ABImemcpy_small.o                  24
@@ -483,7 +592,7 @@ rt7M_tl.a: [15]
     -------------------------------------------------------
     Total:                            658
 
-shb_l.a: [16]
+shb_l.a: [17]
     exit.o                             20
     -------------------------------------------------------
     Total:                             20
@@ -502,7 +611,7 @@ Entry                       Address    Size  Type      Object
 -----                       -------    ----  ----      ------
 .iar.init_table$$Base    0x800'3f4c           --   Gb  - Linker created -
 .iar.init_table$$Limit   0x800'3f6c           --   Gb  - Linker created -
-?main                    0x800'3fad          Code  Gb  cmain.o [15]
+?main                    0x800'3fad          Code  Gb  cmain.o [16]
 ADC_IRQHandler           0x800'4071          Code  Wk  startup_stm32f407xx.o [4]
 AHBPrescTable            0x800'3f9c    0x10  Data  Gb  system_stm32f4xx.o [2]
 APBPrescTable            0x800'4020     0x8  Data  Gb  system_stm32f4xx.o [2]
@@ -555,9 +664,9 @@ DMA2_Stream6_IRQHandler
                          0x800'4131          Code  Wk  startup_stm32f407xx.o [4]
 DMA2_Stream7_IRQHandler
                          0x800'4135          Code  Wk  startup_stm32f407xx.o [4]
-DMATxDescToClear        0x2000'0044     0x4  Data  Lc  NetworkInterface.o [12]
+DMATxDescToClear        0x2000'0044     0x4  Data  Lc  NetworkInterface.o [13]
 DebugMon_Handler         0x800'3f77     0x2  Code  Gb  stm32f4xx_it.o [3]
-ETH_IRQHandler           0x800'3e29     0x6  Code  Gb  NetworkInterface.o [12]
+ETH_IRQHandler           0x800'3e29     0x6  Code  Gb  NetworkInterface.o [13]
 ETH_WKUP_IRQHandler      0x800'4119          Code  Wk  startup_stm32f407xx.o [4]
 EXTI0_IRQHandler         0x800'4041          Code  Wk  startup_stm32f407xx.o [4]
 EXTI15_10_IRQHandler     0x800'40c9          Code  Wk  startup_stm32f407xx.o [4]
@@ -571,81 +680,81 @@ FLASH_IRQHandler         0x800'4039          Code  Wk  startup_stm32f407xx.o [4]
 FPU_IRQHandler           0x800'415d          Code  Wk  startup_stm32f407xx.o [4]
 FSMC_IRQHandler          0x800'40e9          Code  Wk  startup_stm32f407xx.o [4]
 FS_Desc                 0x2000'31b0    0x1c  Data  Gb  usbd_desc.o [1]
-HAL_Delay                0x800'0b75    0x28  Code  Wk  stm32f4xx_hal.o [8]
-HAL_ETH_ErrorCallback    0x800'3e7d     0x2  Code  Wk  stm32fxx_hal_eth.o [12]
-HAL_ETH_IRQHandler       0x800'3e3d    0x3a  Code  Gb  stm32fxx_hal_eth.o [12]
-HAL_ETH_RxCpltCallback   0x800'3dc1    0x1e  Code  Gb  NetworkInterface.o [12]
-HAL_ETH_TxCpltCallback   0x800'3df3    0x1e  Code  Gb  NetworkInterface.o [12]
-HAL_GPIO_Init            0x800'19a1   0x1be  Code  Gb  stm32f4xx_hal_gpio.o [8]
-HAL_GetTick              0x800'0b9d     0xc  Code  Wk  stm32f4xx_hal.o [8]
-HAL_IncTick              0x800'2ebd    0x10  Code  Wk  stm32f4xx_hal.o [8]
-HAL_Init                 0x800'273d    0x30  Code  Gb  stm32f4xx_hal.o [8]
+HAL_Delay                0x800'0b75    0x28  Code  Wk  stm32f4xx_hal.o [9]
+HAL_ETH_ErrorCallback    0x800'3e7d     0x2  Code  Wk  stm32fxx_hal_eth.o [13]
+HAL_ETH_IRQHandler       0x800'3e3d    0x3a  Code  Gb  stm32fxx_hal_eth.o [13]
+HAL_ETH_RxCpltCallback   0x800'3dc1    0x1e  Code  Gb  NetworkInterface.o [13]
+HAL_ETH_TxCpltCallback   0x800'3df3    0x1e  Code  Gb  NetworkInterface.o [13]
+HAL_GPIO_Init            0x800'19a1   0x1be  Code  Gb  stm32f4xx_hal_gpio.o [9]
+HAL_GetTick              0x800'0b9d     0xc  Code  Wk  stm32f4xx_hal.o [9]
+HAL_IncTick              0x800'2ebd    0x10  Code  Wk  stm32f4xx_hal.o [9]
+HAL_Init                 0x800'273d    0x30  Code  Gb  stm32f4xx_hal.o [9]
 HAL_InitTick             0x800'2101    0x8a  Code  Gb  stm32f4xx_hal_timebase_tim.o [3]
 HAL_MspInit              0x800'32b5    0x38  Code  Gb  stm32f4xx_hal_msp.o [3]
-HAL_NVIC_EnableIRQ       0x800'1bf5    0x16  Code  Gb  stm32f4xx_hal_cortex.o [8]
-HAL_NVIC_SetPriority     0x800'1bbb    0x3a  Code  Gb  stm32f4xx_hal_cortex.o [8]
+HAL_NVIC_EnableIRQ       0x800'1bf5    0x16  Code  Gb  stm32f4xx_hal_cortex.o [9]
+HAL_NVIC_SetPriority     0x800'1bbb    0x3a  Code  Gb  stm32f4xx_hal_cortex.o [9]
 HAL_NVIC_SetPriorityGrouping
-                         0x800'1ba7    0x14  Code  Gb  stm32f4xx_hal_cortex.o [8]
-HAL_PCDEx_LPM_Callback   0x800'179d     0x2  Code  Wk  stm32f4xx_hal_pcd_ex.o [8]
-HAL_PCDEx_SetRxFiFo      0x800'2097     0x8  Code  Gb  stm32f4xx_hal_pcd_ex.o [8]
-HAL_PCDEx_SetTxFiFo      0x800'2055    0x42  Code  Gb  stm32f4xx_hal_pcd_ex.o [8]
+                         0x800'1ba7    0x14  Code  Gb  stm32f4xx_hal_cortex.o [9]
+HAL_PCDEx_LPM_Callback   0x800'179d     0x2  Code  Wk  stm32f4xx_hal_pcd_ex.o [9]
+HAL_PCDEx_SetRxFiFo      0x800'2097     0x8  Code  Gb  stm32f4xx_hal_pcd_ex.o [9]
+HAL_PCDEx_SetTxFiFo      0x800'2055    0x42  Code  Gb  stm32f4xx_hal_pcd_ex.o [9]
 HAL_PCD_ConnectCallback
-                         0x800'165d     0x8  Code  Gb  usbd_conf.o [9]
+                         0x800'165d     0x8  Code  Gb  usbd_conf.o [10]
 HAL_PCD_DataInStageCallback
-                         0x800'15d5    0x12  Code  Gb  usbd_conf.o [9]
+                         0x800'15d5    0x12  Code  Gb  usbd_conf.o [10]
 HAL_PCD_DataOutStageCallback
-                         0x800'15c1    0x14  Code  Gb  usbd_conf.o [9]
+                         0x800'15c1    0x14  Code  Gb  usbd_conf.o [10]
 HAL_PCD_DisconnectCallback
-                         0x800'1665     0x8  Code  Gb  usbd_conf.o [9]
-HAL_PCD_EP_Abort         0x800'151d    0x1c  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_EP_Close         0x800'13c1    0x20  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_EP_ClrStall      0x800'14b9    0x2e  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_EP_GetRxCount    0x800'13fd    0x10  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_EP_Open          0x800'1367    0x5a  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_EP_Receive       0x800'13e1    0x1c  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_EP_SetStall      0x800'144f    0x62  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_EP_Transmit      0x800'140d    0x18  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_IRQHandler       0x800'0c93   0x66e  Code  Gb  stm32f4xx_hal_pcd.o [8]
+                         0x800'1665     0x8  Code  Gb  usbd_conf.o [10]
+HAL_PCD_EP_Abort         0x800'151d    0x1c  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_EP_Close         0x800'13c1    0x20  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_EP_ClrStall      0x800'14b9    0x2e  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_EP_GetRxCount    0x800'13fd    0x10  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_EP_Open          0x800'1367    0x5a  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_EP_Receive       0x800'13e1    0x1c  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_EP_SetStall      0x800'144f    0x62  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_EP_Transmit      0x800'140d    0x18  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_IRQHandler       0x800'0c93   0x66e  Code  Gb  stm32f4xx_hal_pcd.o [9]
 HAL_PCD_ISOINIncompleteCallback
-                         0x800'1655     0x8  Code  Gb  usbd_conf.o [9]
+                         0x800'1655     0x8  Code  Gb  usbd_conf.o [10]
 HAL_PCD_ISOOUTIncompleteCallback
-                         0x800'164d     0x8  Code  Gb  usbd_conf.o [9]
-HAL_PCD_Init             0x800'0ba9    0xc2  Code  Gb  stm32f4xx_hal_pcd.o [8]
-HAL_PCD_MspInit          0x800'1539    0x7c  Code  Gb  usbd_conf.o [9]
-HAL_PCD_ResetCallback    0x800'15ef    0x2c  Code  Gb  usbd_conf.o [9]
-HAL_PCD_ResumeCallback   0x800'1645     0x8  Code  Gb  usbd_conf.o [9]
-HAL_PCD_SOFCallback      0x800'15e7     0x8  Code  Gb  usbd_conf.o [9]
-HAL_PCD_SetAddress       0x800'1347    0x20  Code  Gb  stm32f4xx_hal_pcd.o [8]
+                         0x800'164d     0x8  Code  Gb  usbd_conf.o [10]
+HAL_PCD_Init             0x800'0ba9    0xc2  Code  Gb  stm32f4xx_hal_pcd.o [9]
+HAL_PCD_MspInit          0x800'1539    0x7c  Code  Gb  usbd_conf.o [10]
+HAL_PCD_ResetCallback    0x800'15ef    0x2c  Code  Gb  usbd_conf.o [10]
+HAL_PCD_ResumeCallback   0x800'1645     0x8  Code  Gb  usbd_conf.o [10]
+HAL_PCD_SOFCallback      0x800'15e7     0x8  Code  Gb  usbd_conf.o [10]
+HAL_PCD_SetAddress       0x800'1347    0x20  Code  Gb  stm32f4xx_hal_pcd.o [9]
 HAL_PCD_SetupStageCallback
-                         0x800'15b5     0xc  Code  Gb  usbd_conf.o [9]
-HAL_PCD_Start            0x800'0c75    0x1e  Code  Gb  stm32f4xx_hal_pcd.o [8]
+                         0x800'15b5     0xc  Code  Gb  usbd_conf.o [10]
+HAL_PCD_Start            0x800'0c75    0x1e  Code  Gb  stm32f4xx_hal_pcd.o [9]
 HAL_PCD_SuspendCallback
-                         0x800'161b    0x2a  Code  Gb  usbd_conf.o [9]
-HAL_RCC_ClockConfig      0x800'181d   0x100  Code  Gb  stm32f4xx_hal_rcc.o [8]
-HAL_RCC_GetClockConfig   0x800'1945    0x36  Code  Gb  stm32f4xx_hal_rcc.o [8]
-HAL_RCC_GetHCLKFreq      0x800'1929     0x6  Code  Gb  stm32f4xx_hal_rcc.o [8]
-HAL_RCC_GetPCLK1Freq     0x800'192f    0x10  Code  Gb  stm32f4xx_hal_rcc.o [8]
+                         0x800'161b    0x2a  Code  Gb  usbd_conf.o [10]
+HAL_RCC_ClockConfig      0x800'181d   0x100  Code  Gb  stm32f4xx_hal_rcc.o [9]
+HAL_RCC_GetClockConfig   0x800'1945    0x36  Code  Gb  stm32f4xx_hal_rcc.o [9]
+HAL_RCC_GetHCLKFreq      0x800'1929     0x6  Code  Gb  stm32f4xx_hal_rcc.o [9]
+HAL_RCC_GetPCLK1Freq     0x800'192f    0x10  Code  Gb  stm32f4xx_hal_rcc.o [9]
 HAL_RCC_GetSysClockFreq
-                         0x800'20a1    0x60  Code  Wk  stm32f4xx_hal_rcc.o [8]
-HAL_RCC_OscConfig        0x800'2bad   0x310  Code  Wk  stm32f4xx_hal_rcc.o [8]
+                         0x800'20a1    0x60  Code  Wk  stm32f4xx_hal_rcc.o [9]
+HAL_RCC_OscConfig        0x800'2bad   0x310  Code  Wk  stm32f4xx_hal_rcc.o [9]
 HAL_TIMEx_BreakCallback
-                         0x800'388d     0x2  Code  Wk  stm32f4xx_hal_tim_ex.o [8]
+                         0x800'388d     0x2  Code  Wk  stm32f4xx_hal_tim_ex.o [9]
 HAL_TIMEx_CommutCallback
-                         0x800'3891     0x2  Code  Wk  stm32f4xx_hal_tim_ex.o [8]
-HAL_TIM_Base_Init        0x800'2fd5    0x1a  Code  Gb  stm32f4xx_hal_tim.o [8]
-HAL_TIM_Base_MspInit     0x800'3887     0x2  Code  Wk  stm32f4xx_hal_tim.o [8]
-HAL_TIM_Base_Start_IT    0x800'2fef    0x76  Code  Gb  stm32f4xx_hal_tim.o [8]
+                         0x800'3891     0x2  Code  Wk  stm32f4xx_hal_tim_ex.o [9]
+HAL_TIM_Base_Init        0x800'2fd5    0x1a  Code  Gb  stm32f4xx_hal_tim.o [9]
+HAL_TIM_Base_MspInit     0x800'3887     0x2  Code  Wk  stm32f4xx_hal_tim.o [9]
+HAL_TIM_Base_Start_IT    0x800'2fef    0x76  Code  Gb  stm32f4xx_hal_tim.o [9]
 HAL_TIM_IC_CaptureCallback
-                         0x800'3889     0x2  Code  Wk  stm32f4xx_hal_tim.o [8]
-HAL_TIM_IRQHandler       0x800'30b9   0x12a  Code  Gb  stm32f4xx_hal_tim.o [8]
+                         0x800'3889     0x2  Code  Wk  stm32f4xx_hal_tim.o [9]
+HAL_TIM_IRQHandler       0x800'30b9   0x12a  Code  Gb  stm32f4xx_hal_tim.o [9]
 HAL_TIM_OC_DelayElapsedCallback
-                         0x800'388b     0x2  Code  Wk  stm32f4xx_hal_tim.o [8]
+                         0x800'388b     0x2  Code  Wk  stm32f4xx_hal_tim.o [9]
 HAL_TIM_PWM_PulseFinishedCallback
-                         0x800'3893     0x2  Code  Wk  stm32f4xx_hal_tim.o [8]
+                         0x800'3893     0x2  Code  Wk  stm32f4xx_hal_tim.o [9]
 HAL_TIM_PeriodElapsedCallback
                          0x800'2035     0xe  Code  Gb  main.o [3]
 HAL_TIM_TriggerCallback
-                         0x800'388f     0x2  Code  Wk  stm32f4xx_hal_tim.o [8]
+                         0x800'388f     0x2  Code  Wk  stm32f4xx_hal_tim.o [9]
 HASH_RNG_IRQHandler      0x800'4159          Code  Wk  startup_stm32f407xx.o [4]
 HardFault_Handler        0x800'3f6f     0x2  Code  Gb  stm32f4xx_it.o [3]
 I2C1_ER_IRQHandler       0x800'40a9          Code  Wk  startup_stm32f407xx.o [4]
@@ -657,8 +766,8 @@ I2C3_EV_IRQHandler       0x800'413d          Code  Wk  startup_stm32f407xx.o [4]
 IntToUnicode             0x800'3ca1    0x26  Code  Lc  usbd_desc.o [1]
 LL_AHB1_GRP1_EnableClock
                          0x800'2829    0x16  Code  Lc  gpio.o [3]
-LL_EXTI_Init             0x800'33f1    0xaa  Code  Gb  stm32f4xx_ll_exti.o [8]
-LL_GPIO_Init             0x800'3301    0xee  Code  Gb  stm32f4xx_ll_gpio.o [8]
+LL_EXTI_Init             0x800'33f1    0xaa  Code  Gb  stm32f4xx_ll_exti.o [9]
+LL_GPIO_Init             0x800'3301    0xee  Code  Gb  stm32f4xx_ll_gpio.o [9]
 LL_GPIO_SetPinMode       0x800'27f1    0x10  Code  Lc  gpio.o [3]
 LL_GPIO_SetPinPull       0x800'280b    0x10  Code  Lc  gpio.o [3]
 LL_SYSCFG_SetEXTISource
@@ -677,21 +786,21 @@ OTG_HS_EP1_OUT_IRQHandler
 OTG_HS_IRQHandler        0x800'4151          Code  Wk  startup_stm32f407xx.o [4]
 OTG_HS_WKUP_IRQHandler   0x800'414d          Code  Wk  startup_stm32f407xx.o [4]
 PVD_IRQHandler           0x800'402d          Code  Wk  startup_stm32f407xx.o [4]
-PendSV_Handler           0x800'3d11          Code  Gb  portasm.o [11]
+PendSV_Handler           0x800'3d11          Code  Gb  portasm.o [12]
 RCC_IRQHandler           0x800'403d          Code  Wk  startup_stm32f407xx.o [4]
 RTC_Alarm_IRQHandler     0x800'40cd          Code  Wk  startup_stm32f407xx.o [4]
 RTC_WKUP_IRQHandler      0x800'4035          Code  Wk  startup_stm32f407xx.o [4]
 Region$$Table$$Base      0x800'3f4c           --   Gb  - Linker created -
 Region$$Table$$Limit     0x800'3f6c           --   Gb  - Linker created -
 Reset_Handler            0x800'4011          Code  Wk  startup_stm32f407xx.o [4]
-Rx_Buff                 0x2000'0054  0x1800  Data  Gb  NetworkInterface.o [12]
+Rx_Buff                 0x2000'0054  0x1800  Data  Gb  NetworkInterface.o [13]
 SDIO_IRQHandler          0x800'40ed          Code  Wk  startup_stm32f407xx.o [4]
 SPI1_IRQHandler          0x800'40b5          Code  Wk  startup_stm32f407xx.o [4]
 SPI2_IRQHandler          0x800'40b9          Code  Wk  startup_stm32f407xx.o [4]
 SPI3_IRQHandler          0x800'40f5          Code  Wk  startup_stm32f407xx.o [4]
-SVC_Handler              0x800'3d69          Code  Gb  portasm.o [11]
-SWAPBYTE                 0x800'21d5     0xa  Code  Lc  usbd_ctlreq.o [10]
-SysTick_Handler          0x800'3b99    0x26  Code  Gb  port.o [11]
+SVC_Handler              0x800'3d69          Code  Gb  portasm.o [12]
+SWAPBYTE                 0x800'21d5     0xa  Code  Lc  usbd_ctlreq.o [11]
+SysTick_Handler          0x800'3b99    0x26  Code  Gb  port.o [12]
 SystemClock_Config       0x800'1f95    0xa0  Code  Gb  main.o [3]
 SystemCoreClock         0x2000'306c     0x4  Data  Gb  system_stm32f4xx.o [2]
 SystemInit               0x800'3f8d     0xc  Code  Gb  system_stm32f4xx.o [2]
@@ -716,46 +825,46 @@ TIM8_TRG_COM_TIM14_IRQHandler
                          0x800'40dd          Code  Wk  startup_stm32f407xx.o [4]
 TIM8_UP_TIM13_IRQHandler
                          0x800'40d9          Code  Wk  startup_stm32f407xx.o [4]
-TIM_Base_SetConfig       0x800'31e9    0x9e  Code  Gb  stm32f4xx_hal_tim.o [8]
-Tx_Buff                 0x2000'1854  0x1800  Data  Gb  NetworkInterface.o [12]
+TIM_Base_SetConfig       0x800'31e9    0x9e  Code  Gb  stm32f4xx_hal_tim.o [9]
+Tx_Buff                 0x2000'1854  0x1800  Data  Gb  NetworkInterface.o [13]
 UART4_IRQHandler         0x800'40f9          Code  Wk  startup_stm32f407xx.o [4]
 UART5_IRQHandler         0x800'40fd          Code  Wk  startup_stm32f407xx.o [4]
 USART1_IRQHandler        0x800'40bd          Code  Wk  startup_stm32f407xx.o [4]
 USART2_IRQHandler        0x800'40c1          Code  Wk  startup_stm32f407xx.o [4]
 USART3_IRQHandler        0x800'40c5          Code  Wk  startup_stm32f407xx.o [4]
 USART6_IRQHandler        0x800'4139          Code  Wk  startup_stm32f407xx.o [4]
-USBD_CDC                0x2000'3120    0x38  Data  Gb  usbd_cdc.o [10]
-USBD_CDC_CfgDesc        0x2000'3158    0x44  Data  Lc  usbd_cdc.o [10]
-USBD_CDC_DataIn          0x800'369d    0x74  Code  Lc  usbd_cdc.o [10]
-USBD_CDC_DataOut         0x800'3711    0x3c  Code  Lc  usbd_cdc.o [10]
-USBD_CDC_DeInit          0x800'356d    0x60  Code  Lc  usbd_cdc.o [10]
+USBD_CDC                0x2000'3120    0x38  Data  Gb  usbd_cdc.o [11]
+USBD_CDC_CfgDesc        0x2000'3158    0x44  Data  Lc  usbd_cdc.o [11]
+USBD_CDC_DataIn          0x800'369d    0x74  Code  Lc  usbd_cdc.o [11]
+USBD_CDC_DataOut         0x800'3711    0x3c  Code  Lc  usbd_cdc.o [11]
+USBD_CDC_DeInit          0x800'356d    0x60  Code  Lc  usbd_cdc.o [11]
 USBD_CDC_DeviceQualifierDesc
-                        0x2000'3114     0xc  Data  Lc  usbd_cdc.o [10]
-USBD_CDC_EP0_RxReady     0x800'374d    0x34  Code  Lc  usbd_cdc.o [10]
+                        0x2000'3114     0xc  Data  Lc  usbd_cdc.o [11]
+USBD_CDC_EP0_RxReady     0x800'374d    0x34  Code  Lc  usbd_cdc.o [11]
 USBD_CDC_GetDeviceQualifierDescriptor
-                         0x800'37ef     0x8  Code  Gb  usbd_cdc.o [10]
-USBD_CDC_GetFSCfgDesc    0x800'3781     0x4  Code  Lc  usbd_cdc.o [10]
-USBD_CDC_GetHSCfgDesc    0x800'3785    0x22  Code  Lc  usbd_cdc.o [10]
+                         0x800'37ef     0x8  Code  Gb  usbd_cdc.o [11]
+USBD_CDC_GetFSCfgDesc    0x800'3781     0x4  Code  Lc  usbd_cdc.o [11]
+USBD_CDC_GetHSCfgDesc    0x800'3785    0x22  Code  Lc  usbd_cdc.o [11]
 USBD_CDC_GetOtherSpeedCfgDesc
-                         0x800'37a7     0x2  Code  Lc  usbd_cdc.o [10]
-USBD_CDC_Init            0x800'34a1    0xc2  Code  Lc  usbd_cdc.o [10]
-USBD_CDC_ReceivePacket   0x800'384f    0x26  Code  Gb  usbd_cdc.o [10]
+                         0x800'37a7     0x2  Code  Lc  usbd_cdc.o [11]
+USBD_CDC_Init            0x800'34a1    0xc2  Code  Lc  usbd_cdc.o [11]
+USBD_CDC_ReceivePacket   0x800'384f    0x26  Code  Gb  usbd_cdc.o [11]
 USBD_CDC_RegisterInterface
-                         0x800'3801    0x16  Code  Gb  usbd_cdc.o [10]
-USBD_CDC_SetRxBuffer     0x800'3835    0x1a  Code  Gb  usbd_cdc.o [10]
-USBD_CDC_SetTxBuffer     0x800'3817    0x1e  Code  Gb  usbd_cdc.o [10]
-USBD_CDC_Setup           0x800'35cd    0xd0  Code  Lc  usbd_cdc.o [10]
-USBD_ClrClassConfig      0x800'1c8b    0x14  Code  Gb  usbd_core.o [10]
-USBD_CoreFindEP          0x800'1f33     0x4  Code  Gb  usbd_core.o [10]
-USBD_CoreFindIF          0x800'1f2f     0x4  Code  Gb  usbd_core.o [10]
-USBD_CtlContinueRx       0x800'2711     0x4  Code  Gb  usbd_ioreq.o [10]
+                         0x800'3801    0x16  Code  Gb  usbd_cdc.o [11]
+USBD_CDC_SetRxBuffer     0x800'3835    0x1a  Code  Gb  usbd_cdc.o [11]
+USBD_CDC_SetTxBuffer     0x800'3817    0x1e  Code  Gb  usbd_cdc.o [11]
+USBD_CDC_Setup           0x800'35cd    0xd0  Code  Lc  usbd_cdc.o [11]
+USBD_ClrClassConfig      0x800'1c8b    0x14  Code  Gb  usbd_core.o [11]
+USBD_CoreFindEP          0x800'1f33     0x4  Code  Gb  usbd_core.o [11]
+USBD_CoreFindIF          0x800'1f2f     0x4  Code  Gb  usbd_core.o [11]
+USBD_CtlContinueRx       0x800'2711     0x4  Code  Gb  usbd_ioreq.o [11]
 USBD_CtlContinueSendData
-                         0x800'26eb     0x4  Code  Gb  usbd_ioreq.o [10]
-USBD_CtlError            0x800'266f    0x16  Code  Gb  usbd_ctlreq.o [10]
-USBD_CtlPrepareRx        0x800'26fb    0x16  Code  Gb  usbd_ioreq.o [10]
-USBD_CtlReceiveStatus    0x800'272f     0xe  Code  Gb  usbd_ioreq.o [10]
-USBD_CtlSendData         0x800'26d9    0x12  Code  Gb  usbd_ioreq.o [10]
-USBD_CtlSendStatus       0x800'2721     0xe  Code  Gb  usbd_ioreq.o [10]
+                         0x800'26eb     0x4  Code  Gb  usbd_ioreq.o [11]
+USBD_CtlError            0x800'266f    0x16  Code  Gb  usbd_ctlreq.o [11]
+USBD_CtlPrepareRx        0x800'26fb    0x16  Code  Gb  usbd_ioreq.o [11]
+USBD_CtlReceiveStatus    0x800'272f     0xe  Code  Gb  usbd_ioreq.o [11]
+USBD_CtlSendData         0x800'26d9    0x12  Code  Gb  usbd_ioreq.o [11]
+USBD_CtlSendStatus       0x800'2721     0xe  Code  Gb  usbd_ioreq.o [11]
 USBD_FS_ConfigStrDescriptor
                          0x800'3c6d     0xc  Code  Gb  usbd_desc.o [1]
 USBD_FS_DeviceDesc      0x2000'31cc    0x14  Data  Gb  usbd_desc.o [1]
@@ -771,192 +880,193 @@ USBD_FS_ProductStrDescriptor
                          0x800'3c21     0xc  Code  Gb  usbd_desc.o [1]
 USBD_FS_SerialStrDescriptor
                          0x800'3c41    0x2c  Code  Gb  usbd_desc.o [1]
-USBD_GetEpDesc           0x800'1f37    0x3a  Code  Gb  usbd_core.o [10]
-USBD_GetLen              0x800'26c5    0x14  Code  Lc  usbd_ctlreq.o [10]
-USBD_GetNextDesc         0x800'1f71     0xe  Code  Gb  usbd_core.o [10]
-USBD_GetString           0x800'2685    0x40  Code  Gb  usbd_ctlreq.o [10]
-USBD_Get_USB_Status      0x800'1773    0x12  Code  Gb  usbd_conf.o [9]
-USBD_Init                0x800'1c1d    0x26  Code  Gb  usbd_core.o [10]
+USBD_GetEpDesc           0x800'1f37    0x3a  Code  Gb  usbd_core.o [11]
+USBD_GetLen              0x800'26c5    0x14  Code  Lc  usbd_ctlreq.o [11]
+USBD_GetNextDesc         0x800'1f71     0xe  Code  Gb  usbd_core.o [11]
+USBD_GetString           0x800'2685    0x40  Code  Gb  usbd_ctlreq.o [11]
+USBD_Get_USB_Status      0x800'1773    0x12  Code  Gb  usbd_conf.o [10]
+USBD_Init                0x800'1c1d    0x26  Code  Gb  usbd_core.o [11]
 USBD_Interface_fops_FS  0x2000'319c    0x14  Data  Gb  usbd_cdc_if.o [1]
-USBD_LL_ClearStallEP     0x800'1701     0xc  Code  Gb  usbd_conf.o [9]
-USBD_LL_CloseEP          0x800'16e9     0xc  Code  Gb  usbd_conf.o [9]
-USBD_LL_DataInStage      0x800'1d75    0xa4  Code  Gb  usbd_core.o [10]
-USBD_LL_DataOutStage     0x800'1cfb    0x7a  Code  Gb  usbd_core.o [10]
-USBD_LL_DevConnected     0x800'1f0b     0x4  Code  Gb  usbd_core.o [10]
+USBD_LL_ClearStallEP     0x800'1701     0xc  Code  Gb  usbd_conf.o [10]
+USBD_LL_CloseEP          0x800'16e9     0xc  Code  Gb  usbd_conf.o [10]
+USBD_LL_DataInStage      0x800'1d75    0xa4  Code  Gb  usbd_core.o [11]
+USBD_LL_DataOutStage     0x800'1cfb    0x7a  Code  Gb  usbd_core.o [11]
+USBD_LL_DevConnected     0x800'1f0b     0x4  Code  Gb  usbd_core.o [11]
 USBD_LL_DevDisconnected
-                         0x800'1f0f    0x20  Code  Gb  usbd_core.o [10]
-USBD_LL_GetRxDataSize    0x800'174d     0x8  Code  Gb  usbd_conf.o [9]
-USBD_LL_Init             0x800'166d    0x56  Code  Gb  usbd_conf.o [9]
-USBD_LL_IsStallEP        0x800'170d    0x1c  Code  Gb  usbd_conf.o [9]
+                         0x800'1f0f    0x20  Code  Gb  usbd_core.o [11]
+USBD_LL_GetRxDataSize    0x800'174d     0x8  Code  Gb  usbd_conf.o [10]
+USBD_LL_Init             0x800'166d    0x56  Code  Gb  usbd_conf.o [10]
+USBD_LL_IsStallEP        0x800'170d    0x1c  Code  Gb  usbd_conf.o [10]
 USBD_LL_IsoINIncomplete
-                         0x800'1ec3    0x1c  Code  Gb  usbd_core.o [10]
+                         0x800'1ec3    0x1c  Code  Gb  usbd_core.o [11]
 USBD_LL_IsoOUTIncomplete
-                         0x800'1edf    0x1c  Code  Gb  usbd_core.o [10]
-USBD_LL_OpenEP           0x800'16d3    0x16  Code  Gb  usbd_conf.o [9]
-USBD_LL_PrepareReceive   0x800'1741     0xc  Code  Gb  usbd_conf.o [9]
-USBD_LL_Reset            0x800'1e19    0x60  Code  Gb  usbd_core.o [10]
-USBD_LL_Resume           0x800'1e95    0x12  Code  Gb  usbd_core.o [10]
-USBD_LL_SOF              0x800'1ea7    0x1c  Code  Gb  usbd_core.o [10]
-USBD_LL_SetSpeed         0x800'1e79     0x6  Code  Gb  usbd_core.o [10]
-USBD_LL_SetUSBAddress    0x800'1729     0xc  Code  Gb  usbd_conf.o [9]
-USBD_LL_SetupStage       0x800'1c9f    0x5c  Code  Gb  usbd_core.o [10]
-USBD_LL_StallEP          0x800'16f5     0xc  Code  Gb  usbd_conf.o [9]
-USBD_LL_Start            0x800'16c3     0xa  Code  Gb  usbd_conf.o [9]
-USBD_LL_Suspend          0x800'1e7f    0x16  Code  Gb  usbd_core.o [10]
-USBD_LL_Transmit         0x800'1735     0xc  Code  Gb  usbd_conf.o [9]
+                         0x800'1edf    0x1c  Code  Gb  usbd_core.o [11]
+USBD_LL_OpenEP           0x800'16d3    0x16  Code  Gb  usbd_conf.o [10]
+USBD_LL_PrepareReceive   0x800'1741     0xc  Code  Gb  usbd_conf.o [10]
+USBD_LL_Reset            0x800'1e19    0x60  Code  Gb  usbd_core.o [11]
+USBD_LL_Resume           0x800'1e95    0x12  Code  Gb  usbd_core.o [11]
+USBD_LL_SOF              0x800'1ea7    0x1c  Code  Gb  usbd_core.o [11]
+USBD_LL_SetSpeed         0x800'1e79     0x6  Code  Gb  usbd_core.o [11]
+USBD_LL_SetUSBAddress    0x800'1729     0xc  Code  Gb  usbd_conf.o [10]
+USBD_LL_SetupStage       0x800'1c9f    0x5c  Code  Gb  usbd_core.o [11]
+USBD_LL_StallEP          0x800'16f5     0xc  Code  Gb  usbd_conf.o [10]
+USBD_LL_Start            0x800'16c3     0xa  Code  Gb  usbd_conf.o [10]
+USBD_LL_Suspend          0x800'1e7f    0x16  Code  Gb  usbd_core.o [11]
+USBD_LL_Transmit         0x800'1735     0xc  Code  Gb  usbd_conf.o [10]
 USBD_LangIDDesc         0x2000'31e0     0x4  Data  Gb  usbd_desc.o [1]
-USBD_ParseSetupRequest   0x800'2645    0x2a  Code  Gb  usbd_ctlreq.o [10]
-USBD_RegisterClass       0x800'1c43    0x32  Code  Gb  usbd_core.o [10]
-USBD_SetClassConfig      0x800'1c79    0x12  Code  Gb  usbd_core.o [10]
-USBD_SetConfig::cfgidx  0x2000'4f9c     0x1  Data  Lc  usbd_ctlreq.o [10]
-USBD_Start               0x800'1c75     0x4  Code  Gb  usbd_core.o [10]
-USBD_StdDevReq           0x800'21e1   0x296  Code  Gb  usbd_ctlreq.o [10]
-USBD_StdEPReq            0x800'24f5   0x148  Code  Gb  usbd_ctlreq.o [10]
-USBD_StdItfReq           0x800'2485    0x64  Code  Gb  usbd_ctlreq.o [10]
+USBD_ParseSetupRequest   0x800'2645    0x2a  Code  Gb  usbd_ctlreq.o [11]
+USBD_RegisterClass       0x800'1c43    0x32  Code  Gb  usbd_core.o [11]
+USBD_SetClassConfig      0x800'1c79    0x12  Code  Gb  usbd_core.o [11]
+USBD_SetConfig::cfgidx  0x2000'4f9c     0x1  Data  Lc  usbd_ctlreq.o [11]
+USBD_Start               0x800'1c75     0x4  Code  Gb  usbd_core.o [11]
+USBD_StdDevReq           0x800'21e1   0x296  Code  Gb  usbd_ctlreq.o [11]
+USBD_StdEPReq            0x800'24f5   0x148  Code  Gb  usbd_ctlreq.o [11]
+USBD_StdItfReq           0x800'2485    0x64  Code  Gb  usbd_ctlreq.o [11]
 USBD_StrDesc            0x2000'4be0   0x200  Data  Gb  usbd_desc.o [1]
 USBD_StringSerial       0x2000'31e4    0x1c  Data  Gb  usbd_desc.o [1]
-USBD_static_free         0x800'1771     0x2  Code  Gb  usbd_conf.o [9]
-USBD_static_malloc       0x800'1755     0x4  Code  Gb  usbd_conf.o [9]
+USBD_static_free         0x800'1771     0x2  Code  Gb  usbd_conf.o [10]
+USBD_static_malloc       0x800'1755     0x4  Code  Gb  usbd_conf.o [10]
 USBD_static_malloc::mem
-                        0x2000'49c0   0x220  Data  Lc  usbd_conf.o [9]
-USB_ActivateEndpoint     0x800'0559    0x5a  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_ActivateSetup        0x800'0a37    0x18  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_CoreInit             0x800'0189    0x80  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_CoreReset            0x800'0a93    0x54  Code  Lc  stm32f4xx_ll_usb.o [8]
-USB_DeactivateEndpoint   0x800'05c5    0x48  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_DevConnect           0x800'0999    0x18  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_DevDisconnect        0x800'09b1    0x16  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_DevInit              0x800'0343   0x16a  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_DisableGlobalInt     0x800'02df     0x6  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_EP0_OutStart         0x800'0a4f    0x44  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_EPClearStall         0x800'094b    0x32  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_EPSetStall           0x800'091b    0x30  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_EPStartXfer          0x800'0651   0x1a8  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_EPStopXfer           0x800'0819    0x80  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_EnableGlobalInt      0x800'02d7     0x8  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_FlushRxFifo          0x800'04f1    0x42  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_FlushTxFifo          0x800'04ad    0x44  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_GetDevSpeed          0x800'053d    0x1c  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_GetMode              0x800'0a2f     0x8  Code  Gb  stm32f4xx_ll_usb.o [8]
+                        0x2000'49c0   0x220  Data  Lc  usbd_conf.o [10]
+USB_ActivateEndpoint     0x800'0559    0x5a  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_ActivateSetup        0x800'0a37    0x18  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_CoreInit             0x800'0189    0x80  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_CoreReset            0x800'0a93    0x54  Code  Lc  stm32f4xx_ll_usb.o [9]
+USB_DeactivateEndpoint   0x800'05c5    0x48  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_DevConnect           0x800'0999    0x18  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_DevDisconnect        0x800'09b1    0x16  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_DevInit              0x800'0343   0x16a  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_DisableGlobalInt     0x800'02df     0x6  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_EP0_OutStart         0x800'0a4f    0x44  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_EPClearStall         0x800'094b    0x32  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_EPSetStall           0x800'091b    0x30  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_EPStartXfer          0x800'0651   0x1a8  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_EPStopXfer           0x800'0819    0x80  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_EnableGlobalInt      0x800'02d7     0x8  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_FlushRxFifo          0x800'04f1    0x42  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_FlushTxFifo          0x800'04ad    0x44  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_GetDevSpeed          0x800'053d    0x1c  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_GetMode              0x800'0a2f     0x8  Code  Gb  stm32f4xx_ll_usb.o [9]
 USB_ReadDevAllInEpInterrupt
-                         0x800'09e5     0xe  Code  Gb  stm32f4xx_ll_usb.o [8]
+                         0x800'09e5     0xe  Code  Gb  stm32f4xx_ll_usb.o [9]
 USB_ReadDevAllOutEpInterrupt
-                         0x800'09d7     0xe  Code  Gb  stm32f4xx_ll_usb.o [8]
+                         0x800'09d7     0xe  Code  Gb  stm32f4xx_ll_usb.o [9]
 USB_ReadDevInEPInterrupt
-                         0x800'0a09    0x26  Code  Gb  stm32f4xx_ll_usb.o [8]
+                         0x800'0a09    0x26  Code  Gb  stm32f4xx_ll_usb.o [9]
 USB_ReadDevOutEPInterrupt
-                         0x800'09f3    0x16  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_ReadInterrupts       0x800'09cd     0xa  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_ReadPacket           0x800'08db    0x40  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_SetCurrentMode       0x800'02eb    0x58  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_SetDevAddress        0x800'097d    0x16  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_SetDevSpeed          0x800'0533     0xa  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_SetTurnaroundTime    0x800'0209    0xce  Code  Gb  stm32f4xx_ll_usb.o [8]
-USB_WritePacket          0x800'08b5    0x26  Code  Gb  stm32f4xx_ll_usb.o [8]
+                         0x800'09f3    0x16  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_ReadInterrupts       0x800'09cd     0xa  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_ReadPacket           0x800'08db    0x40  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_SetCurrentMode       0x800'02eb    0x58  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_SetDevAddress        0x800'097d    0x16  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_SetDevSpeed          0x800'0533     0xa  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_SetTurnaroundTime    0x800'0209    0xce  Code  Gb  stm32f4xx_ll_usb.o [9]
+USB_WritePacket          0x800'08b5    0x26  Code  Gb  stm32f4xx_ll_usb.o [9]
 UsageFault_Handler       0x800'3f75     0x2  Code  Gb  stm32f4xx_it.o [3]
 UserRxBufferFS          0x2000'3200   0x800  Data  Gb  usbd_cdc_if.o [1]
 UserTxBufferFS          0x2000'3a00   0x800  Data  Gb  usbd_cdc_if.o [1]
 WWDG_IRQHandler          0x800'4029          Code  Wk  startup_stm32f407xx.o [4]
 __NVIC_EnableIRQ         0x800'2771    0x16  Code  Lc  gpio.o [3]
 __NVIC_SetPriority       0x800'2787    0x1a  Code  Lc  gpio.o [3]
-__NVIC_SetPriority       0x800'1b8d    0x1a  Code  Lc  stm32f4xx_hal_cortex.o [8]
-__aeabi_ldiv0            0x800'3885          Code  Gb  I64DivZer.o [15]
-__aeabi_memclr           0x800'3895          Code  Gb  ABImemclr.o [15]
-__aeabi_memclr4          0x800'1999          Code  Gb  ABImemclr4.o [15]
-__cmain                  0x800'3fad          Code  Gb  cmain.o [15]
-__exit                   0x800'3fe1    0x14  Code  Gb  exit.o [16]
-__iar_Memset4_word       0x800'21a1          Code  Gb  ABImemset48.o [15]
-__iar_Memset8_word       0x800'21a1          Code  Gb  ABImemset48.o [15]
-__iar_data_init3         0x800'3f01    0x28  Code  Gb  data_init.o [15]
-__iar_init_vfp           0x800'3f29          Code  Gb  fpinit_M.o [14]
+__NVIC_SetPriority       0x800'1b8d    0x1a  Code  Lc  stm32f4xx_hal_cortex.o [9]
+__aeabi_ldiv0            0x800'3885          Code  Gb  I64DivZer.o [16]
+__aeabi_memclr           0x800'3895          Code  Gb  ABImemclr.o [16]
+__aeabi_memclr4          0x800'1999          Code  Gb  ABImemclr4.o [16]
+__cmain                  0x800'3fad          Code  Gb  cmain.o [16]
+__exit                   0x800'3fe1    0x14  Code  Gb  exit.o [17]
+__iar_Memset4_word       0x800'21a1          Code  Gb  ABImemset48.o [16]
+__iar_Memset8_word       0x800'21a1          Code  Gb  ABImemset48.o [16]
+__iar_data_init3         0x800'3f01    0x28  Code  Gb  data_init.o [16]
+__iar_init_vfp           0x800'3f29          Code  Gb  fpinit_M.o [15]
 __iar_lz77_init_single3
-                         0x800'179f    0x7e  Code  Gb  lz77_init_single.o [15]
-__iar_program_start      0x800'3ff5          Code  Gb  cstartup_M.o [15]
-__iar_small_Memcpy       0x800'1789          Code  Gb  ABImemcpy_small.o [15]
-__iar_small_Memset       0x800'32ed          Code  Gb  ABImemset_small.o [15]
+                         0x800'179f    0x7e  Code  Gb  lz77_init_single.o [16]
+__iar_program_start      0x800'3ff5          Code  Gb  cstartup_M.o [16]
+__iar_small_Memcpy       0x800'1789          Code  Gb  ABImemcpy_small.o [16]
+__iar_small_Memset       0x800'32ed          Code  Gb  ABImemset_small.o [16]
 __iar_small_Memset_word
-                         0x800'32ed          Code  Gb  ABImemset_small.o [15]
-__iar_small_memcpy       0x800'1785          Code  Gb  ABImemcpy_small.o [15]
-__iar_small_memcpy4      0x800'1785          Code  Gb  ABImemcpy_small.o [15]
-__iar_small_memcpy8      0x800'1785          Code  Gb  ABImemcpy_small.o [15]
-__iar_small_memset       0x800'32ed          Code  Gb  ABImemset_small.o [15]
-__iar_small_uldivmod     0x800'2ecd          Code  Gb  I64DivMod_small.o [15]
-__iar_zero_init3         0x800'3ec9    0x38  Code  Gb  zero_init3.o [15]
-__low_level_init         0x800'3fcb     0x4  Code  Gb  low_level_init.o [13]
+                         0x800'32ed          Code  Gb  ABImemset_small.o [16]
+__iar_small_memcpy       0x800'1785          Code  Gb  ABImemcpy_small.o [16]
+__iar_small_memcpy4      0x800'1785          Code  Gb  ABImemcpy_small.o [16]
+__iar_small_memcpy8      0x800'1785          Code  Gb  ABImemcpy_small.o [16]
+__iar_small_memset       0x800'32ed          Code  Gb  ABImemset_small.o [16]
+__iar_small_uldivmod     0x800'2ecd          Code  Gb  I64DivMod_small.o [16]
+__iar_zero_init3         0x800'3ec9    0x38  Code  Gb  zero_init3.o [16]
+__low_level_init         0x800'3fcb     0x4  Code  Gb  low_level_init.o [14]
 __vector_table           0x800'0000          Data  Gb  startup_stm32f407xx.o [4]
-_call_main               0x800'3fb9          Code  Gb  cmain.o [15]
-_exit                    0x800'3fd5          Code  Gb  cexit.o [15]
-exit                     0x800'3fcf     0x4  Code  Gb  exit.o [13]
+_call_main               0x800'3fb9          Code  Gb  cmain.o [16]
+_exit                    0x800'3fd5          Code  Gb  cexit.o [16]
+exit                     0x800'3fcf     0x4  Code  Gb  exit.o [14]
 hUsbDeviceFS            0x2000'46e4   0x2dc  Data  Gb  usb_device.o [1]
-hpcd_USB_OTG_FS         0x2000'4200   0x4e4  Data  Gb  usbd_conf.o [9]
+hpcd_USB_OTG_FS         0x2000'4200   0x4e4  Data  Gb  usbd_conf.o [10]
 htim6                   0x2000'4f54    0x48  Data  Gb  stm32f4xx_hal_timebase_tim.o [3]
 main                     0x800'1f81    0x14  Code  Gb  main.o [3]
 prvEMACHandlerTask{2}{3}{4}{5}::uxLowestSemCount
-                        0x2000'0050     0x4  Data  Lc  NetworkInterface.o [12]
+                        0x2000'0050     0x4  Data  Lc  NetworkInterface.o [13]
 prvResetNextTaskUnblockTime
-                         0x800'3a29    0x1c  Code  Lc  tasks.o [7]
-pxCurrentTCB            0x2000'30ac     0x4  Data  Gb  tasks.o [7]
-pxDelayedTaskList       0x2000'30b0     0x4  Data  Lc  tasks.o [7]
-pxMyInterface           0x2000'0048     0x4  Data  Lc  NetworkInterface.o [12]
+                         0x800'3a29    0x1c  Code  Lc  tasks.o [8]
+pxCurrentTCB            0x2000'30ac     0x4  Data  Gb  tasks.o [8]
+pxDelayedTaskList       0x2000'30b0     0x4  Data  Lc  tasks.o [8]
+pxMyInterface           0x2000'0048     0x4  Data  Lc  NetworkInterface.o [13]
 pxOverflowDelayedTaskList
-                        0x2000'30b4     0x4  Data  Lc  tasks.o [7]
-pxReadyTasksLists       0x2000'4de0   0x12c  Data  Lc  tasks.o [7]
-ucMaxSysCallPriority    0x2000'3054     0x1  Data  Lc  port.o [11]
-ulMaxPRIGROUPValue      0x2000'305c     0x4  Data  Lc  port.o [11]
-uwTick                  0x2000'3064     0x4  Data  Gb  stm32f4xx_hal.o [8]
-uwTickFreq              0x2000'3060     0x1  Data  Gb  stm32f4xx_hal.o [8]
-uwTickPrio              0x2000'3068     0x4  Data  Gb  stm32f4xx_hal.o [8]
-uxCriticalNesting       0x2000'3058     0x4  Data  Lc  port.o [11]
-uxCurrentNumberOfTasks  0x2000'30bc     0x4  Data  Lc  tasks.o [7]
+                        0x2000'30b4     0x4  Data  Lc  tasks.o [8]
+pxReadyTasksLists       0x2000'4de0   0x12c  Data  Lc  tasks.o [8]
+ucMaxSysCallPriority    0x2000'3054     0x1  Data  Lc  port.o [12]
+ulMaxPRIGROUPValue      0x2000'305c     0x4  Data  Lc  port.o [12]
+uwTick                  0x2000'3064     0x4  Data  Gb  stm32f4xx_hal.o [9]
+uwTickFreq              0x2000'3060     0x1  Data  Gb  stm32f4xx_hal.o [9]
+uwTickPrio              0x2000'3068     0x4  Data  Gb  stm32f4xx_hal.o [9]
+uxCriticalNesting       0x2000'3058     0x4  Data  Lc  port.o [12]
+uxCurrentNumberOfTasks  0x2000'30bc     0x4  Data  Lc  tasks.o [8]
 uxDeletedTasksWaitingCleanUp
-                        0x2000'30b8     0x4  Data  Lc  tasks.o [7]
-uxSchedulerSuspended    0x2000'30e8     0x4  Data  Lc  tasks.o [7]
-uxTaskNumber            0x2000'30d8     0x4  Data  Lc  tasks.o [7]
-uxTopReadyPriority      0x2000'30c4     0x4  Data  Lc  tasks.o [7]
-uxTopUsedPriority       0x2000'30e4     0x4  Data  Lc  tasks.o [7]
-vPortEnableVFP           0x800'3da5          Code  Gb  portasm.o [11]
-vPortStartFirstTask      0x800'3d85          Code  Gb  portasm.o [11]
+                        0x2000'30b8     0x4  Data  Lc  tasks.o [8]
+uxSchedulerSuspended    0x2000'30e8     0x4  Data  Lc  tasks.o [8]
+uxTaskNumber            0x2000'30d8     0x4  Data  Lc  tasks.o [8]
+uxTopReadyPriority      0x2000'30c4     0x4  Data  Lc  tasks.o [8]
+uxTopUsedPriority       0x2000'30e4     0x4  Data  Lc  tasks.o [8]
+vPortEnableVFP           0x800'3da5          Code  Gb  portasm.o [12]
+vPortStartFirstTask      0x800'3d85          Code  Gb  portasm.o [12]
 vPortValidateInterruptPriority
-                         0x800'3bc1    0x2c  Code  Gb  port.o [11]
-vTaskSwitchContext       0x800'39d1    0x50  Code  Gb  tasks.o [7]
-xDelayedTaskList1       0x2000'30ec    0x14  Data  Lc  tasks.o [7]
-xDelayedTaskList2       0x2000'3100    0x14  Data  Lc  tasks.o [7]
-xEMACTaskHandle         0x2000'004c     0x4  Data  Lc  NetworkInterface.o [12]
-xETH                    0x2000'4f0c    0x48  Data  Lc  NetworkInterface.o [12]
-xIdleTaskHandles        0x2000'30e0     0x4  Data  Lc  tasks.o [7]
-xNextTaskUnblockTime    0x2000'30dc     0x4  Data  Lc  tasks.o [7]
-xNumOfOverflows         0x2000'30d4     0x4  Data  Lc  tasks.o [7]
-xPendedTicks            0x2000'30cc     0x4  Data  Lc  tasks.o [7]
-xPendingReadyList       0x2000'3070    0x14  Data  Lc  tasks.o [7]
-xPhyObject              0x2000'0000    0x40  Data  Lc  NetworkInterface.o [12]
-xSchedulerRunning       0x2000'30c8     0x4  Data  Lc  tasks.o [7]
-xSuspendedTaskList      0x2000'3098    0x14  Data  Lc  tasks.o [7]
-xTXDescriptorSemaphore  0x2000'0040     0x4  Data  Lc  NetworkInterface.o [12]
+                         0x800'3bc1    0x2c  Code  Gb  port.o [12]
+vTaskSwitchContext       0x800'39d1    0x50  Code  Gb  tasks.o [8]
+xDelayedTaskList1       0x2000'30ec    0x14  Data  Lc  tasks.o [8]
+xDelayedTaskList2       0x2000'3100    0x14  Data  Lc  tasks.o [8]
+xEMACTaskHandle         0x2000'004c     0x4  Data  Lc  NetworkInterface.o [13]
+xETH                    0x2000'4f0c    0x48  Data  Lc  NetworkInterface.o [13]
+xIdleTaskHandles        0x2000'30e0     0x4  Data  Lc  tasks.o [8]
+xNextTaskUnblockTime    0x2000'30dc     0x4  Data  Lc  tasks.o [8]
+xNumOfOverflows         0x2000'30d4     0x4  Data  Lc  tasks.o [8]
+xPendedTicks            0x2000'30cc     0x4  Data  Lc  tasks.o [8]
+xPendingReadyList       0x2000'3070    0x14  Data  Lc  tasks.o [8]
+xPhyObject              0x2000'0000    0x40  Data  Lc  NetworkInterface.o [13]
+xSchedulerRunning       0x2000'30c8     0x4  Data  Lc  tasks.o [8]
+xSuspendedTaskList      0x2000'3098    0x14  Data  Lc  tasks.o [8]
+xTXDescriptorSemaphore  0x2000'0040     0x4  Data  Lc  NetworkInterface.o [13]
 xTaskGenericNotifyFromISR
-                         0x800'3a55   0x11c  Code  Gb  tasks.o [7]
-xTaskIncrementTick       0x800'38a5   0x12c  Code  Gb  tasks.o [7]
+                         0x800'3a55   0x11c  Code  Gb  tasks.o [8]
+xTaskIncrementTick       0x800'38a5   0x12c  Code  Gb  tasks.o [8]
 xTasksWaitingTermination
-                        0x2000'3084    0x14  Data  Lc  tasks.o [7]
-xTickCount              0x2000'30c0     0x4  Data  Lc  tasks.o [7]
-xYieldPendings          0x2000'30d0     0x4  Data  Lc  tasks.o [7]
+                        0x2000'3084    0x14  Data  Lc  tasks.o [8]
+xTickCount              0x2000'30c0     0x4  Data  Lc  tasks.o [8]
+xYieldPendings          0x2000'30d0     0x4  Data  Lc  tasks.o [8]
 
 
-[1] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir
-[2] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\CMSIS_6603591812247902717.dir
-[3] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir
-[4] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\EWARM_18443280873093131863.dir
-[5] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plu-Cli_11501085631675054166.dir
-[6] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir
-[7] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir
-[8] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir
-[9] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\Target_2794460481546860895.dir
-[10] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir
-[11] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir
-[12] = C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir
-[13] = dl7M_tlf.a
-[14] = m7M_tls.a
-[15] = rt7M_tl.a
-[16] = shb_l.a
+[1] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\App_6048373297342892631.dir
+[2] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\CMSIS_6603591812247902717.dir
+[3] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\Core_13247989168731456611.dir
+[4] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\EWARM_18443280873093131863.dir
+[5] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\Ethernet_5605320102233052314.dir
+[6] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plu-Cli_11501085631675054166.dir
+[7] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS-Plus-TCP_16686340316780321206.dir
+[8] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\FreeRTOS_15068288790229095433.dir
+[9] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\STM32F4xx_HAL_Driver_1244631019742807970.dir
+[10] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\Target_2794460481546860895.dir
+[11] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\USB_Device_Library_15009154495834662892.dir
+[12] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\portable_15954926109208205999.dir
+[13] = C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\Obj\portable_7947777220660125680.dir
+[14] = dl7M_tlf.a
+[15] = m7M_tls.a
+[16] = rt7M_tl.a
+[17] = shb_l.a
 
   16'694 bytes of readonly  code memory
      392 bytes of readonly  data memory

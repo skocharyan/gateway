@@ -23,9 +23,9 @@
 
 if ($debugfile -eq "")
 {
-& "C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" --backend -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
+& "C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" --backend -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
 }
 else
 {
-& "C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
+& "C:\iar\ewarm-9.60.3\common\bin\cspybat" -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.general.xcl" --debug_file=$debugfile --backend -f "C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\settings\Gateway_407.Gateway_407.driver.xcl" 
 }

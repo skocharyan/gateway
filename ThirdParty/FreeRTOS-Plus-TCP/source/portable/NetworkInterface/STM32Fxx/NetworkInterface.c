@@ -382,9 +382,9 @@ void HAL_ETH_RxCpltCallback(ETH_HandleTypeDef* heth)
 
     (void)heth;
 
-//    LL_GPIO_TogglePin(MUX_OK_GPIO_Port, MUX_OK_Pin); /* For debugging purposes. */
+    //    LL_GPIO_TogglePin(MUX_OK_GPIO_Port, MUX_OK_Pin); /* For debugging purposes. */
 
-    /* Pass an RX-event and wakeup the prvEMACHandlerTask. */
+        /* Pass an RX-event and wakeup the prvEMACHandlerTask. */
     if (xEMACTaskHandle != NULL)
     {
         xTaskNotifyFromISR(xEMACTaskHandle, EMAC_IF_RX_EVENT, eSetBits, &(xHigherPriorityTaskWoken));
@@ -399,9 +399,9 @@ void HAL_ETH_TxCpltCallback(ETH_HandleTypeDef* heth)
 
     (void)heth;
 
-//    LL_GPIO_TogglePin(ST_OK_GPIO_Port, ST_OK_Pin); /* For debugging purposes. */
+    //    LL_GPIO_TogglePin(ST_OK_GPIO_Port, ST_OK_Pin); /* For debugging purposes. */
 
-    /* Pass a TX-event and wakeup the prvEMACHandlerTask. */
+        /* Pass a TX-event and wakeup the prvEMACHandlerTask. */
     if (xEMACTaskHandle != NULL)
     {
         xTaskNotifyFromISR(xEMACTaskHandle, EMAC_IF_TX_EVENT, eSetBits, &(xHigherPriorityTaskWoken));
@@ -949,21 +949,21 @@ static BaseType_t xMayAcceptPacket(uint8_t* pucEthernetBuffer)
     switch (pxProtPacket->xTCPPacket.xEthernetHeader.usFrameType)
     {
     case ipARP_FRAME_TYPE:
-        /* Check it later. */
-        return pdTRUE;
+    /* Check it later. */
+    return pdTRUE;
 
 #if ( ipconfigUSE_IPv6 != 0 )
     case ipIPv6_FRAME_TYPE:
-        /* Check it later. */
-        return pdTRUE;
+    /* Check it later. */
+    return pdTRUE;
 #endif
     case ipIPv4_FRAME_TYPE:
-        /* Check it here. */
-        break;
+    /* Check it here. */
+    break;
 
     default:
-        /* Refuse the packet. */
-        return pdFALSE;
+    /* Refuse the packet. */
+    return pdFALSE;
     }
 
 #if ( ipconfigETHERNET_DRIVER_FILTERS_PACKETS == 1 )
