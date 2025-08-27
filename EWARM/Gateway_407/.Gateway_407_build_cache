@@ -8,11 +8,5 @@
                 <Path>C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM\Gateway_407\List\Gateway_407.map</Path>
             </Output>
         </Parent>
-        <Parent>
-            <Path>C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\Exe\Gateway_407.out</Path>
-            <Output>
-                <Path>C:\Users\Admin\Desktop\Dispenser\Gateway\EWARM\Gateway_407\List\Gateway_407.map</Path>
-            </Output>
-        </Parent>
     </Tool>
 </BuildDb>

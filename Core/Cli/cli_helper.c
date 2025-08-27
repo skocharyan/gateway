@@ -4,9 +4,10 @@
 #include "task.h"
 #include "cli.h"
 #include "stdint.h"
+#include "stdio.h"
 
-static char inputBuffer[CLI_INPUT_BUFFER_SIZE];
-static char outputBuffer[CLI_OUTPUT_BUFFER_SIZE];
+extern char inputBuffer[CLI_INPUT_BUFFER_SIZE];
+extern char outputBuffer[CLI_OUTPUT_BUFFER_SIZE];
 
 static uint8_t inputIndex = 0;
 

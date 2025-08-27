@@ -16,9 +16,9 @@
   *
   ******************************************************************************
   */
-/* USER CODE END Header */
+  /* USER CODE END Header */
 
-/* Includes ------------------------------------------------------------------*/
+  /* Includes ------------------------------------------------------------------*/
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
@@ -39,55 +39,55 @@
   * @{
   */
 
-/** @addtogroup USBD_CDC_IF
-  * @{
-  */
+  /** @addtogroup USBD_CDC_IF
+    * @{
+    */
 
-/** @defgroup USBD_CDC_IF_Private_TypesDefinitions USBD_CDC_IF_Private_TypesDefinitions
-  * @brief Private types.
-  * @{
-  */
+    /** @defgroup USBD_CDC_IF_Private_TypesDefinitions USBD_CDC_IF_Private_TypesDefinitions
+      * @brief Private types.
+      * @{
+      */
 
-/* USER CODE BEGIN PRIVATE_TYPES */
+      /* USER CODE BEGIN PRIVATE_TYPES */
 
-/* USER CODE END PRIVATE_TYPES */
+      /* USER CODE END PRIVATE_TYPES */
 
-/**
-  * @}
-  */
+      /**
+        * @}
+        */
 
-/** @defgroup USBD_CDC_IF_Private_Defines USBD_CDC_IF_Private_Defines
-  * @brief Private defines.
-  * @{
-  */
+        /** @defgroup USBD_CDC_IF_Private_Defines USBD_CDC_IF_Private_Defines
+          * @brief Private defines.
+          * @{
+          */
 
-/* USER CODE BEGIN PRIVATE_DEFINES */
-/* USER CODE END PRIVATE_DEFINES */
+          /* USER CODE BEGIN PRIVATE_DEFINES */
+          /* USER CODE END PRIVATE_DEFINES */
 
-/**
-  * @}
-  */
+          /**
+            * @}
+            */
 
-/** @defgroup USBD_CDC_IF_Private_Macros USBD_CDC_IF_Private_Macros
-  * @brief Private macros.
-  * @{
-  */
+            /** @defgroup USBD_CDC_IF_Private_Macros USBD_CDC_IF_Private_Macros
+              * @brief Private macros.
+              * @{
+              */
 
-/* USER CODE BEGIN PRIVATE_MACRO */
+              /* USER CODE BEGIN PRIVATE_MACRO */
 
-/* USER CODE END PRIVATE_MACRO */
+              /* USER CODE END PRIVATE_MACRO */
 
-/**
-  * @}
-  */
+              /**
+                * @}
+                */
 
-/** @defgroup USBD_CDC_IF_Private_Variables USBD_CDC_IF_Private_Variables
-  * @brief Private variables.
-  * @{
-  */
-/* Create buffer for reception and transmission           */
-/* It's up to user to redefine and/or remove those define */
-/** Received data over USB are stored in this buffer      */
+                /** @defgroup USBD_CDC_IF_Private_Variables USBD_CDC_IF_Private_Variables
+                  * @brief Private variables.
+                  * @{
+                  */
+                  /* Create buffer for reception and transmission           */
+                  /* It's up to user to redefine and/or remove those define */
+                  /** Received data over USB are stored in this buffer      */
 uint8_t UserRxBufferFS[APP_RX_DATA_SIZE];
 
 /** Data to send over USB CDC are stored in this buffer   */
@@ -101,10 +101,10 @@ uint8_t UserTxBufferFS[APP_TX_DATA_SIZE];
   * @}
   */
 
-/** @defgroup USBD_CDC_IF_Exported_Variables USBD_CDC_IF_Exported_Variables
-  * @brief Public variables.
-  * @{
-  */
+  /** @defgroup USBD_CDC_IF_Exported_Variables USBD_CDC_IF_Exported_Variables
+    * @brief Public variables.
+    * @{
+    */
 
 extern USBD_HandleTypeDef hUsbDeviceFS;
 
@@ -116,16 +116,16 @@ extern USBD_HandleTypeDef hUsbDeviceFS;
   * @}
   */
 
-/** @defgroup USBD_CDC_IF_Private_FunctionPrototypes USBD_CDC_IF_Private_FunctionPrototypes
-  * @brief Private functions declaration.
-  * @{
-  */
+  /** @defgroup USBD_CDC_IF_Private_FunctionPrototypes USBD_CDC_IF_Private_FunctionPrototypes
+    * @brief Private functions declaration.
+    * @{
+    */
 
 static int8_t CDC_Init_FS(void);
 static int8_t CDC_DeInit_FS(void);
 static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length);
-static int8_t CDC_Receive_FS(uint8_t* pbuf, uint32_t *Len);
-static int8_t CDC_TransmitCplt_FS(uint8_t *pbuf, uint32_t *Len, uint8_t epnum);
+static int8_t CDC_Receive_FS(uint8_t* pbuf, uint32_t* Len);
+static int8_t CDC_TransmitCplt_FS(uint8_t* pbuf, uint32_t* Len, uint8_t epnum);
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_DECLARATION */
 
@@ -180,27 +180,27 @@ static int8_t CDC_DeInit_FS(void)
 static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 {
   /* USER CODE BEGIN 5 */
-  switch(cmd)
+  switch (cmd)
   {
-    case CDC_SEND_ENCAPSULATED_COMMAND:
+  case CDC_SEND_ENCAPSULATED_COMMAND:
 
-    break;
+  break;
 
-    case CDC_GET_ENCAPSULATED_RESPONSE:
+  case CDC_GET_ENCAPSULATED_RESPONSE:
 
-    break;
+  break;
 
-    case CDC_SET_COMM_FEATURE:
+  case CDC_SET_COMM_FEATURE:
 
-    break;
+  break;
 
-    case CDC_GET_COMM_FEATURE:
+  case CDC_GET_COMM_FEATURE:
 
-    break;
+  break;
 
-    case CDC_CLEAR_COMM_FEATURE:
+  case CDC_CLEAR_COMM_FEATURE:
 
-    break;
+  break;
 
   /*******************************************************************************/
   /* Line Coding Structure                                                       */
@@ -219,24 +219,24 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   /*                                        4 - Space                            */
   /* 6      | bDataBits  |   1   | Number Data bits (5, 6, 7, 8 or 16).          */
   /*******************************************************************************/
-    case CDC_SET_LINE_CODING:
+  case CDC_SET_LINE_CODING:
 
-    break;
+  break;
 
-    case CDC_GET_LINE_CODING:
+  case CDC_GET_LINE_CODING:
 
-    break;
+  break;
 
-    case CDC_SET_CONTROL_LINE_STATE:
+  case CDC_SET_CONTROL_LINE_STATE:
 
-    break;
+  break;
 
-    case CDC_SEND_BREAK:
+  case CDC_SEND_BREAK:
 
-    break;
+  break;
 
   default:
-    break;
+  break;
   }
 
   return (USBD_OK);
@@ -258,11 +258,12 @@ static int8_t CDC_Control_FS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t *Len)
+static int8_t CDC_Receive_FS(uint8_t* Buf, uint32_t* Len)
 {
   /* USER CODE BEGIN 6 */
   USBD_CDC_SetRxBuffer(&hUsbDeviceFS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceFS);
+  CDC_ReceiveData(UserRxBufferFS, Len);
   return (USBD_OK);
   /* USER CODE END 6 */
 }
@@ -282,8 +283,8 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len)
 {
   uint8_t result = USBD_OK;
   /* USER CODE BEGIN 7 */
-  USBD_CDC_HandleTypeDef *hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
-  if (hcdc->TxState != 0){
+  USBD_CDC_HandleTypeDef* hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceFS.pClassData;
+  if (hcdc->TxState != 0) {
     return USBD_BUSY;
   }
   USBD_CDC_SetTxBuffer(&hUsbDeviceFS, Buf, Len);
@@ -304,7 +305,7 @@ uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len)
   * @param  Len: Number of data received (in bytes)
   * @retval Result of the operation: USBD_OK if all operations are OK else USBD_FAIL
   */
-static int8_t CDC_TransmitCplt_FS(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
+static int8_t CDC_TransmitCplt_FS(uint8_t* Buf, uint32_t* Len, uint8_t epnum)
 {
   uint8_t result = USBD_OK;
   /* USER CODE BEGIN 13 */
@@ -323,6 +324,6 @@ static int8_t CDC_TransmitCplt_FS(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
   * @}
   */
 
-/**
-  * @}
-  */
+  /**
+    * @}
+    */
