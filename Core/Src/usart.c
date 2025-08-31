@@ -16,11 +16,21 @@
   *
   ******************************************************************************
   */
+#include "stdint.h"
+#include "string.h"
+#include "FreeRTOS.h"
+#include "task.h"
+#include "AppConfig.h"
+
   /* USER CODE END Header */
   /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
+uint8_t rxDataBuffer[RX_BUFFER_SIZE] = { 0 };
+uint32_t qrLength = 0;
+
+extern TaskHandle_t qrTaskHandle;
 
 /* USER CODE END 0 */
 
@@ -102,21 +112,50 @@ void MX_USART1_UART_Init(void)
 void U1_Init(void) {
 
   // // DMA RX Initialization
-  // LL_DMA_DisableStream(DMA2, LL_DMA_STREAM_2);
-  // LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_2,
-  //   LL_USART_DMA_GetRegAddr(USART1));
+  LL_DMA_DisableStream(DMA2, LL_DMA_STREAM_2);
+  LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_2,
+    LL_USART_DMA_GetRegAddr(USART1));
 
-  // LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_2, (uint32_t)uart_1.buf);
-  // LL_DMA_SetDataTransferDirection(DMA2, LL_DMA_STREAM_2,
-  //   LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
+  LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_2, (uint32_t)rxDataBuffer);
+  LL_DMA_SetDataTransferDirection(DMA2, LL_DMA_STREAM_2,
+    LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
 
-  // LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_2, U1_RX_BUFFER_SIZE);
+  LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_2, RX_BUFFER_SIZE);
   // LL_DMA_EnableIT_TC(DMA2, LL_DMA_STREAM_2);
 
-  // LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_2);
+  LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_2);
   // LL_USART_EnableDMAReq_RX(USART1);
 
 
+}
+
+
+void USART_Process(void) {
+  // Handle USART1 IDLE line detection event
+  if (LL_USART_IsActiveFlag_IDLE(USART1)) {
+    LL_USART_ClearFlag_IDLE(USART1);
+    // Add your code to handle the IDLE line detection event here
+
+    qrLength = RX_BUFFER_SIZE - LL_DMA_GetDataLength(DMA2, LL_DMA_STREAM_2);
+
+    // Process received data in rxDataBuffer[0..dataLength-1] here
+    // Example: user_callback(rxDataBuffer, dataLength);
+
+    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    xTaskNotifyFromISR(qrTaskHandle, 0, eNoAction, NULL);
+    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+
+
+    // Reset DMA for next reception
+    LL_DMA_DisableStream(DMA2, LL_DMA_STREAM_2);
+    LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_2, (uint32_t)rxDataBuffer);
+    LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_2, RX_BUFFER_SIZE);
+    LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_2);
+
+
+    // Optionally clear buffer if needed
+    // memset(rxDataBuffer, 0, RX_BUFFER_SIZE);
+  }
 }
 
 /* USER CODE END 1 */

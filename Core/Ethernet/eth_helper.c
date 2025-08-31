@@ -4,6 +4,7 @@
 #include "task.h"
 #include "FreeRTOS_Sockets.h"
 #include "FreeRTOS_IP.h"
+#include "stm32f4xx_hal.h"
 
 
 uint8_t ip_address[6] = { 192,168,1,133 };
@@ -126,3 +127,24 @@ int32_t vTCPSendAndReceive(const char* pcTxBuffer,
     return result;
 }
 
+BaseType_t xApplicationGetRandomNumber(uint32_t* pulNumber) {
+
+    *pulNumber = HAL_GetTick(); // Use the system tick as a random number source
+    return pdTRUE;
+}
+
+uint32_t ulApplicationGetNextSequenceNumber(
+    uint32_t ulSourceAddress,
+    uint16_t usSourcePort,
+    uint32_t ulDestinationAddress,
+    uint16_t usDestinationPort)
+{
+    uint32_t ticks = xTaskGetTickCount();
+
+    // Simple pseudo-random generation
+    uint32_t value = ulSourceAddress ^ ulDestinationAddress;
+    value ^= ((uint32_t)usSourcePort << 16) | usDestinationPort;
+    value ^= ticks * 1103515245UL + 12345UL; // LCG
+
+    return value;
+}

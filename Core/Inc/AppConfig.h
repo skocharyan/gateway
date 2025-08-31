@@ -5,16 +5,29 @@
 extern "C" {
 #endif
 
-    // Add your includes here
-    // #include <stdint.h>
+#define FLASH_CONFIG_ADDRESS 0x08010000
 
-    // Define your macros, constants, and types here
+#define QR_TAKS_STACK_SIZE 512
+#define QR_TASK_PRIORITY  (tskIDLE_PRIORITY + 10)
 
-    // Function prototypes
-    // void AppConfig_Init(void);
+#define QR_WAITING_TIME_MS portMAX_DELAY
+
+#define RX_BUFFER_SIZE 256
+
+
+    typedef  enum {
+        NONE,
+        OPEN,
+        CLOSE
+    } GateAction;
+
+    typedef enum {
+        IDLE,
+        OPENING,
+g    }GateState;
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif //
+#endif 

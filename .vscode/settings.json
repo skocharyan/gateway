@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "freertos.h": "c",
-        "cli.h": "c"
+        "cli.h": "c",
+        "eth.h": "c",
+        "stm32f407xx.h": "c",
+        "task.h": "c",
+        "flash.h": "c",
+        "appconfig.h": "c"
     }
 }

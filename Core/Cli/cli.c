@@ -22,7 +22,7 @@ static void vCliTask(void* pvParameters);
 // Command handlers
 BaseType_t prvSetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
 BaseType_t prvGetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
-
+BaseType_t prvResetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString);
 // EOF command handlers
 
 
@@ -43,6 +43,13 @@ const CLI_Command_Definition_t xGetCommand = {
     .cExpectedNumberOfParameters = -1   // allow zero or one parameter
 };
 
+const CLI_Command_Definition_t xResetCommand = {
+    .pcCommand = "reboot",
+    .pcHelpString = "Reboot the syste! \r\n",
+    .pxCommandInterpreter = prvResetCommand,
+    .cExpectedNumberOfParameters = 0
+};
+
 // EOF command definitions
 
 
@@ -59,6 +66,7 @@ void cliInit(void) {
     // Register CLI commands
     FreeRTOS_CLIRegisterCommand(&xSetCommand);
     FreeRTOS_CLIRegisterCommand(&xGetCommand);
+    FreeRTOS_CLIRegisterCommand(&xResetCommand);
 }
 
 

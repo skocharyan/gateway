@@ -17,9 +17,13 @@ C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Ethernet\
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Cli\
 -I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Qr\
+-I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../USB_DEVICE/App\
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../USB_DEVICE/Target\
+-I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Drivers/Flash\
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Drivers/STM32F4xx_HAL_Driver/Inc\
 -I
@@ -59,9 +63,13 @@ C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Ethernet
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Cli
 -I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Qr
+-I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\USB_DEVICE\App
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\USB_DEVICE\Target
+-I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Drivers\Flash
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Drivers\STM32F4xx_HAL_Driver\Inc
 -I

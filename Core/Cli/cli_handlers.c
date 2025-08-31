@@ -2,6 +2,10 @@
 
 #include "FreeRTOS.h"
 #include "eth.h"
+#include "flash.h"
+#include "AppConfig.h"
+
+extern EthernetConfig ethConfig;
 
 
 BaseType_t prvSetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
@@ -33,10 +37,9 @@ BaseType_t prvSetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char
     strncpy(param2, pcParameter2, lParameter2StringLength);
     param2[lParameter2StringLength] = '\0';
 
-    // Match and apply configuration
     if (strcmp(param1, "port") == 0) {
         uint16_t portNumber = (uint16_t)strtoul(param2, NULL, 10);
-        // dispenser_state.configuration.ethernetConfig.portNumber = portNumber;
+        ethConfig.portNumber = portNumber;
         snprintf(pcWriteBuffer, xWriteBufferLen, "Port set to %u\r\n", portNumber);
     }
     else if (strcmp(param1, "ip") == 0) {
@@ -47,8 +50,7 @@ BaseType_t prvSetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char
             snprintf(pcWriteBuffer, xWriteBufferLen, "Invalid IP address format\r\n");
             return pdFALSE;
         }
-        // memcpy(dispenser_state.configuration.ethernetConfig.ipAddress, &ipAddress, sizeof(ipAddress));
-
+        memcpy(ethConfig.ipAddress, &ipAddress, sizeof(ipAddress));
         snprintf(pcWriteBuffer, xWriteBufferLen, "IP set to %s\r\n", param2);
     }
     else if (strcmp(param1, "mask") == 0)
@@ -59,8 +61,7 @@ BaseType_t prvSetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char
             snprintf(pcWriteBuffer, xWriteBufferLen, "Invalid mask format\r\n");
             return pdFALSE;
         }
-        // memcpy(dispenser_state.configuration.ethernetConfig.subnetMask,
-        //     &mask, sizeof(mask));
+        memcpy(ethConfig.subnetMask, &mask, sizeof(mask));
         snprintf(pcWriteBuffer, xWriteBufferLen, "Mask set to %s\r\n", param2);
     }
     else if (strcmp(param1, "gateway") == 0)
@@ -71,8 +72,7 @@ BaseType_t prvSetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char
             snprintf(pcWriteBuffer, xWriteBufferLen, "Invalid gateway format\r\n");
             return pdFALSE;
         }
-        // memcpy(dispenser_state.configuration.ethernetConfig.gatewayAddress,
-        //     &gw, sizeof(gw));
+        memcpy(ethConfig.gatewayAddress, &gw, sizeof(gw));
         snprintf(pcWriteBuffer, xWriteBufferLen, "Gateway set to %s\r\n", param2);
     }
     else if (strcmp(param1, "dns") == 0)
@@ -83,28 +83,17 @@ BaseType_t prvSetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char
             snprintf(pcWriteBuffer, xWriteBufferLen, "Invalid DNS format\r\n");
             return pdFALSE;
         }
-        // memcpy(dispenser_state.configuration.ethernetConfig.dnsAddress,
-        //     &dns, sizeof(dns));
+        memcpy(ethConfig.dnsAddress, &dns, sizeof(dns));
         snprintf(pcWriteBuffer, xWriteBufferLen, "DNS set to %s\r\n", param2);
     }
-    else if (strcmp(param1, "id") == 0) {
-        if (lParameter2StringLength > 15) { // Limit to 15 characters
-            snprintf(pcWriteBuffer, xWriteBufferLen, "Error: ID must be at most 15 characters\r\n");
-            return pdFALSE;
-        }
-        // memset(dispenser_state.configuration.deviceId, 0, sizeof(dispenser_state.configuration.deviceId));
-        // strncpy((char*)dispenser_state.configuration.deviceId, param2, lParameter2StringLength);
-        // dispenser_state.configuration.deviceId[lParameter2StringLength] = '\0'; // Ensure null-termination
-        // snprintf(pcWriteBuffer, xWriteBufferLen, "ID set to %s\r\n", dispenser_state.configuration.deviceId);
-    }
-
     else {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Error: unknown parameter %s\r\n", param1);
         return pdFALSE;
     }
 
-    // FRAM_write(FRAM_START_ADDRESS, sizeof(dispenser_state.configuration), (uint8_t*)&dispenser_state.configuration);
-
+    if (Flash_Write_Data(FLASH_CONFIG_ADDRESS, (uint32_t*)&ethConfig, sizeof(EthernetConfig) / 4) != 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: failed to write to flash\r\n");
+    }
     return pdFALSE;
 }
 
@@ -115,111 +104,87 @@ BaseType_t prvGetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char
     const char* pcParameter;
     BaseType_t lParameterLength;
 
-    // pcParameter = FreeRTOS_CLIGetParameter(pcCommandString, 1, &lParameterLength);
+    pcParameter = FreeRTOS_CLIGetParameter(pcCommandString, 1, &lParameterLength);
 
-    // // If no parameter or parameter == "all", dump everything
-    // if (pcParameter == NULL
-    //     || (lParameterLength == 3 && strncmp(pcParameter, "all", 3) == 0)) {
-    //     const char* ethMode =
-    //         (dispenser_state.configuration.ethernetConfig.dhcpMode == DHCP_STATIC) ? "STATIC" :
-    //         (dispenser_state.configuration.ethernetConfig.dhcpMode == DHCP_DYNAMIC) ? "DYNAMIC" :
-    //         "OFF";
-    //     snprintf(pcWriteBuffer, xWriteBufferLen,
-    //         "ID: %s\r\n" // Include ID
-    //         "IP: %u.%u.%u.%u\r\n"
-    //         "Port: %lu\r\n"
-    //         "Mask: %u.%u.%u.%u\r\n"
-    //         "Gateway: %u.%u.%u.%u\r\n"
-    //         "DNS: %u.%u.%u.%u\r\n"
-    //         "Ethernet: %s\r\n"
-    //         ,
-    //         dispenser_state.configuration.deviceId,
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[0],
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[1],
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[2],
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[3],
-    //         dispenser_state.configuration.ethernetConfig.portNumber,
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[0],
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[1],
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[2],
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[3],
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[0],
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[1],
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[2],
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[3],
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[0],
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[1],
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[2],
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[3],
-    //         ethMode
-    //     );
+    const char* ethMode =
+        (ethConfig.dhcpMode == DHCP_STATIC) ? "STATIC" :
+        (ethConfig.dhcpMode == DHCP_DYNAMIC) ? "DYNAMIC" :
+        "OFF";
 
-    //     return pdFALSE;
-    // }
-    // else if (strncmp(pcParameter, "id", lParameterLength) == 0) {
-    //     snprintf(pcWriteBuffer, xWriteBufferLen, "ID: %s\r\n", dispenser_state.configuration.deviceId);
-    // }
-    // else if (strncmp(pcParameter, "ip", lParameterLength) == 0)
-    // {
-    //     snprintf(pcWriteBuffer, xWriteBufferLen,
-    //         "IP: %u.%u.%u.%u\r\n",
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[0],
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[1],
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[2],
-    //         dispenser_state.configuration.ethernetConfig.ipAddress[3]);
-    // }
-    // else if (strncmp(pcParameter, "port", lParameterLength) == 0)
-    // {
-    //     snprintf(pcWriteBuffer, xWriteBufferLen, "Port: %lu\r\n", dispenser_state.configuration.ethernetConfig.portNumber);
-    // }
-    // // mask
-    // else if (strncmp(pcParameter, "mask", lParameterLength) == 0)
-    // {
-    //     snprintf(pcWriteBuffer, xWriteBufferLen,
-    //         "Mask: %u.%u.%u.%u\r\n",
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[0],
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[1],
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[2],
-    //         dispenser_state.configuration.ethernetConfig.subnetMask[3]);
-    // }
+    if (pcParameter == NULL || lParameterLength == 0 ||
+        (lParameterLength == 3 && strncmp(pcParameter, "all", 3) == 0)) {
+        snprintf(pcWriteBuffer, xWriteBufferLen,
+            "IP: %u.%u.%u.%u\r\n"
+            "Port: %lu\r\n"
+            "Mask: %u.%u.%u.%u\r\n"
+            "Gateway: %u.%u.%u.%u\r\n"
+            "DNS: %u.%u.%u.%u\r\n"
+            "DHCP: %s\r\n",
+            ethConfig.ipAddress[0], ethConfig.ipAddress[1], ethConfig.ipAddress[2], ethConfig.ipAddress[3],
+            (unsigned long)ethConfig.portNumber,
+            ethConfig.subnetMask[0], ethConfig.subnetMask[1], ethConfig.subnetMask[2], ethConfig.subnetMask[3],
+            ethConfig.gatewayAddress[0], ethConfig.gatewayAddress[1], ethConfig.gatewayAddress[2], ethConfig.gatewayAddress[3],
+            ethConfig.dnsAddress[0], ethConfig.dnsAddress[1], ethConfig.dnsAddress[2], ethConfig.dnsAddress[3],
+            ethMode);
+        return pdFALSE;
+    }
 
-    // // gateway
-    // else if (strncmp(pcParameter, "gateway", lParameterLength) == 0)
-    // {
-    //     snprintf(pcWriteBuffer, xWriteBufferLen,
-    //         "Gateway: %u.%u.%u.%u\r\n",
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[0],
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[1],
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[2],
-    //         dispenser_state.configuration.ethernetConfig.gatewayAddress[3]);
-    // }
+    char param[16] = { 0 };
+    strncpy(param, pcParameter, (size_t)lParameterLength);
+    param[lParameterLength < (BaseType_t)(sizeof(param) - 1) ? lParameterLength : (sizeof(param) - 1)] = '\0';
 
-    // // dns
-    // else if (strncmp(pcParameter, "dns", lParameterLength) == 0)
-    // {
-    //     snprintf(pcWriteBuffer, xWriteBufferLen,
-    //         "DNS: %u.%u.%u.%u\r\n",
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[0],
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[1],
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[2],
-    //         dispenser_state.configuration.ethernetConfig.dnsAddress[3]);
-    // }
-    // else if (strncmp(pcParameter, "eth", lParameterLength) == 0
-    //     || strncmp(pcParameter, "ethernet", lParameterLength) == 0)
-    // {
-    //     const char* ethMode =
-    //         (dispenser_state.configuration.ethernetConfig.dhcpMode == DHCP_STATIC) ? "STATIC" :
-    //         (dispenser_state.configuration.ethernetConfig.dhcpMode == DHCP_DYNAMIC) ? "DYNAMIC" :
-    //         "OFF";
-    //     snprintf(pcWriteBuffer, xWriteBufferLen,
-    //         "Ethernet: %s\r\n",
-    //         ethMode);
-    // }
-    // else
-    // {
-    //     snprintf(pcWriteBuffer, xWriteBufferLen, "Error: unknown parameter %.*s\r\n", (int)lParameterLength, pcParameter);
-    // }
-
+    if (strncmp(param, "ip", 2) == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "IP: %u.%u.%u.%u\r\n",
+            ethConfig.ipAddress[0], ethConfig.ipAddress[1], ethConfig.ipAddress[2], ethConfig.ipAddress[3]);
+    }
+    else if (strncmp(param, "port", 4) == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Port: %lu\r\n", (unsigned long)ethConfig.portNumber);
+    }
+    else if (strncmp(param, "mask", 4) == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Mask: %u.%u.%u.%u\r\n",
+            ethConfig.subnetMask[0], ethConfig.subnetMask[1], ethConfig.subnetMask[2], ethConfig.subnetMask[3]);
+    }
+    else if (strncmp(param, "gateway", 7) == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Gateway: %u.%u.%u.%u\r\n",
+            ethConfig.gatewayAddress[0], ethConfig.gatewayAddress[1], ethConfig.gatewayAddress[2], ethConfig.gatewayAddress[3]);
+    }
+    else if (strncmp(param, "dns", 3) == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "DNS: %u.%u.%u.%u\r\n",
+            ethConfig.dnsAddress[0], ethConfig.dnsAddress[1], ethConfig.dnsAddress[2], ethConfig.dnsAddress[3]);
+    }
+    else if (strncmp(param, "dhcp", 4) == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "DHCP: %s\r\n", ethMode);
+    }
+    else {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Error: unknown parameter %s\r\n", param);
+    }
     return pdFALSE;
+}
 
+
+BaseType_t prvResetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const char* pcCommandString)
+{
+    const char* pcParameter;
+    BaseType_t lParameterLength;
+
+    pcParameter = FreeRTOS_CLIGetParameter(pcCommandString, 1, &lParameterLength);
+
+    if (pcParameter == NULL || lParameterLength == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Usage: reset <reboot|now>\r\n");
+        return pdFALSE;
+    }
+
+    char param[16] = { 0 };
+    strncpy(param, pcParameter, (size_t)lParameterLength);
+    param[lParameterLength < (BaseType_t)(sizeof(param) - 1) ? lParameterLength : (sizeof(param) - 1)] = '\0';
+
+    if (strncmp(param, "reboot", 6) == 0 || strncmp(param, "now", 3) == 0) {
+        snprintf(pcWriteBuffer, xWriteBufferLen, "Rebooting...\r\n");
+        HAL_Delay(50);
+        HAL_NVIC_SystemReset();
+        return pdFALSE;
+    }
+
+    snprintf(pcWriteBuffer, xWriteBufferLen, "Error: unknown parameter %s\r\n", param);
+    return pdFALSE;
 }

@@ -189,7 +189,7 @@
                 <option>
                     <name>TrustZoneModes</name>
                     <version>0</version>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OGAarch64Abi</name>
@@ -361,8 +361,10 @@
                     <state>$PROJ_DIR$/../Core/Inc</state>
                     <state>$PROJ_DIR$/../Core/Ethernet</state>
                     <state>$PROJ_DIR$/../Core/Cli</state>
+                    <state>$PROJ_DIR$/../Core/Qr</state>
                     <state>$PROJ_DIR$/../USB_DEVICE/App</state>
                     <state>$PROJ_DIR$/../USB_DEVICE/Target</state>
+                    <state>$PROJ_DIR$/../Drivers/Flash</state>
                     <state>$PROJ_DIR$/../Drivers/STM32F4xx_HAL_Driver/Inc</state>
                     <state>$PROJ_DIR$/../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy</state>
                     <state>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Core/Inc</state>
@@ -1257,6 +1259,15 @@
             <name>CMSIS</name>
             <file>
                 <name>$PROJ_DIR$\..\Core\Src\system_stm32f4xx.c</name>
+            </file>
+        </group>
+        <group>
+            <name>Flash</name>
+            <file>
+                <name>$PROJ_DIR$\..\Drivers\Flash\flash.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\Drivers\Flash\flash.h</name>
             </file>
         </group>
         <group>
