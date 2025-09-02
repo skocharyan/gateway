@@ -6,6 +6,7 @@
         "stm32f407xx.h": "c",
         "task.h": "c",
         "flash.h": "c",
-        "appconfig.h": "c"
+        "appconfig.h": "c",
+        "timers.h": "c"
     }
 }

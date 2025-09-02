@@ -59,7 +59,8 @@ extern PCD_HandleTypeDef hpcd_USB_OTG_FS;
 extern TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN EV */
-
+void handleOpenedState(void);
+void handleClosedState(void);
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -159,6 +160,46 @@ void DebugMon_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
+
+/**
+  * @brief This function handles EXTI line2 interrupt.
+  */
+void EXTI2_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI2_IRQn 0 */
+// Handle close event
+  /* USER CODE END EXTI2_IRQn 0 */
+  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_2) != RESET)
+  {
+    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_2);
+    /* USER CODE BEGIN LL_EXTI_LINE_2 */
+    handleClosedState();
+    /* USER CODE END LL_EXTI_LINE_2 */
+  }
+  /* USER CODE BEGIN EXTI2_IRQn 1 */
+
+  /* USER CODE END EXTI2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line3 interrupt.
+  */
+void EXTI3_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI3_IRQn 0 */
+
+  /* USER CODE END EXTI3_IRQn 0 */
+  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_3) != RESET)
+  {
+    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_3);
+    /* USER CODE BEGIN LL_EXTI_LINE_3 */
+    handleOpenedState();
+    /* USER CODE END LL_EXTI_LINE_3 */
+  }
+  /* USER CODE BEGIN EXTI3_IRQn 1 */
+
+  /* USER CODE END EXTI3_IRQn 1 */
+}
 
 /**
   * @brief This function handles USART1 global interrupt.

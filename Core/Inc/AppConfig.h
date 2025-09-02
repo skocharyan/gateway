@@ -14,17 +14,12 @@ extern "C" {
 
 #define RX_BUFFER_SIZE 256
 
+#define QR_WAIT_TIMEOUT 100
 
-    typedef  enum {
-        NONE,
-        OPEN,
-        CLOSE
-    } GateAction;
+#define QR_SUCCESS_RESPONSE "OK"
 
-    typedef enum {
-        IDLE,
-        OPENING,
-g    }GateState;
+#define GATE_WAIT_TIMEOUT 10000
+
 
 #ifdef __cplusplus
 }

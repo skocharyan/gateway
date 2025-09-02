@@ -17,6 +17,8 @@ C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Ethernet\
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Cli\
 -I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Gate\
+-I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../Core/Qr\
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\EWARM/../USB_DEVICE/App\
@@ -62,6 +64,8 @@ C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Inc
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Ethernet
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Cli
+-I
+C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Gate
 -I
 C:\Users\Koche\Desktop\Work\Smart Dispenser PRJ\gateway\Core\Qr
 -I

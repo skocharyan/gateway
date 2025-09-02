@@ -1,9 +1,11 @@
 #include "qr.h"
 #include "eth.h"
+#include "gate.h"
 #include "flash.h"
 #include "AppConfig.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "string.h"
 
 extern EthernetConfig ethConfig;
 
@@ -19,12 +21,15 @@ static void loadEthConfigs(void);
 static void qrTask(void* params);
 static void createQRTask(void);
 
+int32_t xTCPSendAndReceive(const char* pcTxBuffer,
+    size_t txLen,
+    char* pcRxBuffer,
+    size_t rxBufLen,
+    TickType_t recvTimeoutMs);
 
-extern uint8_t rxDataBuffer[RX_BUFFER_SIZE];;
-extern uint32_t qrLength;
 
-GateAction gateAction = NONE;
-GateState gateState = IDLE;
+extern uint8_t qrDataBuffer[RX_BUFFER_SIZE];;
+
 
 void QR_Init() {
     loadEthConfigs();
@@ -51,10 +56,28 @@ static void createQRTask(void) {
 
 static void qrTask(void* params) {
     uint32_t notValue;
+
+
+    if (getGateActualState() == IDLE) {
+        handleGate(CLOSE);  // close idle state;
+    }
+
     while (1) {
         if (xTaskNotifyWait(0, UINT32_MAX, &notValue, QR_WAITING_TIME_MS) == pdTRUE) {
-            // verifyThe qr
-            // open the gage
+
+            uint8_t qrRespBuffer[RX_BUFFER_SIZE];
+
+            int32_t xBytesReceived = xTCPSendAndReceive((const char*)qrDataBuffer, (size_t)notValue, (char*)qrRespBuffer, RX_BUFFER_SIZE, QR_WAIT_TIMEOUT);
+            if (xBytesReceived <= 0) {
+                continue; // failed to verify the QR code
+            }
+
+            if (strcmp((const char*)qrRespBuffer, QR_SUCCESS_RESPONSE) != 0) {
+                continue; // invalid response
+            }
+
+            handleGate(OPEN);
+
         }
     }
 }

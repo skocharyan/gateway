@@ -30,7 +30,7 @@ void generate_mac_address(uint8_t* device_id, uint8_t* mac_buffer)
 /* Send txLen bytes from pcTxBuffer, receive up to rxBufLen into pcRxBuffer.
    recvTimeoutMs is the receive timeout in milliseconds (socket option).
    Returns number of bytes received (>=0) or negative on error. */
-int32_t vTCPSendAndReceive(const char* pcTxBuffer,
+int32_t xTCPSendAndReceive(const char* pcTxBuffer,
     size_t txLen,
     char* pcRxBuffer,
     size_t rxBufLen,

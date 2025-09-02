@@ -1501,6 +1501,15 @@
                     </file>
                 </group>
                 <group>
+                    <name>Gate</name>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Gate\gate.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Gate\gate.h</name>
+                    </file>
+                </group>
+                <group>
                     <name>include</name>
                     <file>
                         <name>$PROJ_DIR$\..\Core\Inc\AppConfig.h</name>

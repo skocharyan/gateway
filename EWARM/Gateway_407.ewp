@@ -361,6 +361,7 @@
                     <state>$PROJ_DIR$/../Core/Inc</state>
                     <state>$PROJ_DIR$/../Core/Ethernet</state>
                     <state>$PROJ_DIR$/../Core/Cli</state>
+                    <state>$PROJ_DIR$/../Core/Gate</state>
                     <state>$PROJ_DIR$/../Core/Qr</state>
                     <state>$PROJ_DIR$/../USB_DEVICE/App</state>
                     <state>$PROJ_DIR$/../USB_DEVICE/Target</state>
@@ -1161,6 +1162,15 @@
                     </file>
                     <file>
                         <name>$PROJ_DIR$\..\Core\Ethernet\eth_init.c</name>
+                    </file>
+                </group>
+                <group>
+                    <name>Gate</name>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Gate\gate.c</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Gate\gate.h</name>
                     </file>
                 </group>
                 <group>
