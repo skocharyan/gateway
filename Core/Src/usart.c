@@ -21,16 +21,21 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "AppConfig.h"
+#include "stdio.h"
 
   /* USER CODE END Header */
   /* Includes ------------------------------------------------------------------*/
 #include "usart.h"
 
 /* USER CODE BEGIN 0 */
-uint8_t qrDataBuffer[RX_BUFFER_SIZE] = { 0 };
-
+uint8_t dmaBuffer[RX_BUFFER_SIZE] = { 0 };
+uint8_t dmaProcessBuffer[RX_BUFFER_SIZE] = { 0 };
 extern TaskHandle_t qrTaskHandle;
 
+// Track how many bytes we have already processed
+static volatile uint32_t qrLastPos = 0;
+
+void U1_Init(void);
 /* USER CODE END 0 */
 
 /* USART1 init function */
@@ -71,7 +76,7 @@ void MX_USART1_UART_Init(void)
 
   LL_DMA_SetStreamPriorityLevel(DMA2, LL_DMA_STREAM_2, LL_DMA_PRIORITY_LOW);
 
-  LL_DMA_SetMode(DMA2, LL_DMA_STREAM_2, LL_DMA_MODE_NORMAL);
+  LL_DMA_SetMode(DMA2, LL_DMA_STREAM_2, LL_DMA_MODE_CIRCULAR);
 
   LL_DMA_SetPeriphIncMode(DMA2, LL_DMA_STREAM_2, LL_DMA_PERIPH_NOINCREMENT);
 
@@ -88,9 +93,9 @@ void MX_USART1_UART_Init(void)
   NVIC_EnableIRQ(USART1_IRQn);
 
   /* USER CODE BEGIN USART1_Init 1 */
-  LL_USART_EnableIT_IDLE(USART1);
+  LL_USART_EnableIT_IDLE(USART1);  // Enable IDLE line detection interrupt
   /* USER CODE END USART1_Init 1 */
-  USART_InitStruct.BaudRate = 115200;
+  USART_InitStruct.BaudRate = 9600;
   USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B;
   USART_InitStruct.StopBits = LL_USART_STOPBITS_1;
   USART_InitStruct.Parity = LL_USART_PARITY_NONE;
@@ -101,6 +106,7 @@ void MX_USART1_UART_Init(void)
   LL_USART_ConfigAsyncMode(USART1);
   LL_USART_Enable(USART1);
   /* USER CODE BEGIN USART1_Init 2 */
+  U1_Init();
 
   /* USER CODE END USART1_Init 2 */
 
@@ -108,52 +114,63 @@ void MX_USART1_UART_Init(void)
 
 /* USER CODE BEGIN 1 */
 
-void U1_Init(void) {
-
-  // // DMA RX Initialization
+void U1_Init(void)
+{
+  // DMA RX Initialization
   LL_DMA_DisableStream(DMA2, LL_DMA_STREAM_2);
   LL_DMA_SetPeriphAddress(DMA2, LL_DMA_STREAM_2,
     LL_USART_DMA_GetRegAddr(USART1));
-
-  LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_2, (uint32_t)qrDataBuffer);
-  LL_DMA_SetDataTransferDirection(DMA2, LL_DMA_STREAM_2,
-    LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-
+  LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_2, (uint32_t)dmaBuffer);
   LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_2, RX_BUFFER_SIZE);
-  // LL_DMA_EnableIT_TC(DMA2, LL_DMA_STREAM_2);
-
   LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_2);
-  // LL_USART_EnableDMAReq_RX(USART1);
+  LL_USART_EnableDMAReq_RX(USART1);
 
-
+  qrLastPos = 0; // start from beginning
 }
 
-
-void USART_Process(void) {
-  // Handle USART1 IDLE line detection event
-  if (LL_USART_IsActiveFlag_IDLE(USART1)) {
+void USART_Process(void)
+{
+  if (LL_USART_IsActiveFlag_IDLE(USART1))
+  {
+    // Clear IDLE flag
     LL_USART_ClearFlag_IDLE(USART1);
-    // Add your code to handle the IDLE line detection event here
 
-    uint32_t qrLength = RX_BUFFER_SIZE - LL_DMA_GetDataLength(DMA2, LL_DMA_STREAM_2);
+    // How many bytes DMA has written
+    uint32_t dma_remaining = LL_DMA_GetDataLength(DMA2, LL_DMA_STREAM_2);
+    uint32_t dma_pos = RX_BUFFER_SIZE - dma_remaining; // current write position
 
-    // Process received data in qrDataBuffer[0..dataLength-1] here
-    // Example: user_callback(qrDataBuffer, dataLength);
+    if (dma_pos != qrLastPos)
+    {
+      uint32_t newDataLen = 0;
 
-    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    xTaskNotifyFromISR(qrTaskHandle, qrLength, eSetValueWithOverwrite, &xHigherPriorityTaskWoken);
-    portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+      if (dma_pos > qrLastPos)
+      {
+        // Linear case: data is contiguous
+        newDataLen = dma_pos - qrLastPos;
+        memcpy(dmaProcessBuffer, &dmaBuffer[qrLastPos], newDataLen);
+        printf("Detected length: %lu\n", (unsigned long)newDataLen);
+      }
+      else
+      {
+        uint32_t tailLen = RX_BUFFER_SIZE - qrLastPos;
+        uint32_t headLen = dma_pos;
+        memcpy(dmaProcessBuffer, &dmaBuffer[qrLastPos], tailLen);
+        if (headLen > 0)
+        {
+          memcpy(dmaProcessBuffer + tailLen, dmaBuffer, headLen);
+        }
+        newDataLen = tailLen + headLen;
+        printf("Detected length (wrap): %lu\n", (unsigned long)newDataLen);
+      }
 
+      // Notify QR task that new data is available
 
-    // Reset DMA for next reception
-    LL_DMA_DisableStream(DMA2, LL_DMA_STREAM_2);
-    LL_DMA_SetMemoryAddress(DMA2, LL_DMA_STREAM_2, (uint32_t)qrDataBuffer);
-    LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_2, RX_BUFFER_SIZE);
-    LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_2);
+      BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+      xTaskNotifyFromISR(qrTaskHandle, newDataLen, eSetValueWithOverwrite, &xHigherPriorityTaskWoken);
+      portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 
-
-    // Optionally clear buffer if needed
-    // memset(qrDataBuffer, 0, RX_BUFFER_SIZE);
+      qrLastPos = dma_pos;
+    }
   }
 }
 

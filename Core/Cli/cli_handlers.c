@@ -1,9 +1,15 @@
-
-
+#include <stdio.h>
+#include <stdlib.h>
 #include "FreeRTOS.h"
+#include "task.h"
+#include "FreeRTOS_CLI.h"
+#include "string.h"
 #include "eth.h"
 #include "flash.h"
 #include "AppConfig.h"
+#include "stm32f4xx.h" 
+#include "FreeRTOS_IP.h"
+
 
 extern EthernetConfig ethConfig;
 
@@ -180,8 +186,7 @@ BaseType_t prvResetCommand(char* pcWriteBuffer, size_t xWriteBufferLen, const ch
 
     if (strncmp(param, "reboot", 6) == 0 || strncmp(param, "now", 3) == 0) {
         snprintf(pcWriteBuffer, xWriteBufferLen, "Rebooting...\r\n");
-        HAL_Delay(50);
-        HAL_NVIC_SystemReset();
+        NVIC_SystemReset();
         return pdFALSE;
     }
 

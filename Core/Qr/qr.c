@@ -6,6 +6,7 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "string.h"
+#include "stdio.h"
 
 extern EthernetConfig ethConfig;
 
@@ -20,6 +21,7 @@ static StackType_t xQrTaskStack[QR_TAKS_STACK_SIZE];
 static void loadEthConfigs(void);
 static void qrTask(void* params);
 static void createQRTask(void);
+void cliInit(void);
 
 int32_t xTCPSendAndReceive(const char* pcTxBuffer,
     size_t txLen,
@@ -32,9 +34,12 @@ extern uint8_t qrDataBuffer[RX_BUFFER_SIZE];;
 
 
 void QR_Init() {
+    cliInit();
     loadEthConfigs();
-    ethInit();
+    // ethInit();
     createQRTask();
+
+    vTaskStartScheduler();
 }
 
 static void loadEthConfigs() {
@@ -58,25 +63,29 @@ static void qrTask(void* params) {
     uint32_t notValue;
 
 
-    if (getGateActualState() == IDLE) {
-        handleGate(CLOSE);  // close idle state;
-    }
+    // if (getGateActualState() == IDLE) {
+    //     handleGate(CLOSE);  // close idle state;
+    // }
 
     while (1) {
+
         if (xTaskNotifyWait(0, UINT32_MAX, &notValue, QR_WAITING_TIME_MS) == pdTRUE) {
 
-            uint8_t qrRespBuffer[RX_BUFFER_SIZE];
+            // printf("QR data: %s\n", qrDataBuffer);
+            // printf("Notified value: %lu\n", notValue);
 
-            int32_t xBytesReceived = xTCPSendAndReceive((const char*)qrDataBuffer, (size_t)notValue, (char*)qrRespBuffer, RX_BUFFER_SIZE, QR_WAIT_TIMEOUT);
-            if (xBytesReceived <= 0) {
-                continue; // failed to verify the QR code
-            }
+            // uint8_t qrRespBuffer[RX_BUFFER_SIZE];
 
-            if (strcmp((const char*)qrRespBuffer, QR_SUCCESS_RESPONSE) != 0) {
-                continue; // invalid response
-            }
+            // int32_t xBytesReceived = xTCPSendAndReceive((const char*)qrDataBuffer, (size_t)notValue, (char*)qrRespBuffer, RX_BUFFER_SIZE, QR_WAIT_TIMEOUT);
+            // if (xBytesReceived <= 0) {
+            //     continue; // failed to verify the QR code
+            // }
 
-            handleGate(OPEN);
+            // if (strcmp((const char*)qrRespBuffer, QR_SUCCESS_RESPONSE) != 0) {
+            //     continue; // invalid response
+            // }
+
+            // handleGate(OPEN);
 
         }
     }

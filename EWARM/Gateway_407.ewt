@@ -1485,6 +1485,9 @@
                         <name>$PROJ_DIR$\..\Core\Cli\cli.h</name>
                     </file>
                     <file>
+                        <name>$PROJ_DIR$\..\Core\Cli\cli_handlers.c</name>
+                    </file>
+                    <file>
                         <name>$PROJ_DIR$\..\Core\Cli\cli_helper.c</name>
                     </file>
                 </group>
