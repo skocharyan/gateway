@@ -1506,10 +1506,10 @@
                 <group>
                     <name>Gate</name>
                     <file>
-                        <name>$PROJ_DIR$\..\Core\Gate\gate.c</name>
+                        <name>$PROJ_DIR$\..\Core\Gate\gate.cpp</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\Core\Gate\gate.h</name>
+                        <name>$PROJ_DIR$\..\Core\Gate\gate.hpp</name>
                     </file>
                 </group>
                 <group>
@@ -1546,12 +1546,21 @@
                     </file>
                 </group>
                 <group>
-                    <name>Qr</name>
+                    <name>System</name>
                     <file>
-                        <name>$PROJ_DIR$\..\Core\Qr\qr.c</name>
+                        <name>$PROJ_DIR$\..\Core\System\system.cpp</name>
                     </file>
                     <file>
-                        <name>$PROJ_DIR$\..\Core\Qr\qr.h</name>
+                        <name>$PROJ_DIR$\..\Core\System\system_thread.cpp</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\System\system_thread.hpp</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\System\system_uart.cpp</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\System\system_uart.hpp</name>
                     </file>
                 </group>
                 <file>
@@ -1574,9 +1583,6 @@
                 </file>
                 <file>
                     <name>$PROJ_DIR$\..\Core\Src\tim.c</name>
-                </file>
-                <file>
-                    <name>$PROJ_DIR$\..\Core\Src\usart.c</name>
                 </file>
             </group>
             <group>

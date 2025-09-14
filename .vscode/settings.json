@@ -7,6 +7,12 @@
         "task.h": "c",
         "flash.h": "c",
         "appconfig.h": "c",
-        "timers.h": "c"
+        "timers.h": "c",
+        "system.h": "c",
+        "usb_device.h": "c"
+    },
+    "editor.defaultFormatter": null,
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
     }
 }
