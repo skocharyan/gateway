@@ -2,7 +2,7 @@
 
 #include "AppConfig.h"
 #include "FreeRTOS.h"
-#include "eth.h"
+#include "eth.hpp"
 #include "flash.h"
 #include "gate.hpp"
 #include "stdio.h"
@@ -12,30 +12,37 @@
 
 extern EthernetConfig ethConfig;
 
-static void loadEthConfigs(void);
+static void loadEthConfigs(EthernetConfig &ethConfig) {
+  Flash_Read_Data(FLASH_CONFIG_ADDRESS, (uint32_t *)&ethConfig,
+                  sizeof(EthernetConfig) / 4);
+}
+
 extern "C" void cliInit(void);
 
 SystemUart *systemUartInstance = nullptr;
 Gate *gateInstance = nullptr;
 
+
 extern "C" void System_Init() {
 
   cliInit();
-  loadEthConfigs();
-  // ethInit();
-  SystemThread systemThread; // The main worker task
 
-  SystemUart systemUart(systemThread.getTaskHandle());
+  EthernetConfig ethConfig;
+
+  loadEthConfigs(ethConfig);
+
+  Ethernet ethernet(ethConfig);
+  // ethInit();
+  static SystemThread systemThread; // The main worker task
+
+  static SystemUart systemUart(systemThread.getTaskHandle(),
+                               systemThread.getDataBufferRef());
 
   systemUartInstance = &systemUart;
 
-  Gate gate; // Gate control instance
+  static Gate gate; // Gate control instance
+
   gateInstance = &gate;
 
   vTaskStartScheduler();
-}
-
-static void loadEthConfigs() {
-  Flash_Read_Data(FLASH_CONFIG_ADDRESS, (uint32_t *)&ethConfig,
-                  sizeof(EthernetConfig) / 4);
 }

@@ -1,19 +1,24 @@
 #include "system_thread.hpp"
 #include "FreeRTOS.h"
+#include "stdio.h"
 #include "task.h"
-
-#pragma location = ".ccmram"
-StaticTask_t xTaskBuffer;
-#pragma location = ".ccmram"
-StackType_t xTaskStack[QR_TAKS_STACK_SIZE];
 
 SystemThread::SystemThread() {
   qrTaskHandle = xTaskCreateStatic(SystemThread::threadFunction, "QR_Task",
                                    QR_TAKS_STACK_SIZE, this, QR_TASK_PRIORITY,
                                    xTaskStack, &xTaskBuffer);
+  if (qrTaskHandle != NULL) {
+    printf("task is created \n");
+  } else {
+    printf("task is not creted \n");
+  }
 }
 
 TaskHandle_t SystemThread::getTaskHandle() const { return qrTaskHandle; }
+
+uint8_t (&SystemThread::getDataBufferRef())[RX_BUFFER_SIZE] {
+  return dmaProcessBuffer;
+}
 
 void SystemThread::threadFunction(void *params) {
 
@@ -29,8 +34,8 @@ void SystemThread::threadFunction(void *params) {
   while (1) {
     if (xTaskNotifyWait(0, UINT32_MAX, &notValue, QR_WAITING_TIME_MS) ==
         pdTRUE) {
-      // printf("QR data: %s\n", qrDataBuffer);
-      // printf("Notified value: %lu\n", notValue);
+      printf("QR data: %s\n", self->dmaProcessBuffer);
+      printf("Notified value: %lu\n", notValue);
 
       // uint8_t qrRespBuffer[RX_BUFFER_SIZE];
 

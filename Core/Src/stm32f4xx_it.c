@@ -226,5 +226,8 @@ void OTG_FS_IRQHandler(void) {
 }
 
 /* USER CODE BEGIN 1 */
-
+void USART1_IRQHandler(void) {
+  extern void USART1_IRQHandler_cpp(void);
+  USART1_IRQHandler_cpp();
+}
 /* USER CODE END 1 */

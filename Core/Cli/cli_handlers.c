@@ -2,7 +2,7 @@
 #include "FreeRTOS.h"
 #include "FreeRTOS_CLI.h"
 #include "FreeRTOS_IP.h"
-#include "eth.h"
+#include "eth.hpp"
 #include "flash.h"
 #include "stm32f4xx.h"
 #include "string.h"
@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern EthernetConfig ethConfig;
+static EthernetConfig ethConfig;
 
 BaseType_t prvSetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
                          const char *pcCommandString) {

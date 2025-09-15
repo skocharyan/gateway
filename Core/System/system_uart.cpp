@@ -7,7 +7,11 @@
 
 extern SystemUart *systemUartInstance;
 
-SystemUart::SystemUart(TaskHandle_t qrTaskHandle) {
+SystemUart::SystemUart(TaskHandle_t qrTaskHandle,
+                       uint8_t (&ref)[RX_BUFFER_SIZE])
+    : msgRef{ref} {
+
+  printf("SystemUart constructor called \n");
 
   this->qrTaskHandle = qrTaskHandle;
 
@@ -71,6 +75,8 @@ void SystemUart::process(void) {
     // Clear IDLE flag
     LL_USART_ClearFlag_IDLE(USART1);
 
+    uint8_t dmaProcessBuffer[RX_BUFFER_SIZE]{0};
+
     // How many bytes DMA has written
     uint32_t dma_remaining = LL_DMA_GetDataLength(DMA2, LL_DMA_STREAM_2);
     uint32_t dma_pos = RX_BUFFER_SIZE - dma_remaining; // current write position
@@ -96,6 +102,8 @@ void SystemUart::process(void) {
 
       // Notify QR task that new data is available
 
+      memcpy(msgRef, dmaProcessBuffer, newDataLen);
+
       BaseType_t xHigherPriorityTaskWoken = pdFALSE;
       xTaskNotifyFromISR(qrTaskHandle, newDataLen, eSetValueWithOverwrite,
                          &xHigherPriorityTaskWoken);
@@ -106,4 +114,12 @@ void SystemUart::process(void) {
   }
 }
 
-void USART1_IRQHandler(void) { systemUartInstance->process(); }
+extern "C" void USART1_IRQHandler_cpp(void) {
+  printf("Uart interrupt being called \n");
+  systemUartInstance->process();
+}
+
+void USART1_IRQHandler(void) {
+  extern void USART1_IRQHandler_cpp(void);
+  USART1_IRQHandler_cpp();
+}

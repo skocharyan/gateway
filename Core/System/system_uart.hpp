@@ -13,14 +13,15 @@ extern "C" {
 class SystemUart {
 private:
   uint8_t dmaBuffer[RX_BUFFER_SIZE]{0};
-  uint8_t dmaProcessBuffer[RX_BUFFER_SIZE]{0};
+
+  uint8_t (&msgRef)[RX_BUFFER_SIZE];
 
   volatile uint32_t qrLastPos{0};
 
   TaskHandle_t qrTaskHandle{NULL};
 
 public:
-  SystemUart(TaskHandle_t qrTaskHandle);
+  SystemUart(TaskHandle_t qrTaskHandle, uint8_t (&ref)[RX_BUFFER_SIZE]);
   void process(void);
 };
 

@@ -1494,13 +1494,13 @@
                 <group>
                     <name>Ethernet</name>
                     <file>
-                        <name>$PROJ_DIR$\..\Core\Ethernet\eth.h</name>
+                        <name>$PROJ_DIR$\..\Core\Ethernet\eth.cpp</name>
+                    </file>
+                    <file>
+                        <name>$PROJ_DIR$\..\Core\Ethernet\eth.hpp</name>
                     </file>
                     <file>
                         <name>$PROJ_DIR$\..\Core\Ethernet\eth_helper.c</name>
-                    </file>
-                    <file>
-                        <name>$PROJ_DIR$\..\Core\Ethernet\eth_init.c</name>
                     </file>
                 </group>
                 <group>
