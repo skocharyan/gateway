@@ -15,13 +15,14 @@ extern EthernetConfig ethConfig;
 static void loadEthConfigs(EthernetConfig &ethConfig) {
   Flash_Read_Data(FLASH_CONFIG_ADDRESS, (uint32_t *)&ethConfig,
                   sizeof(EthernetConfig) / 4);
+
+  printf("Port numner from flash: %d\n", ethConfig.portNumber);
 }
 
 extern "C" void cliInit(void);
 
 SystemUart *systemUartInstance = nullptr;
 Gate *gateInstance = nullptr;
-
 
 extern "C" void System_Init() {
 
@@ -31,7 +32,7 @@ extern "C" void System_Init() {
 
   loadEthConfigs(ethConfig);
 
-  Ethernet ethernet(ethConfig);
+  static Ethernet ethernet(ethConfig);
   // ethInit();
   static SystemThread systemThread; // The main worker task
 

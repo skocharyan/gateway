@@ -9,7 +9,8 @@
         "appconfig.h": "c",
         "timers.h": "c",
         "system.h": "c",
-        "usb_device.h": "c"
+        "usb_device.h": "c",
+        "functional": "c"
     },
     "editor.defaultFormatter": null,
     "[cpp]": {

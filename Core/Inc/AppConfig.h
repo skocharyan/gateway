@@ -5,10 +5,10 @@
 extern "C" {
 #endif
 
-#define FLASH_CONFIG_ADDRESS 0x08010000
+#define FLASH_CONFIG_ADDRESS 0x08020000
 
 #define QR_TAKS_STACK_SIZE 512
-#define QR_TASK_PRIORITY  (tskIDLE_PRIORITY + 10)
+#define QR_TASK_PRIORITY (tskIDLE_PRIORITY + 10)
 
 #define QR_WAITING_TIME_MS portMAX_DELAY
 
@@ -20,9 +20,8 @@ extern "C" {
 
 #define GATE_WAIT_TIMEOUT 10000
 
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif 
+#endif
