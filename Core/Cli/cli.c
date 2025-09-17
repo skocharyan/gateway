@@ -30,14 +30,15 @@ BaseType_t prvResetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
 // Command definition
 const CLI_Command_Definition_t xSetCommand = {
     .pcCommand = "set",
-    .pcHelpString = "set property <value>: Set the ip/port/mas .... values\r\n",
+    .pcHelpString = "set <field> <value>: Set network field. Fields: ip, port, "
+                    "mask, gateway, dns, host_ip\r\n",
     .pxCommandInterpreter = prvSetCommand,
     .cExpectedNumberOfParameters = 2};
 
 const CLI_Command_Definition_t xGetCommand = {
     .pcCommand = "get",
     .pcHelpString = "get [all|field]: Get one field or 'all'. Fields:\r\n"
-                    "ip, port, mask, gateway, dns, dhcp\r\n",
+                    "ip, port, mask, gateway, dns, host_ip, dhcp\r\n",
     .pxCommandInterpreter = prvGetCommand,
     .cExpectedNumberOfParameters = -1 // allow zero or one parameter
 };

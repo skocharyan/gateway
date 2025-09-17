@@ -19,12 +19,12 @@ typedef struct __attribute__((aligned(8))) {
   uint8_t gatewayAddress[4];
   uint8_t dnsAddress[4];
   uint32_t portNumber;
+  uint8_t hostIPAddress[4];
 } EthernetConfig;
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
-
 
 #ifdef __cplusplus
 class Ethernet {

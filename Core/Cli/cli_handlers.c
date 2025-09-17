@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static EthernetConfig ethConfig;
+extern EthernetConfig ethConfig;
 
 BaseType_t prvSetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
                          const char *pcCommandString) {
@@ -83,6 +83,14 @@ BaseType_t prvSetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
     }
     memcpy(ethConfig.dnsAddress, &dns, sizeof(dns));
     snprintf(pcWriteBuffer, xWriteBufferLen, "DNS set to %s\r\n", param2);
+  } else if (strcmp(param1, "host_ip") == 0) {
+    uint32_t hip = FreeRTOS_inet_addr(param2);
+    if (hip == 0) {
+      snprintf(pcWriteBuffer, xWriteBufferLen, "Invalid host_ip format\r\n");
+      return pdFALSE;
+    }
+    memcpy(ethConfig.hostIPAddress, &hip, sizeof(hip));
+    snprintf(pcWriteBuffer, xWriteBufferLen, "Host IP set to %s\r\n", param2);
   } else {
     snprintf(pcWriteBuffer, xWriteBufferLen, "Error: unknown parameter %s\r\n",
              param1);
@@ -116,6 +124,7 @@ BaseType_t prvGetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
              "Mask: %u.%u.%u.%u\r\n"
              "Gateway: %u.%u.%u.%u\r\n"
              "DNS: %u.%u.%u.%u\r\n"
+             "Host IP: %u.%u.%u.%u\r\n"
              "DHCP: %s\r\n",
              ethConfig.ipAddress[0], ethConfig.ipAddress[1],
              ethConfig.ipAddress[2], ethConfig.ipAddress[3],
@@ -125,7 +134,9 @@ BaseType_t prvGetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
              ethConfig.gatewayAddress[1], ethConfig.gatewayAddress[2],
              ethConfig.gatewayAddress[3], ethConfig.dnsAddress[0],
              ethConfig.dnsAddress[1], ethConfig.dnsAddress[2],
-             ethConfig.dnsAddress[3], ethMode);
+             ethConfig.dnsAddress[3], ethConfig.hostIPAddress[0],
+             ethConfig.hostIPAddress[1], ethConfig.hostIPAddress[2],
+             ethConfig.hostIPAddress[3], ethMode);
     return pdFALSE;
   }
 
@@ -154,6 +165,10 @@ BaseType_t prvGetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
     snprintf(pcWriteBuffer, xWriteBufferLen, "DNS: %u.%u.%u.%u\r\n",
              ethConfig.dnsAddress[0], ethConfig.dnsAddress[1],
              ethConfig.dnsAddress[2], ethConfig.dnsAddress[3]);
+  } else if (strncmp(param, "host_ip", 7) == 0) {
+    snprintf(pcWriteBuffer, xWriteBufferLen, "Host IP: %u.%u.%u.%u\r\n",
+             ethConfig.hostIPAddress[0], ethConfig.hostIPAddress[1],
+             ethConfig.hostIPAddress[2], ethConfig.hostIPAddress[3]);
   } else if (strncmp(param, "dhcp", 4) == 0) {
     snprintf(pcWriteBuffer, xWriteBufferLen, "DHCP: %s\r\n", ethMode);
   } else {

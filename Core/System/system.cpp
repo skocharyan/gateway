@@ -24,11 +24,11 @@ extern "C" void cliInit(void);
 SystemUart *systemUartInstance = nullptr;
 Gate *gateInstance = nullptr;
 
+EthernetConfig ethConfig;
+
 extern "C" void System_Init() {
 
   cliInit();
-
-  EthernetConfig ethConfig;
 
   loadEthConfigs(ethConfig);
 
