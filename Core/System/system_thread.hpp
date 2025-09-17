@@ -12,6 +12,8 @@ extern "C" {
 
 void System_Init();
 
+enum SystemState { SYSTEM_IDLE, SYSTEM_BUSY };
+
 class SystemThread {
 private:
   TaskHandle_t qrTaskHandle;
@@ -19,6 +21,8 @@ private:
 
   StaticTask_t xTaskBuffer;
   StackType_t xTaskStack[QR_TAKS_STACK_SIZE];
+
+  SystemState state{SYSTEM_IDLE};
 
   static void threadFunction(void *args);
 

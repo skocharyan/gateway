@@ -1,0 +1,19 @@
+Port numner from flash: 7788
+IP Address: 192.168.0.111
+Subnet Mask: 255.255.255.0
+Gateway Address: 192.168.0.1
+DNS Address: 0.0.0.0
+Port Number: 7788
+Ethernet initialized 
+task is created 
+SystemUart constructor called 
+Uart interrupt being called 
+Detected length: 4
+QR data: Bsbs
+Notified value: 4
+Uart interrupt being called 
+Detected length: 4
+Sent bytes: -1
+QR data: Bsbs
+Notified value: 4
+Sent bytes: -1

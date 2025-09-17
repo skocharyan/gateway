@@ -38,28 +38,34 @@ void SystemThread::threadFunction(void *params) {
   while (1) {
     if (xTaskNotifyWait(0, UINT32_MAX, &notValue, QR_WAITING_TIME_MS) ==
         pdTRUE) {
-      printf("QR data: %s\n", self->dmaProcessBuffer);
-      printf("Notified value: %lu\n", notValue);
-      uint16_t port = 7788;
-      int32_t sentBytes =
-          xTCPSend((const char *)self->dmaProcessBuffer,
-                   strlen((const char *)self->dmaProcessBuffer), port);
+      if (self->state == SYSTEM_IDLE) {
+        self->state = SYSTEM_BUSY;
+        printf("QR data: %s\n", self->dmaProcessBuffer);
+        printf("Notified value: %lu\n", notValue);
+        uint16_t port = 7788;
+        int32_t sentBytes =
+            xTCPSend((const char *)self->dmaProcessBuffer,
+                     strlen((const char *)self->dmaProcessBuffer), port);
 
-      printf("Sent bytes: %ld\n", sentBytes);
-      // uint8_t qrRespBuffer[RX_BUFFER_SIZE];
+        printf("Sent bytes: %ld\n", sentBytes);
+        // uint8_t qrRespBuffer[RX_BUFFER_SIZE];
 
-      // int32_t xBytesReceived = xTCPSendAndReceive((const
-      // char*)qrDataBuffer, (size_t)notValue, (char*)qrRespBuffer,
-      // RX_BUFFER_SIZE, QR_WAIT_TIMEOUT); if (xBytesReceived <= 0) {
-      //     continue; // failed to verify the QR code
-      // }
+        // int32_t xBytesReceived = xTCPSendAndReceive((const
+        // char*)qrDataBuffer, (size_t)notValue, (char*)qrRespBuffer,
+        // RX_BUFFER_SIZE, QR_WAIT_TIMEOUT); if (xBytesReceived <= 0) {
+        //     continue; // failed to verify the QR code
+        // }
 
-      // if (strcmp((const char*)qrRespBuffer, QR_SUCCESS_RESPONSE) != 0)
-      // {
-      //     continue; // invalid response
-      // }
+        // if (strcmp((const char*)qrRespBuffer, QR_SUCCESS_RESPONSE) != 0)
+        // {
+        //     continue; // invalid response
+        // }
 
-      // handleGate(OPEN);
+        // handleGate(OPEN);
+        self->state = SYSTEM_IDLE;
+      } else {
+        printf("System is busy, ignoring new data\n");
+      }
     }
   }
 }
