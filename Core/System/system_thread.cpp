@@ -1,11 +1,13 @@
 #include "system_thread.hpp"
 #include "FreeRTOS.h"
 #include "cstring"
+#include "eth.hpp"
 #include "stdio.h"
 #include "task.h"
 
 extern "C" int32_t xTCPSend(const char *pcTxBuffer, size_t txLen,
                             uint16_t port);
+extern Ethernet *ethernetInstance;
 
 SystemThread::SystemThread() {
   qrTaskHandle = xTaskCreateStatic(SystemThread::threadFunction, "QR_Task",
@@ -42,10 +44,9 @@ void SystemThread::threadFunction(void *params) {
         self->state = SYSTEM_BUSY;
         printf("QR data: %s\n", self->dmaProcessBuffer);
         printf("Notified value: %lu\n", notValue);
-        uint16_t port = 7788;
-        int32_t sentBytes =
-            xTCPSend((const char *)self->dmaProcessBuffer,
-                     strlen((const char *)self->dmaProcessBuffer), port);
+        int32_t sentBytes = ethernetInstance->xTCPSend(
+            (const char *)self->dmaProcessBuffer,
+            strlen((const char *)self->dmaProcessBuffer));
 
         printf("Sent bytes: %ld\n", sentBytes);
         // uint8_t qrRespBuffer[RX_BUFFER_SIZE];

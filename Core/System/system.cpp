@@ -23,6 +23,7 @@ extern "C" void cliInit(void);
 
 SystemUart *systemUartInstance = nullptr;
 Gate *gateInstance = nullptr;
+Ethernet *ethernetInstance = nullptr;
 
 EthernetConfig ethConfig;
 
@@ -44,6 +45,7 @@ extern "C" void System_Init() {
   static Gate gate; // Gate control instance
 
   gateInstance = &gate;
+  ethernetInstance = &ethernet;
 
   vTaskStartScheduler();
 }
