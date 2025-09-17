@@ -138,3 +138,133 @@ int32_t Ethernet::xTCPSend(const char *pcTxBuffer, size_t txLen) {
   result = (int32_t)alreadyTransmitted;
   return result;
 }
+
+int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
+                                     TickType_t recvTimeoutMs) {
+  struct freertos_sockaddr xRemoteAddress;
+
+  /* Local receive buffer (adjust size as appropriate). */
+  enum { LOCAL_RX_BUF_SIZE = 256 };
+  char localRx[LOCAL_RX_BUF_SIZE];
+
+  if (pcTxBuffer == NULL || txLen == 0) {
+    return -1;
+  }
+
+  const int maxAttempts = 2;
+  for (int attempt = 0; attempt < maxAttempts; ++attempt) {
+    Socket_t xSocket = FREERTOS_INVALID_SOCKET;
+    size_t alreadyTransmitted = 0;
+    size_t alreadyReceived = 0;
+
+    /* Diagnostic: ensure network is up before attempting to connect */
+    if (FreeRTOS_IsNetworkUp() == pdFALSE) {
+      printf("xTCPSendAndReceive: network is not up yet\n");
+      return -1;
+    }
+
+    memset(&xRemoteAddress, 0, sizeof(xRemoteAddress));
+    xRemoteAddress.sin_port = FreeRTOS_htons(config.portNumber);
+    xRemoteAddress.sin_address.ulIP_IPv4 = FreeRTOS_inet_addr_quick(
+        config.hostIPAddress[0], config.hostIPAddress[1],
+        config.hostIPAddress[2], config.hostIPAddress[3]);
+    xRemoteAddress.sin_family = FREERTOS_AF_INET;
+
+    xSocket = FreeRTOS_socket(FREERTOS_AF_INET, FREERTOS_SOCK_STREAM,
+                              FREERTOS_IPPROTO_TCP);
+    configASSERT(xSocket != FREERTOS_INVALID_SOCKET);
+    if (xSocket == FREERTOS_INVALID_SOCKET) {
+      if (attempt + 1 < maxAttempts) {
+        vTaskDelay(pdMS_TO_TICKS(100));
+        continue;
+      }
+      return -1;
+    }
+
+    TickType_t xRecvTimeout = pdMS_TO_TICKS(recvTimeoutMs);
+    TickType_t xSendTimeout = pdMS_TO_TICKS(5000);
+    FreeRTOS_setsockopt(xSocket, 0, FREERTOS_SO_RCVTIMEO, &xRecvTimeout,
+                        sizeof(xRecvTimeout));
+    FreeRTOS_setsockopt(xSocket, 0, FREERTOS_SO_SNDTIMEO, &xSendTimeout,
+                        sizeof(xSendTimeout));
+
+    if (FreeRTOS_connect(xSocket, &xRemoteAddress, sizeof(xRemoteAddress)) !=
+        0) {
+      FreeRTOS_closesocket(xSocket);
+      if (attempt + 1 < maxAttempts) {
+        vTaskDelay(pdMS_TO_TICKS(100));
+        continue;
+      }
+      return -1;
+    }
+
+    /* Send loop (handle partial sends). */
+    while (alreadyTransmitted < txLen) {
+      BaseType_t xBytesSent =
+          FreeRTOS_send(xSocket, &pcTxBuffer[alreadyTransmitted],
+                        (size_t)(txLen - alreadyTransmitted), 0);
+      if (xBytesSent > 0) {
+        alreadyTransmitted += (size_t)xBytesSent;
+      } else {
+        /* send error or timeout */
+        FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
+        FreeRTOS_closesocket(xSocket);
+        if (attempt + 1 < maxAttempts) {
+          vTaskDelay(pdMS_TO_TICKS(100));
+          break; /* retry outer loop */
+        }
+        return -1;
+      }
+    }
+
+    /* Optional: tell peer no more data will be sent (depends on protocol). */
+    (void)FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_WR);
+
+    /* Receive loop */
+    for (;;) {
+      if (alreadyReceived >= LOCAL_RX_BUF_SIZE) {
+        break;
+      }
+      BaseType_t xBytesReceived =
+          FreeRTOS_recv(xSocket, &localRx[alreadyReceived],
+                        (size_t)(LOCAL_RX_BUF_SIZE - alreadyReceived), 0);
+      if (xBytesReceived > 0) {
+        alreadyReceived += (size_t)xBytesReceived;
+        /* keep NUL termination when space permits */
+        if (alreadyReceived < LOCAL_RX_BUF_SIZE) {
+          localRx[alreadyReceived] = '\0';
+        }
+        /* continue to try to read more until timeout or remote closes */
+        continue;
+      } else if (xBytesReceived == 0) {
+        /* No data (timeout or orderly close) */
+        break;
+      } else {
+        /* Error */
+        alreadyReceived = 0;
+        break;
+      }
+    }
+
+    (void)FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
+    FreeRTOS_closesocket(xSocket);
+
+    if (alreadyReceived > 0) {
+      /* Tolerant check: look for "OK" anywhere in the response */
+      if (strstr(localRx, "OK") != NULL) {
+        printf("Received Qr Confirmation \n");
+        return 0; /* success */
+      }
+      /* Received something but not OK; treat as failure for this attempt */
+    }
+
+    /* If we reach here, this attempt failed; retry if allowed */
+    if (attempt + 1 < maxAttempts) {
+      vTaskDelay(pdMS_TO_TICKS(100));
+      continue;
+    }
+    return -1;
+  } /* attempts */
+
+  return -1;
+}

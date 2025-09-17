@@ -44,11 +44,11 @@ void SystemThread::threadFunction(void *params) {
         self->state = SYSTEM_BUSY;
         printf("QR data: %s\n", self->dmaProcessBuffer);
         printf("Notified value: %lu\n", notValue);
-        int32_t sentBytes = ethernetInstance->xTCPSend(
+        int32_t success = ethernetInstance->xTCPSendAndReceive(
             (const char *)self->dmaProcessBuffer,
-            strlen((const char *)self->dmaProcessBuffer));
+            strlen((const char *)self->dmaProcessBuffer), 500);
 
-        printf("Sent bytes: %ld\n", sentBytes);
+        printf("received status : %ld\n", success == 0);
         // uint8_t qrRespBuffer[RX_BUFFER_SIZE];
 
         // int32_t xBytesReceived = xTCPSendAndReceive((const

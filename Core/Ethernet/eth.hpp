@@ -38,8 +38,9 @@ private:
 
 public:
   Ethernet(EthernetConfig config);
-
   int32_t xTCPSend(const char *pcTxBuffer, size_t txLen);
+  int32_t xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
+                             TickType_t recvTimeoutMs);
 };
 #endif // __cplusplus
 
