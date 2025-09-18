@@ -20,6 +20,11 @@ extern "C" {
 
 #define GATE_WAIT_TIMEOUT 10000
 
+#define GATE_TASK_STACK_SIZE 256
+#define GATE_TASK_PRIORITY (tskIDLE_PRIORITY + 5)
+
+#define GATE_SCAN_INIT_TIMEOUT pdMS_TO_TICKS(50) // 50 ms
+
 #ifdef __cplusplus
 }
 #endif

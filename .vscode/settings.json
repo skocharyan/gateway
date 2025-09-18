@@ -15,5 +15,6 @@
     "editor.defaultFormatter": null,
     "[cpp]": {
         "editor.defaultFormatter": "ms-vscode.cpptools"
-    }
+    },
+    "cmake.sourceDirectory": "C:/Users/Koche/Desktop/Work/Smart Dispenser PRJ/gateway/Drivers/CMSIS/DSP/Source/ComplexMathFunctions"
 }

@@ -22,7 +22,6 @@ static void loadEthConfigs(EthernetConfig &ethConfig) {
 extern "C" void cliInit(void);
 
 SystemUart *systemUartInstance = nullptr;
-Gate *gateInstance = nullptr;
 Ethernet *ethernetInstance = nullptr;
 
 EthernetConfig ethConfig;
@@ -42,9 +41,8 @@ extern "C" void System_Init() {
 
   systemUartInstance = &systemUart;
 
-  static Gate gate; // Gate control instance
+  static Gate &gate = Gate::getInstance();
 
-  gateInstance = &gate;
   ethernetInstance = &ethernet;
 
   vTaskStartScheduler();
