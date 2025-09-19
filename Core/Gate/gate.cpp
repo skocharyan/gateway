@@ -1,4 +1,3 @@
-
 #include "gate.hpp"
 #include "FreeRTOS.h"
 #include "main.h"
@@ -16,18 +15,25 @@ Gate &Gate::getInstance() {
 extern "C" void gate_timer_callback_wrapper(TimerHandle_t xTimer) {
   // Prefer the timer's ID (we pass `this` as the ID when creating the timer)
   void *id = pvTimerGetTimerID(xTimer);
-  Gate *g = static_cast<Gate *>(id);
-  if (g) {
-    g->timerCallback(xTimer);
-    return;
+  Gate *gateInstance = static_cast<Gate *>(id);
+  if (gateInstance) {
+    gateInstance->timerCallback(xTimer);
   }
 }
 
 void Gate::gateMonitorTask(void *params) {
-
-  Gate *g = static_cast<Gate *>(params);
+  Gate *gate = static_cast<Gate *>(params);
+  uint32_t notValue;
   for (;;) {
-    vTaskDelay(g->scanTimeout);
+    if (xTaskNotifyWait(0, UINT16_MAX, &notValue, portMAX_DELAY) == pdTRUE) {
+      GateState currentState = gate->getGateActualState();
+      if (currentState == CLOSED || currentState == UNDEFINED) {
+        // Open the gate
+        gate->gateHandler(OPEN);
+      } else if (currentState == OPENED) {
+        gate->gateHandler(IDLE);
+      }
+    }
   }
 }
 
@@ -48,23 +54,29 @@ Gate::Gate() {
   MX_SPI1_Init(); // Initialize the SPI for current sensing
 }
 
-void Gate::timerCallback(TimerHandle_t xTimer) {
-  gateState = CLOSED; // start the closing process
-  gateHandler(CLOSE);
-}
+void Gate::timerCallback(TimerHandle_t xTimer) { gateHandler(CLOSE); }
 
 void Gate::resetTimer(void) { xTimerReset(softTimer, 0); }
 
 void Gate::handleOpenedState(void) {
-  // start the timer
-  // after timer is elapsed start closing the gate
+  // This function is called by IQR \
+  // when the gate is fully opened
+  // 1. disable motors
+  // 2. sart wait timer
+  // 3. set staus waiting
+
+  gateStatus = GateStatus::WAITING;
   resetTimer();
-  gateState = OPENED;
-  gateHandler(NONE); // disable motors
+  controlGateMotor(GateAction::IDLE);
 }
+
 void Gate::handleClosedState(void) {
-  gateState = CLOSING;
-  gateHandler(NONE); // disable motors
+  // This function is called by IQR \
+  // when the gate is fully closed
+  // 1. disable motor
+  // 2. set status waiting
+  gateStatus = GateStatus::WAITING;
+  controlGateMotor(GateAction::IDLE);
 }
 
 GateState Gate::getGateActualState(void) {
@@ -73,17 +85,49 @@ GateState Gate::getGateActualState(void) {
   } else if (LL_GPIO_IsInputPinSet(CLOSE_SW_GPIO_Port, CLOSE_SW_Pin)) {
     return CLOSED;
   }
-  return IDLE;
+  return UNDEFINED;
 }
 
-GateState Gate::getGateState(void) { return gateState; }
+void Gate::gateHandler(GateAction action) {
+  GateState currentState = getGateActualState();
 
-void Gate::gateHandler(GateAction action) { __NOP(); }
+  if (action == GateAction::OPEN) {
+    if (currentState != GateState::OPENED) {
+      gateStatus = GateStatus::OPENING;
+      controlGateMotor(action);
+    } else {
+      // Gate is already fully open
+      gateStatus = GateStatus::WAITING;
+      controlGateMotor(GateAction::IDLE);
+    }
+  } else if (action == GateAction::CLOSE) {
+    if (currentState != GateState::CLOSED) {
+      gateStatus = GateStatus::CLOSING;
+      controlGateMotor(action);
+    } else {
+      // Gate is already fully closed
+      gateStatus = GateStatus::WAITING;
+      controlGateMotor(GateAction::IDLE);
+    }
+  } else if (action == GateAction::IDLE) {
+    // Stop the motor and wait
+    gateStatus = GateStatus::WAITING;
+    controlGateMotor(action);
+  }
+}
+
+void Gate::controlGateMotor(GateAction action) {
+  if (action == GateAction::CLOSE) {
+    PWM_SetDutyCycle(100);
+    LL_GPIO_SetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
+  } else if (action == GateAction::OPEN) {
+    LL_GPIO_ResetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
+    PWM_SetDutyCycle(100);
+  }
+}
 
 extern "C" {
 void handleOpenedState(void) { Gate::getInstance().handleOpenedState(); }
 
-void handleOpeneState(void) { handleOpenedState(); }
-
-void handleCloseState(void) { Gate::getInstance().handleClosedState(); }
+void handleClosedState(void) { Gate::getInstance().handleClosedState(); }
 }

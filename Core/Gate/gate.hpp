@@ -7,9 +7,11 @@
 #include "task.h"
 #include "timers.h"
 
-typedef enum { NONE, OPEN, CLOSE } GateAction;
+enum GateStatus { NONE, OPENING, CLOSING, WAITING };
 
-typedef enum { IDLE, OPENING, CLOSING, OPENED, CLOSED } GateState;
+enum GateState { OPENED, CLOSED, UNDEFINED };
+
+enum GateAction { OPEN, CLOSE, IDLE };
 
 class Gate {
 private:
@@ -17,9 +19,9 @@ private:
 
   StaticTimer_t softTimerBuffer;
 
-  GateAction gateAction = NONE;
+  GateStatus gateStatus{NONE};
 
-  GateState gateState = IDLE;
+  GateState gateState{UNDEFINED};
 
   TaskHandle_t gateTaskHandle;
 
@@ -29,9 +31,9 @@ private:
 
   volatile TickType_t scanTimeout = GATE_SCAN_INIT_TIMEOUT;
 
-  void gateHandler(GateAction action);
-
   void resetTimer(void);
+
+  void controlGateMotor(GateAction);
 
   static void gateMonitorTask(void *params);
 
@@ -54,13 +56,13 @@ private:
 public:
   GateState getGateActualState(void);
 
-  GateState getGateState(void);
-
   void handleOpenedState(void);
 
   void handleClosedState(void);
 
   void timerCallback(TimerHandle_t xTimer);
+
+  void gateHandler(GateAction action);
 };
 
 #endif

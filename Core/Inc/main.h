@@ -74,6 +74,8 @@ void Error_Handler(void);
 #define OPEN_SW_Pin LL_GPIO_PIN_3
 #define OPEN_SW_GPIO_Port GPIOE
 #define OPEN_SW_EXTI_IRQn EXTI3_IRQn
+#define MOTOR_DIR_Pin LL_GPIO_PIN_4
+#define MOTOR_DIR_GPIO_Port GPIOE
 #define LED2_Pin LL_GPIO_PIN_13
 #define LED2_GPIO_Port GPIOC
 #define PC14_OSC32_IN_Pin LL_GPIO_PIN_14
@@ -102,10 +104,6 @@ void Error_Handler(void);
 #define OTG_FS_OverCurrent_GPIO_Port GPIOD
 #define SWO_Pin LL_GPIO_PIN_3
 #define SWO_GPIO_Port GPIOB
-#define FRAM_WP_Pin LL_GPIO_PIN_6
-#define FRAM_WP_GPIO_Port GPIOB
-#define KEY_ROW2_Pin LL_GPIO_PIN_8
-#define KEY_ROW2_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
