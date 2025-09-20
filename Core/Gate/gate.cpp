@@ -4,7 +4,8 @@
 #include "spi.h"
 #include "tim.h"
 
-void PWM_SetDutyCycle(uint8_t dutyCycle);
+constexpr float MAX_INST_CURRENT =
+    0; // Placeholder threshold; implement real value later
 
 // Singleton accessor implementation
 Gate &Gate::getInstance() {
@@ -21,7 +22,7 @@ extern "C" void gate_timer_callback_wrapper(TimerHandle_t xTimer) {
   }
 }
 
-void Gate::gateMonitorTask(void *params) {
+void Gate::gateControlTask(void *params) {
   Gate *gate = static_cast<Gate *>(params);
   uint32_t notValue;
   for (;;) {
@@ -37,6 +38,34 @@ void Gate::gateMonitorTask(void *params) {
   }
 }
 
+void Gate::gateMonitorTask(void *params) {
+  Gate *gate = static_cast<Gate *>(params);
+  GateStatus preStopStatus = GateStatus::NONE; // last active (OPENING/CLOSING)
+  bool motorStoppedByOverCurrent = false;
+  for (;;) {
+    float current = gate->getInstantCurrent();
+
+    // Only monitor when gate is moving
+    GateStatus gs = gate->gateStatus;
+    if (gs == GateStatus::OPENING || gs == GateStatus::CLOSING) {
+      if (current > MAX_INST_CURRENT) {
+        // Capture state and stop
+        preStopStatus = gs;
+        gate->controlGateMotor(GateAction::IDLE);
+        gate->gateStatus = GateStatus::WAITING; // mark not moving
+        motorStoppedByOverCurrent = true;
+      }
+    } else if (motorStoppedByOverCurrent) {
+      // Placeholder auto-restart policy (disabled until real thresholds
+      // implemented) When real hysteresis exists, restart logic can go here.
+      // For now we keep motor stopped; clear flag so we don't loop.
+      motorStoppedByOverCurrent = false;
+    }
+
+    vTaskDelay(pdMS_TO_TICKS(100));
+  }
+}
+
 Gate::Gate() {
 
   softTimer = xTimerCreateStatic("GateTimer", pdMS_TO_TICKS(GATE_WAIT_TIMEOUT),
@@ -44,14 +73,18 @@ Gate::Gate() {
                                  gate_timer_callback_wrapper, &softTimerBuffer);
 
   gateTaskHandle =
-      xTaskCreateStatic(gateMonitorTask, "GateTask", GATE_TASK_STACK_SIZE, this,
+      xTaskCreateStatic(gateControlTask, "GateTask", GATE_TASK_STACK_SIZE, this,
                         GATE_TASK_PRIORITY, gateTaskStack, &gateTaskBuffer);
 
-  vTaskSuspend(gateTaskHandle);
+  gateMonitorTaskHandle = xTaskCreateStatic(
+      gateMonitorTask, "Gate Monitor", GATE_TASK_STACK_SIZE, this,
+      GATE_TASK_PRIORITY, gateMonitorTaskStack, &gateMonitorTaskBuffer);
 
   MX_TIM9_Init(); // Initialie the pwm timer
 
   MX_SPI1_Init(); // Initialize the SPI for current sensing
+
+  vTaskSuspend(gateMonitorTaskHandle);
 }
 
 void Gate::timerCallback(TimerHandle_t xTimer) { gateHandler(CLOSE); }
@@ -68,6 +101,7 @@ void Gate::handleOpenedState(void) {
   gateStatus = GateStatus::WAITING;
   resetTimer();
   controlGateMotor(GateAction::IDLE);
+  vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
 }
 
 void Gate::handleClosedState(void) {
@@ -77,6 +111,7 @@ void Gate::handleClosedState(void) {
   // 2. set status waiting
   gateStatus = GateStatus::WAITING;
   controlGateMotor(GateAction::IDLE);
+  vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
 }
 
 GateState Gate::getGateActualState(void) {
@@ -94,7 +129,8 @@ void Gate::gateHandler(GateAction action) {
   if (action == GateAction::OPEN) {
     if (currentState != GateState::OPENED) {
       gateStatus = GateStatus::OPENING;
-      controlGateMotor(action);
+      controlGateMotor(action); // Start motor first, then enable monitoring
+      vTaskResume(gateMonitorTaskHandle);
     } else {
       // Gate is already fully open
       gateStatus = GateStatus::WAITING;
@@ -103,7 +139,8 @@ void Gate::gateHandler(GateAction action) {
   } else if (action == GateAction::CLOSE) {
     if (currentState != GateState::CLOSED) {
       gateStatus = GateStatus::CLOSING;
-      controlGateMotor(action);
+      controlGateMotor(action); // Start motor first, then enable monitoring
+      vTaskResume(gateMonitorTaskHandle);
     } else {
       // Gate is already fully closed
       gateStatus = GateStatus::WAITING;
@@ -118,13 +155,15 @@ void Gate::gateHandler(GateAction action) {
 
 void Gate::controlGateMotor(GateAction action) {
   if (action == GateAction::CLOSE) {
-    PWM_SetDutyCycle(100);
+    PWM_SetDutyCycle(100); // TODO: consider ramp and configurable duty
     LL_GPIO_SetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
   } else if (action == GateAction::OPEN) {
     LL_GPIO_ResetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
-    PWM_SetDutyCycle(100);
+    PWM_SetDutyCycle(100); // TODO: consider ramp and configurable duty
   }
 }
+
+float Gate::getInstantCurrent(void) { return 11.0f; }
 
 extern "C" {
 void handleOpenedState(void) { Gate::getInstance().handleOpenedState(); }

@@ -29,11 +29,21 @@ private:
 
   StackType_t gateTaskStack[GATE_TASK_STACK_SIZE];
 
+  TaskHandle_t gateMonitorTaskHandle;
+
+  StaticTask_t gateMonitorTaskBuffer;
+
+  StackType_t gateMonitorTaskStack[GATE_TASK_STACK_SIZE];
+
   volatile TickType_t scanTimeout = GATE_SCAN_INIT_TIMEOUT;
 
   void resetTimer(void);
 
+  float getInstantCurrent(void);
+
   void controlGateMotor(GateAction);
+
+  static void gateControlTask(void *params);
 
   static void gateMonitorTask(void *params);
 
