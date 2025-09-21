@@ -22,6 +22,7 @@
 #include "main.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -61,6 +62,8 @@ extern TIM_HandleTypeDef htim6;
 /* USER CODE BEGIN EV */
 void handleOpenedState(void);
 void handleClosedState(void);
+void startDebugTimer();
+
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -151,24 +154,6 @@ void DebugMon_Handler(void) {
 /******************************************************************************/
 
 /**
- * @brief This function handles EXTI line2 interrupt.
- */
-void EXTI2_IRQHandler(void) {
-  /* USER CODE BEGIN EXTI2_IRQn 0 */
-  // Handle close event
-  /* USER CODE END EXTI2_IRQn 0 */
-  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_2) != RESET) {
-    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_2);
-    /* USER CODE BEGIN LL_EXTI_LINE_2 */
-    handleClosedState();
-    /* USER CODE END LL_EXTI_LINE_2 */
-  }
-  /* USER CODE BEGIN EXTI2_IRQn 1 */
-
-  /* USER CODE END EXTI2_IRQn 1 */
-}
-
-/**
  * @brief This function handles EXTI line3 interrupt.
  */
 void EXTI3_IRQHandler(void) {
@@ -178,12 +163,34 @@ void EXTI3_IRQHandler(void) {
   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_3) != RESET) {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_3);
     /* USER CODE BEGIN LL_EXTI_LINE_3 */
-    handleOpenedState();
+    LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_3); // Disable the  buttioninterrupt
+    startDebugTimer();                      // Enable the debounce timer
+    handleClosedState();
     /* USER CODE END LL_EXTI_LINE_3 */
   }
   /* USER CODE BEGIN EXTI3_IRQn 1 */
 
   /* USER CODE END EXTI3_IRQn 1 */
+}
+
+/**
+ * @brief This function handles EXTI line[9:5] interrupts.
+ */
+void EXTI9_5_IRQHandler(void) {
+  /* USER CODE BEGIN EXTI9_5_IRQn 0 */
+
+  /* USER CODE END EXTI9_5_IRQn 0 */
+  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_8) != RESET) {
+    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_8);
+    /* USER CODE BEGIN LL_EXTI_LINE_8 */
+    LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_8); // Disable the  buttioninterrupt
+    startDebugTimer();                      // Enable the debounce timer
+    handleOpenedState();
+    /* USER CODE END LL_EXTI_LINE_8 */
+  }
+  /* USER CODE BEGIN EXTI9_5_IRQn 1 */
+
+  /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
 /**
@@ -198,6 +205,23 @@ void TIM6_DAC_IRQHandler(void) {
   /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
 
   /* USER CODE END TIM6_DAC_IRQn 1 */
+}
+
+/**
+ * @brief This function handles TIM7 global interrupt.
+ */
+void TIM7_IRQHandler(void) {
+  /* USER CODE BEGIN TIM7_IRQn 0 */
+  if (LL_TIM_IsActiveFlag_UPDATE(TIM7)) { // prevent debouncing
+    LL_TIM_ClearFlag_UPDATE(TIM7);
+    LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_3);
+    LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_8);
+  }
+
+  /* USER CODE END TIM7_IRQn 0 */
+  /* USER CODE BEGIN TIM7_IRQn 1 */
+
+  /* USER CODE END TIM7_IRQn 1 */
 }
 
 /**
@@ -230,4 +254,21 @@ void USART1_IRQHandler(void) {
   extern void USART1_IRQHandler_cpp(void);
   USART1_IRQHandler_cpp();
 }
+
+// void EXTI9_5_IRQHandler(void) {
+//   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
+
+//   /* USER CODE END EXTI9_5_IRQn 0 */
+//   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_5) != RESET) {
+//     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_5);
+//     /* USER CODE BEGIN LL_EXTI_LINE_5 */
+//     LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_5); // Disable the  buttioninterrupt
+//     startDebugTimer();                      // Enable the debounce timer
+//     printf("Close button pressed \n");
+//     /* USER CODE END LL_EXTI_LINE_5 */
+//   }
+//   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
+
+//   /* USER CODE END EXTI9_5_IRQn 1 */
+// }
 /* USER CODE END 1 */

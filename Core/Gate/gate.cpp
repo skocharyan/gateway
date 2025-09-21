@@ -29,7 +29,6 @@ void Gate::gateControlTask(void *params) {
     if (xTaskNotifyWait(0, UINT16_MAX, &notValue, portMAX_DELAY) == pdTRUE) {
       GateState currentState = gate->getGateActualState();
       if (currentState == CLOSED || currentState == UNDEFINED) {
-        // Open the gate
         gate->gateHandler(OPEN);
       } else if (currentState == OPENED) {
         gate->gateHandler(IDLE);
@@ -155,11 +154,13 @@ void Gate::gateHandler(GateAction action) {
 
 void Gate::controlGateMotor(GateAction action) {
   if (action == GateAction::CLOSE) {
-    PWM_SetDutyCycle(100); // TODO: consider ramp and configurable duty
     LL_GPIO_SetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
+    LL_GPIO_ResetOutputPin(MOTOR_DIR_2_GPIO_Port, MOTOR_DIR_2_Pin);
+    PWM_SetDutyCycle(100);
   } else if (action == GateAction::OPEN) {
     LL_GPIO_ResetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
-    PWM_SetDutyCycle(100); // TODO: consider ramp and configurable duty
+    LL_GPIO_SetOutputPin(MOTOR_DIR_2_GPIO_Port, MOTOR_DIR_2_Pin);
+    PWM_SetDutyCycle(100);
   }
 }
 

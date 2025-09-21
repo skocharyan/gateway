@@ -29,6 +29,7 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
+#include "stm32f4xx_ll_tim.h"
 #include "stm32f4xx_ll_usart.h"
 #include "stm32f4xx_ll_rcc.h"
 #include "stm32f4xx_ll_system.h"
@@ -68,14 +69,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define CLOSE_SW_Pin LL_GPIO_PIN_2
-#define CLOSE_SW_GPIO_Port GPIOE
-#define CLOSE_SW_EXTI_IRQn EXTI2_IRQn
-#define OPEN_SW_Pin LL_GPIO_PIN_3
-#define OPEN_SW_GPIO_Port GPIOE
-#define OPEN_SW_EXTI_IRQn EXTI3_IRQn
 #define MOTOR_DIR_Pin LL_GPIO_PIN_4
 #define MOTOR_DIR_GPIO_Port GPIOE
+#define MOTOR_DIR_2_Pin LL_GPIO_PIN_6
+#define MOTOR_DIR_2_GPIO_Port GPIOE
 #define LED2_Pin LL_GPIO_PIN_13
 #define LED2_GPIO_Port GPIOC
 #define PC14_OSC32_IN_Pin LL_GPIO_PIN_14
@@ -92,6 +89,9 @@ void Error_Handler(void);
 #define LED1_GPIO_Port GPIOB
 #define BOOT1_Pin LL_GPIO_PIN_2
 #define BOOT1_GPIO_Port GPIOB
+#define OPEN_SW_Pin LL_GPIO_PIN_8
+#define OPEN_SW_GPIO_Port GPIOA
+#define OPEN_SW_EXTI_IRQn EXTI9_5_IRQn
 #define OTG_FS_DM_Pin LL_GPIO_PIN_11
 #define OTG_FS_DM_GPIO_Port GPIOA
 #define OTG_FS_DP_Pin LL_GPIO_PIN_12
@@ -100,6 +100,9 @@ void Error_Handler(void);
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin LL_GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
+#define CLOSE_SW_Pin LL_GPIO_PIN_3
+#define CLOSE_SW_GPIO_Port GPIOD
+#define CLOSE_SW_EXTI_IRQn EXTI3_IRQn
 #define OTG_FS_OverCurrent_Pin LL_GPIO_PIN_5
 #define OTG_FS_OverCurrent_GPIO_Port GPIOD
 #define SWO_Pin LL_GPIO_PIN_3

@@ -38,6 +38,7 @@ extern TIM_HandleTypeDef htim9;
 
 /* USER CODE END Private defines */
 
+void MX_TIM7_Init(void);
 void MX_TIM9_Init(void);
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
@@ -54,3 +55,4 @@ void PWM_SetDutyCycle(uint8_t dutyCycle);
 #endif
 
 #endif /* __TIM_H__ */
+

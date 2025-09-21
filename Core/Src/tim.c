@@ -26,8 +26,42 @@
 
 TIM_HandleTypeDef htim9;
 
+/* TIM7 init function */
+void MX_TIM7_Init(void)
+{
+
+  /* USER CODE BEGIN TIM7_Init 0 */
+
+  /* USER CODE END TIM7_Init 0 */
+
+  LL_TIM_InitTypeDef TIM_InitStruct = {0};
+
+  /* Peripheral clock enable */
+  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM7);
+
+  /* TIM7 interrupt Init */
+  NVIC_SetPriority(TIM7_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
+  NVIC_EnableIRQ(TIM7_IRQn);
+
+  /* USER CODE BEGIN TIM7_Init 1 */
+
+  /* USER CODE END TIM7_Init 1 */
+  TIM_InitStruct.Prescaler = 8399;
+  TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
+  TIM_InitStruct.Autoreload = 2000-LL_TIM_IC_FILTER_FDIV1_N2;
+  LL_TIM_Init(TIM7, &TIM_InitStruct);
+  LL_TIM_DisableARRPreload(TIM7);
+  LL_TIM_SetOnePulseMode(TIM7, LL_TIM_ONEPULSEMODE_SINGLE);
+  LL_TIM_SetTriggerOutput(TIM7, LL_TIM_TRGO_RESET);
+  LL_TIM_DisableMasterSlaveMode(TIM7);
+  /* USER CODE BEGIN TIM7_Init 2 */
+  LL_TIM_EnableIT_UPDATE(TIM7);
+  /* USER CODE END TIM7_Init 2 */
+
+}
 /* TIM9 init function */
-void MX_TIM9_Init(void) {
+void MX_TIM9_Init(void)
+{
 
   /* USER CODE BEGIN TIM9_Init 0 */
 
@@ -40,54 +74,63 @@ void MX_TIM9_Init(void) {
 
   /* USER CODE END TIM9_Init 1 */
   htim9.Instance = TIM9;
-  htim9.Init.Prescaler = 84 - 1;
+  htim9.Init.Prescaler = 84-1;
   htim9.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim9.Init.Period = 100 - 1;
+  htim9.Init.Period = 100-1;
   htim9.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim9.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-  if (HAL_TIM_Base_Init(&htim9) != HAL_OK) {
+  if (HAL_TIM_Base_Init(&htim9) != HAL_OK)
+  {
     Error_Handler();
   }
   sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
-  if (HAL_TIM_ConfigClockSource(&htim9, &sClockSourceConfig) != HAL_OK) {
+  if (HAL_TIM_ConfigClockSource(&htim9, &sClockSourceConfig) != HAL_OK)
+  {
     Error_Handler();
   }
-  if (HAL_TIM_PWM_Init(&htim9) != HAL_OK) {
+  if (HAL_TIM_PWM_Init(&htim9) != HAL_OK)
+  {
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
   sConfigOC.Pulse = 0;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim9, &sConfigOC, TIM_CHANNEL_1) != HAL_OK) {
+  if (HAL_TIM_PWM_ConfigChannel(&htim9, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
     Error_Handler();
   }
   /* USER CODE BEGIN TIM9_Init 2 */
 
   /* USER CODE END TIM9_Init 2 */
   HAL_TIM_MspPostInit(&htim9);
+
 }
 
-void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *tim_baseHandle) {
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
+{
 
-  if (tim_baseHandle->Instance == TIM9) {
-    /* USER CODE BEGIN TIM9_MspInit 0 */
+  if(tim_baseHandle->Instance==TIM9)
+  {
+  /* USER CODE BEGIN TIM9_MspInit 0 */
 
-    /* USER CODE END TIM9_MspInit 0 */
+  /* USER CODE END TIM9_MspInit 0 */
     /* TIM9 clock enable */
     __HAL_RCC_TIM9_CLK_ENABLE();
-    /* USER CODE BEGIN TIM9_MspInit 1 */
+  /* USER CODE BEGIN TIM9_MspInit 1 */
 
-    /* USER CODE END TIM9_MspInit 1 */
+  /* USER CODE END TIM9_MspInit 1 */
   }
 }
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *timHandle) {
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef* timHandle)
+{
 
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (timHandle->Instance == TIM9) {
-    /* USER CODE BEGIN TIM9_MspPostInit 0 */
+  if(timHandle->Instance==TIM9)
+  {
+  /* USER CODE BEGIN TIM9_MspPostInit 0 */
 
-    /* USER CODE END TIM9_MspPostInit 0 */
+  /* USER CODE END TIM9_MspPostInit 0 */
 
     __HAL_RCC_GPIOE_CLK_ENABLE();
     /**TIM9 GPIO Configuration
@@ -100,27 +143,35 @@ void HAL_TIM_MspPostInit(TIM_HandleTypeDef *timHandle) {
     GPIO_InitStruct.Alternate = GPIO_AF3_TIM9;
     HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-    /* USER CODE BEGIN TIM9_MspPostInit 1 */
+  /* USER CODE BEGIN TIM9_MspPostInit 1 */
 
-    /* USER CODE END TIM9_MspPostInit 1 */
+  /* USER CODE END TIM9_MspPostInit 1 */
   }
+
 }
 
-void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef *tim_baseHandle) {
+void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
+{
 
-  if (tim_baseHandle->Instance == TIM9) {
-    /* USER CODE BEGIN TIM9_MspDeInit 0 */
+  if(tim_baseHandle->Instance==TIM9)
+  {
+  /* USER CODE BEGIN TIM9_MspDeInit 0 */
 
-    /* USER CODE END TIM9_MspDeInit 0 */
+  /* USER CODE END TIM9_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_TIM9_CLK_DISABLE();
-    /* USER CODE BEGIN TIM9_MspDeInit 1 */
+  /* USER CODE BEGIN TIM9_MspDeInit 1 */
 
-    /* USER CODE END TIM9_MspDeInit 1 */
+  /* USER CODE END TIM9_MspDeInit 1 */
   }
 }
 
 /* USER CODE BEGIN 1 */
+
+void startDebugTimer() {
+  LL_TIM_SetCounter(TIM7, 0);
+  LL_TIM_EnableCounter(TIM7);
+}
 
 void PWM_SetDutyCycle(uint8_t dutyCycle) {
 
