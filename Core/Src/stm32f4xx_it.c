@@ -166,6 +166,7 @@ void EXTI3_IRQHandler(void) {
     LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_3); // Disable the  buttioninterrupt
     startDebugTimer();                      // Enable the debounce timer
     handleClosedState();
+    printf("Close button pressed \n");
     /* USER CODE END LL_EXTI_LINE_3 */
   }
   /* USER CODE BEGIN EXTI3_IRQn 1 */
@@ -186,6 +187,7 @@ void EXTI9_5_IRQHandler(void) {
     LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_8); // Disable the  buttioninterrupt
     startDebugTimer();                      // Enable the debounce timer
     handleOpenedState();
+    printf("Open button pressed \n");
     /* USER CODE END LL_EXTI_LINE_8 */
   }
   /* USER CODE BEGIN EXTI9_5_IRQn 1 */

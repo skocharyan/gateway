@@ -1,0 +1,207 @@
+Port numner from flash: 7788
+IP Address: 192.168.0.111
+Subnet Mask: 255.255.255.0
+Gateway Address: 192.168.0.1
+DNS Address: 0.0.0.0
+Port Number: 7788
+task is created 
+SystemUart constructor called 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 2 
+Opening 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Software timer elapsed 
+Current state 0 
+MOTOR is clossing 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Current state 2 
+MOTOR is clossing 
+Software timer elapsed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Open button pressed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Open button pressed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+MOTOR disabled 
+Open button pressed 
+MOTOR disabled 
+Open button pressed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Software timer elapsed 
+Current state 0 
+MOTOR is clossing 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Current state 2 
+MOTOR is clossing 
+Software timer elapsed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 2 
+Opening 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Software timer elapsed 
+Current state 0 
+MOTOR is clossing 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Software timer elapsed 
+Current state 1 
+MOTOR disabled 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Software timer elapsed 
+Current state 0 
+MOTOR is clossing 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Current state 2 
+MOTOR is clossing 
+Software timer elapsed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Open button pressed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notification 
+Current state 1 
+Opening 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Software timer elapsed 
+Current state 0 
+MOTOR is clossing 
+MOTOR disabled 
+Software timer restarted
+Close button pressed 
+Current state 2 
+MOTOR is clossing 
+Software timer elapsed 
+Current state 2 
+MOTOR is clossing 
+MOTOR disabled 
+Open button pressed 
+Uart interrupt being called 
+Detected length: 5
+QR data: Bsbsb
+Received task notificatio

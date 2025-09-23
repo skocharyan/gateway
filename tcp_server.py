@@ -1,8 +1,8 @@
 import socket
 
 # Define server address and port
-HOST = '127.0.0.1'  # Localhost
-PORT = 65432        # Port to listen on
+HOST = '192.168.0.100'  # Localhost
+PORT = 7788        # Port to listen on
 
 # Create a socket object
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:

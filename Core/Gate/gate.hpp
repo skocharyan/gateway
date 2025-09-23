@@ -23,8 +23,6 @@ private:
 
   GateState gateState{UNDEFINED};
 
-  TaskHandle_t gateTaskHandle;
-
   StaticTask_t gateTaskBuffer;
 
   StackType_t gateTaskStack[GATE_TASK_STACK_SIZE];
@@ -34,6 +32,8 @@ private:
   StaticTask_t gateMonitorTaskBuffer;
 
   StackType_t gateMonitorTaskStack[GATE_TASK_STACK_SIZE];
+
+  volatile bool suspendMotorTask{false};
 
   volatile TickType_t scanTimeout = GATE_SCAN_INIT_TIMEOUT;
 
@@ -64,6 +64,8 @@ private:
   Gate();
 
 public:
+  TaskHandle_t gateTaskHandle;
+
   GateState getGateActualState(void);
 
   void handleOpenedState(void);

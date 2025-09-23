@@ -22,6 +22,16 @@ typedef struct __attribute__((aligned(8))) {
   uint8_t hostIPAddress[4];
 } EthernetConfig;
 
+enum ErrorCodes {
+  ERR_PARAM = -10,
+  ERR_NET_DOWN = -11,
+  ERR_SOCKET_CREATE = -12,
+  ERR_CONNECT = -13,
+  ERR_SEND = -14,
+  ERR_RECV = -15,
+  ERR_NO_OK = -16
+};
+
 #ifdef __cplusplus
 } // extern "C"
 #endif
@@ -39,6 +49,13 @@ private:
 public:
   Ethernet(EthernetConfig config);
   int32_t xTCPSend(const char *pcTxBuffer, size_t txLen);
+  /*
+   * xTCPSendAndReceive
+   * pcTxBuffer    : data to send (not null-terminated requirement, length in
+   * txLen) txLen         : number of bytes to transmit recvTimeoutMs : receive
+   * timeout in milliseconds (converted internally via pdMS_TO_TICKS) Returns 0
+   * on success ("OK" substring received), -1 on failure.
+   */
   int32_t xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
                              TickType_t recvTimeoutMs);
 };

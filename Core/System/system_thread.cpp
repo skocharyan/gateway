@@ -2,6 +2,7 @@
 #include "FreeRTOS.h"
 #include "cstring"
 #include "eth.hpp"
+#include "gate.hpp"
 #include "stdio.h"
 #include "task.h"
 
@@ -31,6 +32,8 @@ void SystemThread::threadFunction(void *params) {
   SystemThread *self = static_cast<SystemThread *>(params);
   (void)self;
 
+  Gate &gate = Gate::getInstance();
+
   uint32_t notValue;
 
   // if (getGateActualState() == IDLE) {
@@ -43,26 +46,12 @@ void SystemThread::threadFunction(void *params) {
       if (self->state == SYSTEM_IDLE) {
         self->state = SYSTEM_BUSY;
         printf("QR data: %s\n", self->dmaProcessBuffer);
-        printf("Notified value: %lu\n", notValue);
         int32_t success = ethernetInstance->xTCPSendAndReceive(
             (const char *)self->dmaProcessBuffer,
             strlen((const char *)self->dmaProcessBuffer), 500);
 
-        printf("received status : %ld\n", success == 0);
-        // uint8_t qrRespBuffer[RX_BUFFER_SIZE];
+        xTaskNotify(gate.gateTaskHandle, 1, eSetValueWithOverwrite);
 
-        // int32_t xBytesReceived = xTCPSendAndReceive((const
-        // char*)qrDataBuffer, (size_t)notValue, (char*)qrRespBuffer,
-        // RX_BUFFER_SIZE, QR_WAIT_TIMEOUT); if (xBytesReceived <= 0) {
-        //     continue; // failed to verify the QR code
-        // }
-
-        // if (strcmp((const char*)qrRespBuffer, QR_SUCCESS_RESPONSE) != 0)
-        // {
-        //     continue; // invalid response
-        // }
-
-        // handleGate(OPEN);
         self->state = SYSTEM_IDLE;
       } else {
         printf("System is busy, ignoring new data\n");

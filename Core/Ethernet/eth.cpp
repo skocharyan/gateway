@@ -57,7 +57,7 @@ Ethernet::Ethernet(EthernetConfig config) : config{config} {
 #endif /* ( ipconfigUSE_DHCP != 0 ) */
 
   FreeRTOS_IPInit_Multi();
-  printf("Ethernet initialized \n");
+  // printf("Ethernet initialized \n");
 }
 
 void Ethernet::printConfig() {
@@ -85,7 +85,7 @@ int32_t Ethernet::xTCPSend(const char *pcTxBuffer, size_t txLen) {
 
   /* Diagnostic: ensure network is up before attempting to connect */
   if (FreeRTOS_IsNetworkUp() == pdFALSE) {
-    printf("xTCPSend: network is not up yet\n");
+    // printf("xTCPSend: network is not up yet\n");
     return -1;
   }
 
@@ -141,26 +141,28 @@ int32_t Ethernet::xTCPSend(const char *pcTxBuffer, size_t txLen) {
 
 int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
                                      TickType_t recvTimeoutMs) {
-  struct freertos_sockaddr xRemoteAddress;
 
-  /* Local receive buffer (adjust size as appropriate). */
+  struct freertos_sockaddr xRemoteAddress;
   enum { LOCAL_RX_BUF_SIZE = 256 };
   char localRx[LOCAL_RX_BUF_SIZE];
 
   if (pcTxBuffer == NULL || txLen == 0) {
-    return -1;
+    return ERR_PARAM;
   }
 
   const int maxAttempts = 2;
+  // printf("xTCPSendAndReceive: starting, txLen=%lu, recvTimeoutMs=%lu\n",
+  //        (unsigned long)txLen, (unsigned long)recvTimeoutMs);
+
   for (int attempt = 0; attempt < maxAttempts; ++attempt) {
     Socket_t xSocket = FREERTOS_INVALID_SOCKET;
     size_t alreadyTransmitted = 0;
     size_t alreadyReceived = 0;
+    // printf("Attempt %d/%d\n", attempt + 1, maxAttempts);
 
-    /* Diagnostic: ensure network is up before attempting to connect */
     if (FreeRTOS_IsNetworkUp() == pdFALSE) {
-      printf("xTCPSendAndReceive: network is not up yet\n");
-      return -1;
+      // printf("xTCPSendAndReceive: network is not up yet\n");
+      return ERR_NET_DOWN;
     }
 
     memset(&xRemoteAddress, 0, sizeof(xRemoteAddress));
@@ -178,10 +180,10 @@ int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
         vTaskDelay(pdMS_TO_TICKS(100));
         continue;
       }
-      return -1;
+      return ERR_SOCKET_CREATE;
     }
 
-    TickType_t xRecvTimeout = pdMS_TO_TICKS(recvTimeoutMs);
+    TickType_t xRecvTimeout = pdMS_TO_TICKS(recvTimeoutMs); /* param in ms */
     TickType_t xSendTimeout = pdMS_TO_TICKS(5000);
     FreeRTOS_setsockopt(xSocket, 0, FREERTOS_SO_RCVTIMEO, &xRecvTimeout,
                         sizeof(xRecvTimeout));
@@ -190,35 +192,38 @@ int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
 
     if (FreeRTOS_connect(xSocket, &xRemoteAddress, sizeof(xRemoteAddress)) !=
         0) {
+      // printf("Connect failed (attempt %d)\n", attempt + 1);
       FreeRTOS_closesocket(xSocket);
       if (attempt + 1 < maxAttempts) {
         vTaskDelay(pdMS_TO_TICKS(100));
         continue;
       }
-      return -1;
+      return ERR_CONNECT;
     }
+    // printf("Connected to %d.%d.%d.%d:%u\n", config.hostIPAddress[0],
+    //        config.hostIPAddress[1], config.hostIPAddress[2],
+    //        config.hostIPAddress[3], (unsigned)config.portNumber);
 
-    /* Send loop (handle partial sends). */
     while (alreadyTransmitted < txLen) {
       BaseType_t xBytesSent =
           FreeRTOS_send(xSocket, &pcTxBuffer[alreadyTransmitted],
                         (size_t)(txLen - alreadyTransmitted), 0);
       if (xBytesSent > 0) {
         alreadyTransmitted += (size_t)xBytesSent;
+        // printf("Sent %ld bytes (total %lu/%lu)\n", (long)xBytesSent,
+        //        (unsigned long)alreadyTransmitted, (unsigned long)txLen);
       } else {
-        /* send error or timeout */
+        // printf("Send error after %lu bytes (code=%ld)\n",
+        //        (unsigned long)alreadyTransmitted, (long)xBytesSent);
         FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
         FreeRTOS_closesocket(xSocket);
         if (attempt + 1 < maxAttempts) {
           vTaskDelay(pdMS_TO_TICKS(100));
-          break; /* retry outer loop */
+          goto attempt_end; /* break outer attempt loop */
         }
-        return -1;
+        return ERR_SEND;
       }
     }
-
-    /* Optional: tell peer no more data will be sent (depends on protocol). */
-    (void)FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_WR);
 
     /* Receive loop */
     for (;;) {
@@ -230,41 +235,53 @@ int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
                         (size_t)(LOCAL_RX_BUF_SIZE - alreadyReceived), 0);
       if (xBytesReceived > 0) {
         alreadyReceived += (size_t)xBytesReceived;
-        /* keep NUL termination when space permits */
         if (alreadyReceived < LOCAL_RX_BUF_SIZE) {
           localRx[alreadyReceived] = '\0';
         }
-        /* continue to try to read more until timeout or remote closes */
-        continue;
+        // printf("Recv chunk %ld bytes (total %lu) -> '%.*s'\n",
+        //        (long)xBytesReceived, (unsigned long)alreadyReceived,
+        //        (int)alreadyReceived, localRx);
+        continue; /* try read more until timeout/close */
       } else if (xBytesReceived == 0) {
-        /* No data (timeout or orderly close) */
+        // printf("Recv timeout/close after %lu bytes\n",
+        //        (unsigned long)alreadyReceived);
         break;
       } else {
-        /* Error */
+        // printf("Recv error (code=%ld) after %lu bytes\n",
+        // (long)xBytesReceived,
+        //        (unsigned long)alreadyReceived);
         alreadyReceived = 0;
-        break;
+        FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
+        FreeRTOS_closesocket(xSocket);
+        if (attempt + 1 < maxAttempts) {
+          vTaskDelay(pdMS_TO_TICKS(100));
+          goto attempt_end; /* try next attempt */
+        }
+        return ERR_RECV;
       }
     }
 
     (void)FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
     FreeRTOS_closesocket(xSocket);
-
     if (alreadyReceived > 0) {
-      /* Tolerant check: look for "OK" anywhere in the response */
+      // printf("Full received buffer (%lu bytes): '%.*s'\n",
+      //        (unsigned long)alreadyReceived, (int)alreadyReceived, localRx);
+      // printf("Hex:");
+      // for (size_t i = 0; i < alreadyReceived; ++i) {
+      //   printf(" %02X", (unsigned char)localRx[i]);
+      // }
+      // printf("\n");
       if (strstr(localRx, "OK") != NULL) {
-        printf("Received Qr Confirmation \n");
-        return 0; /* success */
+        // printf("Received Qr Confirmation \n");
+        return 0;
       }
-      /* Received something but not OK; treat as failure for this attempt */
+      // printf("Did not find 'OK' in response.\n");
     }
 
-    /* If we reach here, this attempt failed; retry if allowed */
+  attempt_end:;
     if (attempt + 1 < maxAttempts) {
-      vTaskDelay(pdMS_TO_TICKS(100));
-      continue;
+      continue; /* next attempt */
     }
-    return -1;
-  } /* attempts */
-
-  return -1;
+  }
+  return ERR_NO_OK;
 }
