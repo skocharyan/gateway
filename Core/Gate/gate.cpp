@@ -113,7 +113,9 @@ void Gate::handleOpenedState(void) {
   // 1. disable motors
   // 2. sart wait timer
   // 3. set staus waiting
-
+  if (gateStatus == GateStatus::OPENING) {
+    return;
+  }
   gateStatus = GateStatus::WAITING;
   controlGateMotor(GateAction::IDLE);
   // vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
@@ -125,6 +127,9 @@ void Gate::handleClosedState(void) {
   // when the gate is fully closed
   // 1. disable motor
   // 2. set status waiting
+  if (gateStatus == GateStatus::CLOSING) {
+    return;
+  }
   gateStatus = GateStatus::WAITING;
   controlGateMotor(GateAction::IDLE);
   // vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring

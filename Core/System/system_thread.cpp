@@ -49,10 +49,11 @@ void SystemThread::threadFunction(void *params) {
         int32_t success = ethernetInstance->xTCPSendAndReceive(
             (const char *)self->dmaProcessBuffer,
             strlen((const char *)self->dmaProcessBuffer), 500);
+        if (success == 0) {
+          xTaskNotify(gate.gateTaskHandle, 1, eSetValueWithOverwrite);
+          self->state = SYSTEM_IDLE;
+        }
 
-        xTaskNotify(gate.gateTaskHandle, 1, eSetValueWithOverwrite);
-
-        self->state = SYSTEM_IDLE;
       } else {
         printf("System is busy, ignoring new data\n");
       }

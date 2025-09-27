@@ -163,10 +163,7 @@ void EXTI3_IRQHandler(void) {
   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_3) != RESET) {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_3);
     /* USER CODE BEGIN LL_EXTI_LINE_3 */
-    LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_3); // Disable the  buttioninterrupt
-    startDebugTimer();                      // Enable the debounce timer
-    handleClosedState();
-    printf("Close button pressed \n");
+    startDebugTimer(); // Enable the debounce timer
     /* USER CODE END LL_EXTI_LINE_3 */
   }
   /* USER CODE BEGIN EXTI3_IRQn 1 */
@@ -184,10 +181,7 @@ void EXTI9_5_IRQHandler(void) {
   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_8) != RESET) {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_8);
     /* USER CODE BEGIN LL_EXTI_LINE_8 */
-    LL_EXTI_DisableIT_0_31(LL_EXTI_LINE_8); // Disable the  buttioninterrupt
-    startDebugTimer();                      // Enable the debounce timer
-    handleOpenedState();
-    printf("Open button pressed \n");
+    startDebugTimer(); // Enable the debounce timer
     /* USER CODE END LL_EXTI_LINE_8 */
   }
   /* USER CODE BEGIN EXTI9_5_IRQn 1 */
@@ -216,8 +210,12 @@ void TIM7_IRQHandler(void) {
   /* USER CODE BEGIN TIM7_IRQn 0 */
   if (LL_TIM_IsActiveFlag_UPDATE(TIM7)) { // prevent debouncing
     LL_TIM_ClearFlag_UPDATE(TIM7);
-    LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_3);
-    LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_8);
+    if (!LL_GPIO_IsInputPinSet(CLOSE_SW_GPIO_Port, CLOSE_SW_Pin)) {
+      handleClosedState();
+    }
+    if (!LL_GPIO_IsInputPinSet(OPEN_SW_GPIO_Port, OPEN_SW_Pin)) {
+      handleOpenedState();
+    }
   }
 
   /* USER CODE END TIM7_IRQn 0 */
