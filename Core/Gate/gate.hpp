@@ -4,6 +4,7 @@
 #include "AppConfig.h"
 #include "FreeRTOS.h"
 #include "spi.h"
+#include "system_thread.hpp"
 #include "task.h"
 #include "timers.h"
 
@@ -12,6 +13,10 @@ enum GateStatus { NONE, OPENING, CLOSING, WAITING };
 enum GateState { OPENED, CLOSED, UNDEFINED };
 
 enum GateAction { OPEN, CLOSE, IDLE };
+
+enum SoftTimerStatus { STOPPED, RUNNING, EXPIRED };
+
+extern SystemThread *systemThreadInstance;
 
 class Gate {
 private:
@@ -33,6 +38,8 @@ private:
 
   StackType_t gateMonitorTaskStack[GATE_TASK_STACK_SIZE];
 
+  SoftTimerStatus timerStatus{RUNNING};
+
   volatile bool suspendMotorTask{false};
 
   volatile TickType_t scanTimeout = GATE_SCAN_INIT_TIMEOUT;
@@ -53,6 +60,8 @@ public:
   // Get the singleton instance. Creates it on first call.
   static Gate &getInstance();
 
+private:
+  // Constructor is private for singleton enforcement
   // Deleted copy/move to enforce singleton
   Gate(const Gate &) = delete;
   Gate &operator=(const Gate &) = delete;
@@ -61,8 +70,6 @@ public:
 
   ~Gate() = default;
 
-private:
-  // Constructor is private for singleton enforcement
   Gate();
 
 public:
@@ -77,6 +84,23 @@ public:
   void timerCallback(TimerHandle_t xTimer);
 
   void gateHandler(GateAction action);
+
+  void pause() {
+    TaskHandle_t handle = systemThreadInstance->getTaskHandle();
+    if (handle == NULL) {
+      return;
+    }
+    vTaskSuspend(handle);
+    timerStatus = SoftTimerStatus::STOPPED;
+  };
+  void resume() {
+    TaskHandle_t handle = systemThreadInstance->getTaskHandle();
+    if (handle == NULL) {
+      return;
+    }
+    vTaskResume(handle);
+    timerStatus = SoftTimerStatus::RUNNING;
+  };
 };
 
 #endif

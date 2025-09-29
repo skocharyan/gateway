@@ -42,9 +42,12 @@ enum ErrorCodes {
 #ifdef __cplusplus
 
 // Provide extern declaration; define in eth.cpp
-extern TaskHandle_t xUdpTaskHandle;
 
 class Ethernet {
+public:
+  TaskHandle_t xUdpTaskHandle;
+  TaskHandle_t xUdpTxTaskHandle;
+
 private:
   EthernetConfig config;
   uint8_t ucMACAddress[6];
@@ -54,27 +57,26 @@ private:
   StaticTask_t xUdpTaskBuffer;
   StackType_t xUdpStack[UDP_TASK_STACK_SIZE];
 
-  Socket_t xUDPTxSocket{nullptr};
-  // Rename to match usage in eth.cpp
-  struct freertos_sockaddr xUdpTxAddress;
+  StaticTask_t xUdpTxTaskBuffer;
+  StackType_t xUdpTxStack[UDP_TASK_STACK_SIZE];
+
+  uint8_t ucUDPTxBuffer[256];
+  uint8_t ucUDPDataLength;
 
   void printConfig();
 
   static void xUdpTask(void *params);
+  static void xUDPTxTask(void *params);
 
 public:
   Ethernet(EthernetConfig config);
+
   int32_t xTCPSend(const char *pcTxBuffer, size_t txLen);
-  /*
-   * xTCPSendAndReceive
-   * pcTxBuffer    : data to send (not null-terminated requirement, length in
-   * txLen) txLen         : number of bytes to transmit recvTimeoutMs : receive
-   * timeout in milliseconds (converted internally via pdMS_TO_TICKS) Returns 0
-   * on success ("OK" substring received), -1 on failure.
-   */
+
   int32_t xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
                              TickType_t recvTimeoutMs);
-  int32_t xUDPSend(const char *pcTxBuffer, size_t txLen);
+
+  void xUDPSendISR(const char *pcTxBuffer, size_t txLen);
 };
 #endif // __cplusplus
 

@@ -2,9 +2,10 @@
 #include "FreeRTOS.h"
 #include "FreeRTOS_IP.h"
 #include "FreeRTOS_Routing.h"
+#include "cstring"
+#include "gate.hpp"
 #include "stdio.h"
 #include "task.h"
-
 // Define the global task handle here
 TaskHandle_t xUdpTaskHandle = nullptr;
 
@@ -22,27 +23,11 @@ Ethernet::Ethernet(EthernetConfig config) : config{config} {
       xTaskCreateStatic(xUdpTask, "UDPTask", UDP_TASK_STACK_SIZE, this,
                         tskIDLE_PRIORITY + 5, xUdpStack, &xUdpTaskBuffer);
 
+  xUdpTxTaskHandle =
+      xTaskCreateStatic(xUDPTxTask, "UDPTxTask", UDP_TASK_STACK_SIZE, this,
+                        tskIDLE_PRIORITY + 5, xUdpTxStack, &xUdpTxTaskBuffer);
+
   configASSERT(xUdpTaskHandle != nullptr);
-
-  memset(&xUdpTxAddress, 0, sizeof(xUdpTxAddress));
-
-  xUdpTxAddress.sin_address.ulIP_IPv4 =
-      FreeRTOS_inet_addr_quick(config.ipAddress[0], config.ipAddress[1],
-                               config.ipAddress[2], 255); // broadcast message
-
-  // xUdpTxAddress.sin_address.ulIP_IPv4 = FreeRTOS_inet_addr("192.168.0.50");
-  xUdpTxAddress.sin_family = FREERTOS_AF_INET4;
-  xUdpTxAddress.sin_port = FreeRTOS_htons(10000);
-
-  /* Create the socket. */
-  xUDPTxSocket =
-      FreeRTOS_socket(FREERTOS_AF_INET, /* Used for IPv4 UDP socket. */
-                      /* FREERTOS_AF_INET6 can be used for IPv6 UDP socket. */
-                      FREERTOS_SOCK_DGRAM, /*FREERTOS_SOCK_DGRAM for UDP.*/
-                      FREERTOS_IPPROTO_UDP);
-
-  /* Check the socket was created. */
-  configASSERT(xUDPTxSocket != FREERTOS_INVALID_SOCKET);
 
   printConfig();
   // Ethernet constructor initalization
@@ -54,11 +39,6 @@ Ethernet::Ethernet(EthernetConfig config) : config{config} {
       config.portNumber == 0) {
     return;
   }
-
-  //   uint16_t port = FreeRTOS_htons(config.portNumber);
-
-  // Convert IP parameters to network byte order using
-  // FreeRTOS_inet_addr_quick
   uint32_t ip =
       FreeRTOS_inet_addr_quick(config.ipAddress[0], config.ipAddress[1],
                                config.ipAddress[2], config.ipAddress[3]);
@@ -86,11 +66,10 @@ Ethernet::Ethernet(EthernetConfig config) : config{config} {
 #endif /* ( ipconfigUSE_DHCP != 0 ) */
 
   FreeRTOS_IPInit_Multi();
-  // printf("Ethernet initialized \n");
 }
 
 void Ethernet::xUdpTask(void *params) {
-  // Ethernet *eth = static_cast<Ethernet *>(params);
+  Ethernet *eth = static_cast<Ethernet *>(params);
   long lBytes;
   uint8_t cReceivedString[60];
   struct freertos_sockaddr xClient, xBindAddress;
@@ -106,33 +85,71 @@ void Ethernet::xUdpTask(void *params) {
   configASSERT(xListeningSocket != FREERTOS_INVALID_SOCKET);
 
   memset(&xBindAddress, 0, sizeof(xBindAddress));
-  xBindAddress.sin_port = FreeRTOS_htons(9988);
-  xBindAddress.sin_family = FREERTOS_AF_INET4;
+  xBindAddress.sin_port = FreeRTOS_htons((uint16_t)eth->config.portNumber);
+  xBindAddress.sin_family = FREERTOS_AF_INET;
   FreeRTOS_bind(xListeningSocket, &xBindAddress, sizeof(xBindAddress));
 
   for (;;) {
-    /* Receive data from the socket. ulFlags is zero, so the standard
-       interface is used. By default the block time is portMAX_DELAY, but it
-       can be changed using FreeRTOS_setsockopt(). */
     lBytes =
         FreeRTOS_recvfrom(xListeningSocket, cReceivedString,
                           sizeof(cReceivedString), 0, &xClient, &xClientLength);
 
     if (lBytes > 0) {
-      // Hadle the received data
       printf("Received %ld bytes: '%.*s'\n", (long)lBytes, (int)lBytes,
              cReceivedString);
+
+      if (strstr((const char *)cReceivedString, "PAUSE") != NULL) {
+        printf("QR Paused\n");
+        Gate::getInstance().pause();
+      } else if (strstr((const char *)cReceivedString, "RESUME") != NULL) {
+        printf("QR Resumed\n");
+        Gate::getInstance().resume();
+      }
     }
   }
 }
 
-// Send udp packet
-int32_t Ethernet::xUDPSend(const char *pcTxBuffer, size_t txLen) {
-  if (xUDPTxSocket == nullptr) {
-    return -1;
+void Ethernet::xUDPTxTask(void *params) {
+
+  Ethernet *eth = static_cast<Ethernet *>(params);
+
+  Socket_t xUDPTxSocket;
+  struct freertos_sockaddr xUdpTxAddress;
+
+  xUdpTxAddress.sin_family = FREERTOS_AF_INET;
+  // Set destination IP to 192.168.0.100
+  xUdpTxAddress.sin_address.ulIP_IPv4 = FreeRTOS_inet_addr_quick(
+      eth->config.ipAddress[0], eth->config.ipAddress[1],
+      eth->config.ipAddress[2], 255);
+  xUdpTxAddress.sin_port = FreeRTOS_htons(eth->config.portNumber);
+
+  xUDPTxSocket = FreeRTOS_socket(FREERTOS_AF_INET, FREERTOS_SOCK_DGRAM,
+                                 FREERTOS_IPPROTO_UDP);
+
+  uint32_t notValue;
+
+  while (1) {
+    if (xTaskNotifyWait(0, UINT32_MAX, &notValue, portMAX_DELAY) == pdTRUE) {
+
+      if (xUDPTxSocket == FREERTOS_INVALID_SOCKET) {
+        xUDPTxSocket = FreeRTOS_socket(FREERTOS_AF_INET, FREERTOS_SOCK_DGRAM,
+                                       FREERTOS_IPPROTO_UDP);
+      } else {
+        BaseType_t sent = FreeRTOS_sendto(
+            xUDPTxSocket, eth->ucUDPTxBuffer, eth->ucUDPDataLength, 0,
+            &xUdpTxAddress, sizeof(xUdpTxAddress));
+        printf("Sent %ld bytes\n", (long)sent);
+      }
+    }
   }
-  return FreeRTOS_sendto(xUDPTxSocket, pcTxBuffer, txLen, 0, &xUdpTxAddress,
-                         sizeof(xUdpTxAddress));
+}
+void Ethernet::xUDPSendISR(const char *pcTxBuffer, size_t txLen) {
+  memcpy(ucUDPTxBuffer, pcTxBuffer, txLen);
+  ucUDPDataLength = txLen;
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+  xTaskNotifyFromISR(xUdpTxTaskHandle, 0, eSetValueWithOverwrite,
+                     &xHigherPriorityTaskWoken);
+  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
 void Ethernet::printConfig() {
@@ -173,8 +190,9 @@ int32_t Ethernet::xTCPSend(const char *pcTxBuffer, size_t txLen) {
 
   xSocket = FreeRTOS_socket(FREERTOS_AF_INET, FREERTOS_SOCK_STREAM,
                             FREERTOS_IPPROTO_TCP);
-  configASSERT(xSocket != FREERTOS_INVALID_SOCKET);
+
   if (xSocket == FREERTOS_INVALID_SOCKET) {
+    printf("Socket creation failed\n");
     return -1;
   }
 
@@ -275,9 +293,6 @@ int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
       }
       return ERR_CONNECT;
     }
-    // printf("Connected to %d.%d.%d.%d:%u\n", config.hostIPAddress[0],
-    //        config.hostIPAddress[1], config.hostIPAddress[2],
-    //        config.hostIPAddress[3], (unsigned)config.portNumber);
 
     while (alreadyTransmitted < txLen) {
       BaseType_t xBytesSent =
@@ -285,11 +300,7 @@ int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
                         (size_t)(txLen - alreadyTransmitted), 0);
       if (xBytesSent > 0) {
         alreadyTransmitted += (size_t)xBytesSent;
-        // printf("Sent %ld bytes (total %lu/%lu)\n", (long)xBytesSent,
-        //        (unsigned long)alreadyTransmitted, (unsigned long)txLen);
       } else {
-        // printf("Send error after %lu bytes (code=%ld)\n",
-        //        (unsigned long)alreadyTransmitted, (long)xBytesSent);
         FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
         FreeRTOS_closesocket(xSocket);
         if (attempt + 1 < maxAttempts) {
@@ -313,18 +324,10 @@ int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
         if (alreadyReceived < LOCAL_RX_BUF_SIZE) {
           localRx[alreadyReceived] = '\0';
         }
-        // printf("Recv chunk %ld bytes (total %lu) -> '%.*s'\n",
-        //        (long)xBytesReceived, (unsigned long)alreadyReceived,
-        //        (int)alreadyReceived, localRx);
         continue; /* try read more until timeout/close */
       } else if (xBytesReceived == 0) {
-        // printf("Recv timeout/close after %lu bytes\n",
-        //        (unsigned long)alreadyReceived);
         break;
       } else {
-        // printf("Recv error (code=%ld) after %lu bytes\n",
-        // (long)xBytesReceived,
-        //        (unsigned long)alreadyReceived);
         alreadyReceived = 0;
         FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
         FreeRTOS_closesocket(xSocket);
@@ -339,18 +342,10 @@ int32_t Ethernet::xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
     (void)FreeRTOS_shutdown(xSocket, FREERTOS_SHUT_RDWR);
     FreeRTOS_closesocket(xSocket);
     if (alreadyReceived > 0) {
-      // printf("Full received buffer (%lu bytes): '%.*s'\n",
-      //        (unsigned long)alreadyReceived, (int)alreadyReceived, localRx);
-      // printf("Hex:");
-      // for (size_t i = 0; i < alreadyReceived; ++i) {
-      //   printf(" %02X", (unsigned char)localRx[i]);
-      // }
-      // printf("\n");
       if (strstr(localRx, "OK") != NULL) {
         // printf("Received Qr Confirmation \n");
         return 0;
       }
-      // printf("Did not find 'OK' in response.\n");
     }
 
   attempt_end:;

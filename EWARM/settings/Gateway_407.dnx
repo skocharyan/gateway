@@ -37,11 +37,11 @@
         <stlinkfoundProbes />
     </StLinkDriver>
     <DebugChecksum>
-        <Checksum>2144325033</Checksum>
+        <Checksum>95233021</Checksum>
     </DebugChecksum>
     <Exceptions>
-        <StopOnUncaught>_ 0</StopOnUncaught>
         <StopOnThrow>_ 0</StopOnThrow>
+        <StopOnUncaught>_ 0</StopOnUncaught>
     </Exceptions>
     <Disassembly>
         <MixedMode>1</MixedMode>

@@ -6,7 +6,8 @@
 #include "stdio.h"
 #include "tim.h"
 
-constexpr float MAX_INST_CURRENT = 0;
+extern Ethernet *ethernetInstance;
+
 // Singleton accessor implementation
 Gate &Gate::getInstance() {
   static Gate instance;
@@ -101,7 +102,8 @@ void Gate::timerCallback(TimerHandle_t xTimer) { gateHandler(CLOSE); }
 void Gate::restartTimerISR(void) {
   // Don't use stdio in ISRs; also only call FreeRTOS FromISR APIs
   // after the scheduler (and timer daemon) are running.
-  if (xTaskGetSchedulerState() != taskSCHEDULER_RUNNING) {
+  if (xTaskGetSchedulerState() != taskSCHEDULER_RUNNING ||
+      timerStatus != SoftTimerStatus::RUNNING) {
     return;
   }
 
@@ -136,7 +138,8 @@ void Gate::handleOpenedState(void) {
   // vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
   suspendMotorTask = true;
   // send udp status
-  // Ethernet::getInstance().xUDPSend("OPENED", 6);
+  ethernetInstance->xUDPSendISR("OPENED", 7);
+  restartTimerISR();
 }
 
 void Gate::handleClosedState(void) {
@@ -152,7 +155,7 @@ void Gate::handleClosedState(void) {
   // vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
   suspendMotorTask = true;
   restartTimerISR();
-  // send udp status
+  ethernetInstance->xUDPSendISR("CLOSED", 7);
 }
 
 GateState Gate::getGateActualState(void) {

@@ -23,7 +23,7 @@ extern "C" void cliInit(void);
 
 SystemUart *systemUartInstance = nullptr;
 Ethernet *ethernetInstance = nullptr;
-
+SystemThread *systemThreadInstance = nullptr;
 EthernetConfig ethConfig;
 
 extern "C" void System_Init() {
@@ -36,6 +36,7 @@ extern "C" void System_Init() {
   // ethInit();
   static SystemThread systemThread; // The main worker task
 
+  systemThreadInstance = &systemThread;
   static SystemUart systemUart(systemThread.getTaskHandle(),
                                systemThread.getDataBufferRef());
 
