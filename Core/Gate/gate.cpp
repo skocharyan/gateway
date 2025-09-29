@@ -1,5 +1,6 @@
 #include "gate.hpp"
 #include "FreeRTOS.h"
+#include "eth.hpp"
 #include "main.h"
 #include "spi.h"
 #include "stdio.h"
@@ -28,10 +29,10 @@ void Gate::gateControlTask(void *params) {
     if (xTaskNotifyWait(0, UINT16_MAX, &notValue, pdMS_TO_TICKS(5000)) ==
         pdTRUE) {
       GateState currentState = gate->getGateActualState();
-      printf("Received task notification \n");
       if (currentState == CLOSED || currentState == UNDEFINED) {
         gate->gateHandler(OPEN);
       } else if (currentState == OPENED) {
+        gate->restartTimer();
         gate->gateHandler(IDLE);
       }
     } else if (gate->getGateActualState() == UNDEFINED &&
@@ -95,16 +96,30 @@ Gate::Gate() {
   suspendMotorTask = true;
 }
 
-void Gate::timerCallback(TimerHandle_t xTimer) {
-  printf("Software timer elapsed \n");
-  gateHandler(CLOSE);
+void Gate::timerCallback(TimerHandle_t xTimer) { gateHandler(CLOSE); }
+
+void Gate::restartTimerISR(void) {
+  // Don't use stdio in ISRs; also only call FreeRTOS FromISR APIs
+  // after the scheduler (and timer daemon) are running.
+  if (xTaskGetSchedulerState() != taskSCHEDULER_RUNNING) {
+    return;
+  }
+
+  if (softTimer == NULL) {
+    return;
+  }
+
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+  xTimerResetFromISR(softTimer, &xHigherPriorityTaskWoken);
+  portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
 }
 
-void Gate::resetTimer(void) {
-  printf("Software timer restarted\n");
-  BaseType_t pxHigherPriorityTaskWoken = pdFALSE;
-  xTimerResetFromISR(softTimer, &pxHigherPriorityTaskWoken);
-  portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+void Gate::restartTimer(void) {
+  if (xTimerIsTimerActive(softTimer) == pdFALSE) {
+    xTimerStart(softTimer, 0);
+  } else {
+    xTimerReset(softTimer, 0);
+  }
 }
 
 void Gate::handleOpenedState(void) {
@@ -120,6 +135,8 @@ void Gate::handleOpenedState(void) {
   controlGateMotor(GateAction::IDLE);
   // vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
   suspendMotorTask = true;
+  // send udp status
+  // Ethernet::getInstance().xUDPSend("OPENED", 6);
 }
 
 void Gate::handleClosedState(void) {
@@ -134,42 +151,34 @@ void Gate::handleClosedState(void) {
   controlGateMotor(GateAction::IDLE);
   // vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
   suspendMotorTask = true;
-  resetTimer();
+  restartTimerISR();
+  // send udp status
 }
 
 GateState Gate::getGateActualState(void) {
   // Reads the state of the gate limit switches to determine the actual
   // position. Assumes active-high logic: pin set means switch released.
   bool closeSwReleased =
-      (LL_GPIO_IsInputPinSet(OPEN_SW_GPIO_Port, OPEN_SW_Pin) == 1);
-  bool openSwReleased =
-      (LL_GPIO_IsInputPinSet(CLOSE_SW_GPIO_Port, CLOSE_SW_Pin) == 1);
+      LL_GPIO_IsInputPinSet(CLOSE_SW_GPIO_Port, CLOSE_SW_Pin);
+  bool openSwReleased = LL_GPIO_IsInputPinSet(OPEN_SW_GPIO_Port, OPEN_SW_Pin);
 
-  // If the open switch is released and the close switch is pressed, gate is
-  // closed.
-  if (openSwReleased && !closeSwReleased) {
-    return CLOSED;
+  if (closeSwReleased && !openSwReleased) {
+    return GateState::CLOSED;
+  } else if (!closeSwReleased && openSwReleased) {
+    return GateState::OPENED;
   }
-  // If the close switch is released and the open switch is pressed, gate is
-  // opened.
-  else if (!openSwReleased && closeSwReleased) {
-    return OPENED;
-  }
-  // Otherwise, state is undefined (e.g., both switches released or pressed).
-  return UNDEFINED;
+  return GateState::UNDEFINED;
 }
 
 void Gate::gateHandler(GateAction action) {
   GateState currentState = getGateActualState();
-  printf("Current state %d \n", (uint8_t)currentState);
   if (action == GateAction::OPEN) {
     if (currentState != GateState::OPENED) {
       gateStatus = GateStatus::OPENING;
-      printf("Opening \n");
       controlGateMotor(action); // Start motor first, then enable monitoring
+      restartTimer();
       vTaskResume(gateMonitorTaskHandle);
     } else {
-      // Gate is already fully open
       gateStatus = GateStatus::WAITING;
       controlGateMotor(GateAction::IDLE);
     }
@@ -197,7 +206,6 @@ void Gate::controlGateMotor(GateAction action) {
     LL_GPIO_SetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
     LL_GPIO_ResetOutputPin(MOTOR_DIR_2_GPIO_Port, MOTOR_DIR_2_Pin);
     PWM_SetDutyCycle(100);
-    printf("MOTOR is clossing \n");
   } else if (action == GateAction::OPEN) {
     LL_GPIO_ResetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
     LL_GPIO_SetOutputPin(MOTOR_DIR_2_GPIO_Port, MOTOR_DIR_2_Pin);
@@ -206,7 +214,6 @@ void Gate::controlGateMotor(GateAction action) {
     LL_GPIO_ResetOutputPin(MOTOR_DIR_GPIO_Port, MOTOR_DIR_Pin);
     LL_GPIO_ResetOutputPin(MOTOR_DIR_2_GPIO_Port, MOTOR_DIR_2_Pin);
     PWM_SetDutyCycle(0);
-    printf("MOTOR disabled \n");
   }
 }
 

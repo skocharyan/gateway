@@ -37,7 +37,9 @@ private:
 
   volatile TickType_t scanTimeout = GATE_SCAN_INIT_TIMEOUT;
 
-  void resetTimer(void);
+  void restartTimerISR(void);
+
+  void restartTimer(void);
 
   float getInstantCurrent(void);
 

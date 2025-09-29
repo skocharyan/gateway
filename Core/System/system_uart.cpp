@@ -88,7 +88,6 @@ void SystemUart::process(void) {
         // Linear case: data is contiguous
         newDataLen = dma_pos - qrLastPos;
         memcpy(dmaProcessBuffer, &dmaBuffer[qrLastPos], newDataLen);
-        printf("Detected length: %lu\n", (unsigned long)newDataLen);
       } else {
         uint32_t tailLen = RX_BUFFER_SIZE - qrLastPos;
         uint32_t headLen = dma_pos;
@@ -97,7 +96,6 @@ void SystemUart::process(void) {
           memcpy(dmaProcessBuffer + tailLen, dmaBuffer, headLen);
         }
         newDataLen = tailLen + headLen;
-        printf("Detected length (wrap): %lu\n", (unsigned long)newDataLen);
       }
 
       // Notify QR task that new data is available
@@ -114,10 +112,7 @@ void SystemUart::process(void) {
   }
 }
 
-extern "C" void USART1_IRQHandler_cpp(void) {
-  printf("Uart interrupt being called \n");
-  systemUartInstance->process();
-}
+extern "C" void USART1_IRQHandler_cpp(void) { systemUartInstance->process(); }
 
 void USART1_IRQHandler(void) {
   extern void USART1_IRQHandler_cpp(void);

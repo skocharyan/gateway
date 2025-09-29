@@ -45,7 +45,6 @@ void SystemThread::threadFunction(void *params) {
         pdTRUE) {
       if (self->state == SYSTEM_IDLE) {
         self->state = SYSTEM_BUSY;
-        printf("QR data: %s\n", self->dmaProcessBuffer);
         int32_t success = ethernetInstance->xTCPSendAndReceive(
             (const char *)self->dmaProcessBuffer,
             strlen((const char *)self->dmaProcessBuffer), 500);

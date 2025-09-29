@@ -5,6 +5,9 @@
 #include "stdio.h"
 #include "task.h"
 
+// Define the global task handle here
+TaskHandle_t xUdpTaskHandle = nullptr;
+
 // Private function prototypes
 extern "C" NetworkInterface_t *
 pxSTM32Fxx_FillInterfaceDescriptor(BaseType_t xEMACIndex,
@@ -14,6 +17,32 @@ extern "C" void generate_mac_address(uint8_t *device_id, uint8_t *mac_buffer);
 // EOF prototypes
 
 Ethernet::Ethernet(EthernetConfig config) : config{config} {
+
+  xUdpTaskHandle =
+      xTaskCreateStatic(xUdpTask, "UDPTask", UDP_TASK_STACK_SIZE, this,
+                        tskIDLE_PRIORITY + 5, xUdpStack, &xUdpTaskBuffer);
+
+  configASSERT(xUdpTaskHandle != nullptr);
+
+  memset(&xUdpTxAddress, 0, sizeof(xUdpTxAddress));
+
+  xUdpTxAddress.sin_address.ulIP_IPv4 =
+      FreeRTOS_inet_addr_quick(config.ipAddress[0], config.ipAddress[1],
+                               config.ipAddress[2], 255); // broadcast message
+
+  // xUdpTxAddress.sin_address.ulIP_IPv4 = FreeRTOS_inet_addr("192.168.0.50");
+  xUdpTxAddress.sin_family = FREERTOS_AF_INET4;
+  xUdpTxAddress.sin_port = FreeRTOS_htons(10000);
+
+  /* Create the socket. */
+  xUDPTxSocket =
+      FreeRTOS_socket(FREERTOS_AF_INET, /* Used for IPv4 UDP socket. */
+                      /* FREERTOS_AF_INET6 can be used for IPv6 UDP socket. */
+                      FREERTOS_SOCK_DGRAM, /*FREERTOS_SOCK_DGRAM for UDP.*/
+                      FREERTOS_IPPROTO_UDP);
+
+  /* Check the socket was created. */
+  configASSERT(xUDPTxSocket != FREERTOS_INVALID_SOCKET);
 
   printConfig();
   // Ethernet constructor initalization
@@ -60,6 +89,52 @@ Ethernet::Ethernet(EthernetConfig config) : config{config} {
   // printf("Ethernet initialized \n");
 }
 
+void Ethernet::xUdpTask(void *params) {
+  // Ethernet *eth = static_cast<Ethernet *>(params);
+  long lBytes;
+  uint8_t cReceivedString[60];
+  struct freertos_sockaddr xClient, xBindAddress;
+  uint32_t xClientLength = sizeof(xClient);
+  Socket_t xListeningSocket;
+
+  /* Attempt to open the socket. */
+  xListeningSocket = FreeRTOS_socket(
+      FREERTOS_AF_INET, FREERTOS_SOCK_DGRAM, /* FREERTOS_SOCK_DGRAM for UDP */
+      FREERTOS_IPPROTO_UDP);
+
+  /* Check the socket was created. */
+  configASSERT(xListeningSocket != FREERTOS_INVALID_SOCKET);
+
+  memset(&xBindAddress, 0, sizeof(xBindAddress));
+  xBindAddress.sin_port = FreeRTOS_htons(9988);
+  xBindAddress.sin_family = FREERTOS_AF_INET4;
+  FreeRTOS_bind(xListeningSocket, &xBindAddress, sizeof(xBindAddress));
+
+  for (;;) {
+    /* Receive data from the socket. ulFlags is zero, so the standard
+       interface is used. By default the block time is portMAX_DELAY, but it
+       can be changed using FreeRTOS_setsockopt(). */
+    lBytes =
+        FreeRTOS_recvfrom(xListeningSocket, cReceivedString,
+                          sizeof(cReceivedString), 0, &xClient, &xClientLength);
+
+    if (lBytes > 0) {
+      // Hadle the received data
+      printf("Received %ld bytes: '%.*s'\n", (long)lBytes, (int)lBytes,
+             cReceivedString);
+    }
+  }
+}
+
+// Send udp packet
+int32_t Ethernet::xUDPSend(const char *pcTxBuffer, size_t txLen) {
+  if (xUDPTxSocket == nullptr) {
+    return -1;
+  }
+  return FreeRTOS_sendto(xUDPTxSocket, pcTxBuffer, txLen, 0, &xUdpTxAddress,
+                         sizeof(xUdpTxAddress));
+}
+
 void Ethernet::printConfig() {
   printf("IP Address: %d.%d.%d.%d\n", config.ipAddress[0], config.ipAddress[1],
          config.ipAddress[2], config.ipAddress[3]);
@@ -85,7 +160,6 @@ int32_t Ethernet::xTCPSend(const char *pcTxBuffer, size_t txLen) {
 
   /* Diagnostic: ensure network is up before attempting to connect */
   if (FreeRTOS_IsNetworkUp() == pdFALSE) {
-    // printf("xTCPSend: network is not up yet\n");
     return -1;
   }
 
@@ -111,8 +185,9 @@ int32_t Ethernet::xTCPSend(const char *pcTxBuffer, size_t txLen) {
 
   if (FreeRTOS_connect(xSocket, &xRemoteAddress, sizeof(xRemoteAddress)) != 0) {
     FreeRTOS_closesocket(xSocket);
-    return -1;
+    return ERR_SOCKET_CREATE;
   }
+
   while (alreadyTransmitted < txLen) {
     BaseType_t xBytesSent =
         FreeRTOS_send(xSocket, &pcTxBuffer[alreadyTransmitted],

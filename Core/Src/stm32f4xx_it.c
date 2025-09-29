@@ -22,7 +22,9 @@
 #include "main.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "FreeRTOS.h"
 #include "stdio.h"
+#include "task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -210,11 +212,14 @@ void TIM7_IRQHandler(void) {
   /* USER CODE BEGIN TIM7_IRQn 0 */
   if (LL_TIM_IsActiveFlag_UPDATE(TIM7)) { // prevent debouncing
     LL_TIM_ClearFlag_UPDATE(TIM7);
-    if (!LL_GPIO_IsInputPinSet(CLOSE_SW_GPIO_Port, CLOSE_SW_Pin)) {
-      handleClosedState();
-    }
-    if (!LL_GPIO_IsInputPinSet(OPEN_SW_GPIO_Port, OPEN_SW_Pin)) {
-      handleOpenedState();
+    // Only call into FreeRTOS-aware code when the scheduler is running
+    if (xTaskGetSchedulerState() == taskSCHEDULER_RUNNING) {
+      if (!LL_GPIO_IsInputPinSet(CLOSE_SW_GPIO_Port, CLOSE_SW_Pin)) {
+        handleClosedState();
+      }
+      if (!LL_GPIO_IsInputPinSet(OPEN_SW_GPIO_Port, OPEN_SW_Pin)) {
+        handleOpenedState();
+      }
     }
   }
 

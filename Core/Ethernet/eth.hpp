@@ -10,6 +10,9 @@ extern "C" {
 #include "stdint.h"
 #include "task.h"
 
+// Use a C-compatible constant to support C and C++ compilers
+#define UDP_TASK_STACK_SIZE 512U
+
 typedef enum { DHCP_STATIC, DHCP_DYNAMIC, ETH_OFF } DhcpMode_t;
 
 typedef struct __attribute__((aligned(8))) {
@@ -37,6 +40,10 @@ enum ErrorCodes {
 #endif
 
 #ifdef __cplusplus
+
+// Provide extern declaration; define in eth.cpp
+extern TaskHandle_t xUdpTaskHandle;
+
 class Ethernet {
 private:
   EthernetConfig config;
@@ -44,7 +51,16 @@ private:
   NetworkInterface_t xInterfaces[1];
   NetworkEndPoint_t xEndPoints[1];
 
+  StaticTask_t xUdpTaskBuffer;
+  StackType_t xUdpStack[UDP_TASK_STACK_SIZE];
+
+  Socket_t xUDPTxSocket{nullptr};
+  // Rename to match usage in eth.cpp
+  struct freertos_sockaddr xUdpTxAddress;
+
   void printConfig();
+
+  static void xUdpTask(void *params);
 
 public:
   Ethernet(EthernetConfig config);
@@ -58,6 +74,7 @@ public:
    */
   int32_t xTCPSendAndReceive(const char *pcTxBuffer, size_t txLen,
                              TickType_t recvTimeoutMs);
+  int32_t xUDPSend(const char *pcTxBuffer, size_t txLen);
 };
 #endif // __cplusplus
 
