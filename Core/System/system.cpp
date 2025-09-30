@@ -10,11 +10,11 @@
 #include "system_uart.hpp"
 #include "task.h"
 
-extern EthernetConfig ethConfig;
+extern Config_t ethConfig;
 
-static void loadEthConfigs(EthernetConfig &ethConfig) {
+static void loadEthConfigs(Config_t &ethConfig) {
   Flash_Read_Data(FLASH_CONFIG_ADDRESS, (uint32_t *)&ethConfig,
-                  sizeof(EthernetConfig) / 4);
+                  sizeof(Config_t) / 4);
 
   printf("Port numner from flash: %d\n", ethConfig.portNumber);
 }
@@ -24,7 +24,7 @@ extern "C" void cliInit(void);
 SystemUart *systemUartInstance = nullptr;
 Ethernet *ethernetInstance = nullptr;
 SystemThread *systemThreadInstance = nullptr;
-EthernetConfig ethConfig;
+Config_t ethConfig;
 
 extern "C" void System_Init() {
 

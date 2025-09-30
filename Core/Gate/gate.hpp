@@ -44,6 +44,12 @@ private:
 
   volatile TickType_t scanTimeout = GATE_SCAN_INIT_TIMEOUT;
 
+  TaskHandle_t gateIWDGTaskHandle;
+
+  StaticTask_t gateIWDGTaskBuffer;
+
+  StackType_t gateIWDGTaskStack[GATE_TASK_STACK_SIZE / 2];
+
   void restartTimerISR(void);
 
   void restartTimer(void);
@@ -55,6 +61,8 @@ private:
   static void gateControlTask(void *params);
 
   static void gateMonitorTask(void *params);
+
+  static void gateIWDGTask(void *params);
 
 public:
   // Get the singleton instance. Creates it on first call.

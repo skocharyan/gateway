@@ -1,11 +1,13 @@
 #include "gate.hpp"
 #include "FreeRTOS.h"
 #include "eth.hpp"
+#include "iwdg.h"
 #include "main.h"
 #include "spi.h"
 #include "stdio.h"
 #include "tim.h"
 
+extern IWDG_HandleTypeDef hiwdg;
 extern Ethernet *ethernetInstance;
 
 // Singleton accessor implementation
@@ -75,6 +77,14 @@ void Gate::gateMonitorTask(void *params) {
   }
 }
 
+void Gate::gateIWDGTask(void *params) {
+  Gate *gate = static_cast<Gate *>(params);
+  for (;;) {
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    HAL_IWDG_Refresh(&hiwdg);
+  }
+}
+
 Gate::Gate() {
 
   softTimer = xTimerCreateStatic("GateTimer", pdMS_TO_TICKS(GATE_WAIT_TIMEOUT),
@@ -89,15 +99,23 @@ Gate::Gate() {
       gateMonitorTask, "Gate Monitor", GATE_TASK_STACK_SIZE, this,
       GATE_TASK_PRIORITY, gateMonitorTaskStack, &gateMonitorTaskBuffer);
 
-  MX_TIM9_Init(); // Initialie the pwm timer
+  gateIWDGTaskHandle = xTaskCreateStatic(
+      gateIWDGTask, "Gate WD Task", GATE_TASK_STACK_SIZE / 2, this,
+      GATE_TASK_PRIORITY, gateIWDGTaskStack, &gateIWDGTaskBuffer);
 
-  MX_SPI1_Init(); // Initialize the SPI for current sensing
+  MX_TIM9_Init();
 
-  // vTaskSuspend(gateMonitorTaskHandle);
+  MX_SPI1_Init();
+
   suspendMotorTask = true;
 }
 
-void Gate::timerCallback(TimerHandle_t xTimer) { gateHandler(CLOSE); }
+void Gate::timerCallback(TimerHandle_t xTimer) {
+  if (timerStatus != SoftTimerStatus::RUNNING) {
+    return;
+  }
+  gateHandler(CLOSE);
+}
 
 void Gate::restartTimerISR(void) {
   // Don't use stdio in ISRs; also only call FreeRTOS FromISR APIs

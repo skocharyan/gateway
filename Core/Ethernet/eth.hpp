@@ -23,7 +23,9 @@ typedef struct __attribute__((aligned(8))) {
   uint8_t dnsAddress[4];
   uint32_t portNumber;
   uint8_t hostIPAddress[4];
-} EthernetConfig;
+  uint32_t deviceID;
+  uint32_t motorThrottle;
+} Config_t;
 
 enum ErrorCodes {
   ERR_PARAM = -10,
@@ -49,7 +51,7 @@ public:
   TaskHandle_t xUdpTxTaskHandle;
 
 private:
-  EthernetConfig config;
+  Config_t config;
   uint8_t ucMACAddress[6];
   NetworkInterface_t xInterfaces[1];
   NetworkEndPoint_t xEndPoints[1];
@@ -69,7 +71,7 @@ private:
   static void xUDPTxTask(void *params);
 
 public:
-  Ethernet(EthernetConfig config);
+  Ethernet(Config_t config);
 
   int32_t xTCPSend(const char *pcTxBuffer, size_t txLen);
 

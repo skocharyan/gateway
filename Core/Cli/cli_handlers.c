@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-extern EthernetConfig ethConfig;
+extern Config_t ethConfig;
 
 BaseType_t prvSetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
                          const char *pcCommandString) {
@@ -49,6 +49,21 @@ BaseType_t prvSetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
     uint16_t portNumber = (uint16_t)strtoul(param2, NULL, 10);
     ethConfig.portNumber = portNumber;
     snprintf(pcWriteBuffer, xWriteBufferLen, "Port set to %u\r\n", portNumber);
+  } else if (strcmp(param1, "device_id") == 0) {
+    uint32_t dev = (uint32_t)strtoul(param2, NULL, 10);
+    ethConfig.deviceID = dev;
+    snprintf(pcWriteBuffer, xWriteBufferLen, "Device ID set to %lu\r\n",
+             (unsigned long)dev);
+  } else if (strcmp(param1, "tt") == 0 || strcmp(param1, "throttle") == 0) {
+    uint32_t tt = (uint32_t)strtoul(param2, NULL, 10);
+    if (tt > 100) {
+      snprintf(pcWriteBuffer, xWriteBufferLen,
+               "Error: tt (throttle) must be between 0 and 100\r\n");
+      return pdFALSE;
+    }
+    ethConfig.motorThrottle = tt;
+    snprintf(pcWriteBuffer, xWriteBufferLen, "Throttle set to %lu (%%)\r\n",
+             (unsigned long)tt);
   } else if (strcmp(param1, "ip") == 0) {
 
     uint32_t ipAddress = FreeRTOS_inet_addr(param2);
@@ -98,7 +113,7 @@ BaseType_t prvSetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
   }
 
   if (Flash_Write_Data(FLASH_CONFIG_ADDRESS, (uint32_t *)&ethConfig,
-                       sizeof(EthernetConfig) / 4) != 0) {
+                       sizeof(Config_t) / 4) != 0) {
     snprintf(pcWriteBuffer, xWriteBufferLen,
              "Error: failed to write to flash\r\n");
   }
@@ -137,6 +152,12 @@ BaseType_t prvGetCommand(char *pcWriteBuffer, size_t xWriteBufferLen,
              ethConfig.dnsAddress[3], ethConfig.hostIPAddress[0],
              ethConfig.hostIPAddress[1], ethConfig.hostIPAddress[2],
              ethConfig.hostIPAddress[3], ethMode);
+    snprintf(pcWriteBuffer + strlen(pcWriteBuffer),
+             xWriteBufferLen - strlen(pcWriteBuffer),
+             "Device ID: %lu\r\n"
+             "Throttle: %lu\r\n",
+             (unsigned long)ethConfig.deviceID,
+             (unsigned long)ethConfig.motorThrottle);
     return pdFALSE;
   }
 

@@ -17,7 +17,7 @@ pxSTM32Fxx_FillInterfaceDescriptor(BaseType_t xEMACIndex,
 extern "C" void generate_mac_address(uint8_t *device_id, uint8_t *mac_buffer);
 // EOF prototypes
 
-Ethernet::Ethernet(EthernetConfig config) : config{config} {
+Ethernet::Ethernet(Config_t config) : config{config} {
 
   xUdpTaskHandle =
       xTaskCreateStatic(xUdpTask, "UDPTask", UDP_TASK_STACK_SIZE, this,
