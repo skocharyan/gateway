@@ -94,19 +94,30 @@ public:
   void gateHandler(GateAction action);
 
   void pause() {
+    if (systemThreadInstance == nullptr) {
+      /* System thread not initialized yet - nothing to pause. */
+      return;
+    }
     TaskHandle_t handle = systemThreadInstance->getTaskHandle();
     if (handle == NULL) {
       return;
     }
+    /* Suspend the system thread task from task context. Do NOT call
+       vTaskSuspendFromISR - suspending from ISRs isn't supported. */
     vTaskSuspend(handle);
     timerStatus = SoftTimerStatus::STOPPED;
   };
   void resume() {
+    if (systemThreadInstance == nullptr) {
+      /* System thread not initialized yet - nothing to resume. */
+      return;
+    }
     TaskHandle_t handle = systemThreadInstance->getTaskHandle();
     if (handle == NULL) {
       return;
     }
     vTaskResume(handle);
+    gateHandler(GateAction::CLOSE); // automaticaly close after resume
     timerStatus = SoftTimerStatus::RUNNING;
   };
 };
