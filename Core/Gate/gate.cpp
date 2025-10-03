@@ -33,8 +33,10 @@ void Gate::gateControlTask(void *params) {
         pdTRUE) {
       GateState currentState = gate->getGateActualState();
       if (currentState == CLOSED || currentState == UNDEFINED) {
+        printf("Should open \n");
         gate->gateHandler(OPEN);
       } else if (currentState == OPENED) {
+        printf("Should Reopen \n");
         gate->restartTimer();
         gate->gateHandler(IDLE);
       }
@@ -80,7 +82,7 @@ void Gate::gateMonitorTask(void *params) {
 void Gate::gateIWDGTask(void *params) {
   Gate *gate = static_cast<Gate *>(params);
   for (;;) {
-    vTaskDelay(pdMS_TO_TICKS(1000));
+    vTaskDelay(pdMS_TO_TICKS(500));
     HAL_IWDG_Refresh(&hiwdg);
   }
 }
@@ -111,6 +113,7 @@ Gate::Gate() {
 }
 
 void Gate::timerCallback(TimerHandle_t xTimer) {
+  printf("Timer elapses \n");
   if (timerStatus != SoftTimerStatus::RUNNING) {
     return;
   }
@@ -129,6 +132,7 @@ void Gate::restartTimerISR(void) {
     return;
   }
 
+  printf("restart timer from isr \n");
   BaseType_t xHigherPriorityTaskWoken = pdFALSE;
   xTimerResetFromISR(softTimer, &xHigherPriorityTaskWoken);
   portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
@@ -148,7 +152,7 @@ void Gate::handleOpenedState(void) {
   // 1. disable motors
   // 2. sart wait timer
   // 3. set staus waiting
-  if (gateStatus == GateStatus::OPENING) {
+  if (gateStatus == GateStatus::CLOSING) {
     return;
   }
   gateStatus = GateStatus::WAITING;
@@ -158,6 +162,7 @@ void Gate::handleOpenedState(void) {
   // send udp status
   ethernetInstance->xUDPSendISR("OPENED", 7);
   restartTimerISR();
+  printf("Opened \n");
 }
 
 void Gate::handleClosedState(void) {
@@ -165,14 +170,16 @@ void Gate::handleClosedState(void) {
   // when the gate is fully closed
   // 1. disable motor
   // 2. set status waiting
-  if (gateStatus == GateStatus::CLOSING) {
+  printf("Closed \n");
+
+  if (gateStatus == GateStatus::OPENING) {
     return;
   }
   gateStatus = GateStatus::WAITING;
   controlGateMotor(GateAction::IDLE);
   // vTaskSuspend(gateMonitorTaskHandle); // thisable the current mointoring
   suspendMotorTask = true;
-  restartTimerISR();
+  //  restartTimerISR();
   ethernetInstance->xUDPSendISR("CLOSED", 7);
 }
 
@@ -184,9 +191,9 @@ GateState Gate::getGateActualState(void) {
   bool openSwReleased = LL_GPIO_IsInputPinSet(OPEN_SW_GPIO_Port, OPEN_SW_Pin);
 
   if (closeSwReleased && !openSwReleased) {
-    return GateState::CLOSED;
-  } else if (!closeSwReleased && openSwReleased) {
     return GateState::OPENED;
+  } else if (!closeSwReleased && openSwReleased) {
+    return GateState::CLOSED;
   }
   return GateState::UNDEFINED;
 }
@@ -196,9 +203,9 @@ void Gate::gateHandler(GateAction action) {
   if (action == GateAction::OPEN) {
     if (currentState != GateState::OPENED) {
       gateStatus = GateStatus::OPENING;
+      printf("Enabling motor to open \n");
       controlGateMotor(action); // Start motor first, then enable monitoring
-      restartTimer();
-      vTaskResume(gateMonitorTaskHandle);
+      // vTaskResume(gateMonitorTaskHandle);
     } else {
       gateStatus = GateStatus::WAITING;
       controlGateMotor(GateAction::IDLE);
@@ -208,7 +215,7 @@ void Gate::gateHandler(GateAction action) {
     if (currentState != GateState::CLOSED) {
       gateStatus = GateStatus::CLOSING;
       controlGateMotor(action); // Start motor first, then enable monitoring
-      vTaskResume(gateMonitorTaskHandle);
+      // vTaskResume(gateMonitorTaskHandle);
     } else {
       // Gate is already fully closed
       gateStatus = GateStatus::WAITING;

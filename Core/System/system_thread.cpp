@@ -36,10 +36,6 @@ void SystemThread::threadFunction(void *params) {
 
   uint32_t notValue;
 
-  // if (getGateActualState() == IDLE) {
-  //     handleGate(CLOSE);  // close idle state;
-  // }
-
   while (1) {
     if (xTaskNotifyWait(0, UINT32_MAX, &notValue, QR_WAITING_TIME_MS) ==
         pdTRUE) {
@@ -49,7 +45,7 @@ void SystemThread::threadFunction(void *params) {
             (const char *)self->dmaProcessBuffer,
             strlen((const char *)self->dmaProcessBuffer), 500);
         if (success == 0) {
-          xTaskNotify(gate.gateTaskHandle, 1, eSetValueWithOverwrite);
+          xTaskNotify(gate.gateTaskHandle, 1, eNoAction);
           self->state = SYSTEM_IDLE;
         }
 

@@ -107,6 +107,7 @@ public:
     vTaskSuspend(handle);
     timerStatus = SoftTimerStatus::STOPPED;
   };
+
   void resume() {
     if (systemThreadInstance == nullptr) {
       /* System thread not initialized yet - nothing to resume. */
@@ -116,10 +117,14 @@ public:
     if (handle == NULL) {
       return;
     }
+
+    xTaskNotifyStateClear(handle);
     vTaskResume(handle);
-    gateHandler(GateAction::CLOSE); // automaticaly close after resume
+    gateHandler(GateAction::CLOSE);
     timerStatus = SoftTimerStatus::RUNNING;
   };
+
+  void open() { gateHandler(GateAction::OPEN); }
 };
 
 #endif

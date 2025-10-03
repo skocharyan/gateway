@@ -104,6 +104,9 @@ void Ethernet::xUdpTask(void *params) {
       } else if (strstr((const char *)cReceivedString, "RESUME") != NULL) {
         printf("QR Resumed\n");
         Gate::getInstance().resume();
+      } else if (strstr((const char *)cReceivedString, "OPEN") != NULL) {
+        printf("Received open command \n");
+        Gate::getInstance().open();
       }
     }
   }

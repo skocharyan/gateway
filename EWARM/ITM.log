@@ -1,0 +1,89 @@
+Port numner from flash: 7788
+IP Address: 192.168.0.111
+Subnet Mask: 255.255.255.0
+Gateway Address: 192.168.0.1
+DNS Address: 255.255.255.255
+Port Number: 7788
+task is created 
+SystemUart constructor called 
+Received 4 bytes: 'OPEN'
+Received open command 
+Enabling motor to open 
+restart timer from isr 
+Opened 
+Sent 7 bytes
+Closed 
+Sent 7 bytes
+Timer elapses 
+Received 4 bytes: 'OPEN'
+Received open command 
+Enabling motor to open 
+restart timer from isr 
+Opened 
+Sent 7 bytes
+Timer elapses 
+Closed 
+restart timer from isr 
+Opened 
+Sent 7 bytes
+Received 4 bytes: 'OPEN'
+Received open command 
+Enabling motor to open 
+Timer elapses 
+Closed 
+Sent 7 bytes
+Received 4 bytes: 'OPEN'
+Received open command 
+Enabling motor to open 
+Closed 
+restart timer from isr 
+Opened 
+Sent 7 bytes
+Received 5 bytes: 'PAUSE'
+QR Paused
+Timer elapses 
+Received 6 bytes: 'RESUME'
+QR Resumed
+Closed 
+restart timer from isr 
+Opened 
+Sent 7 bytes
+Received 5 bytes: 'PAUSE'
+QR Paused
+Received 5 bytes: 'PAUSE'
+QR Paused
+Timer elapses 
+Received 4 bytes: 'OPEN'
+Received open command 
+Enabling motor to open 
+Opened 
+Sent 7 bytes
+Received 5 bytes: 'PAUSE'
+QR Paused
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 6 bytes: 'RESUME'
+QR Resumed
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 4 bytes: 'OPEN'
+Received open command 
+Received 4 bytes: 'OPEN'
+Received open command 
+Enabling motor to open 
+restart timer from isr 
+Opened 
+Sent 7 bytes
+Received 5 bytes: 'PAUSE'
+QR Paused
+Timer elapses 

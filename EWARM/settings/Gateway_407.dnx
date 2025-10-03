@@ -21,27 +21,27 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <PlDriver>
-        <MemConfigValue>C:\iar\ewarm-9.60.3\arm\config\debugger\ST\STM32F407VG.ddf</MemConfigValue>
         <FirstRun>0</FirstRun>
+        <MemConfigValue>C:\iar\ewarm-9.60.3\arm\config\debugger\ST\STM32F407VG.ddf</MemConfigValue>
     </PlDriver>
     <ArmDriver>
         <EnableCache>0</EnableCache>
         <EnforceMemoryConfiguration>1</EnforceMemoryConfiguration>
     </ArmDriver>
     <StLinkDriver>
+        <stlinkserialNo>066AFF383138564D43232124</stlinkserialNo>
+        <stlinkfoundProbes />
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
         <CStepIntDis>_ 0</CStepIntDis>
         <stlinkResetStyle>3</stlinkResetStyle>
         <stlinkResetStrategy>3</stlinkResetStrategy>
-        <stlinkserialNo>066AFF383138564D43232124</stlinkserialNo>
-        <stlinkfoundProbes />
     </StLinkDriver>
     <DebugChecksum>
-        <Checksum>95233021</Checksum>
+        <Checksum>763318764</Checksum>
     </DebugChecksum>
     <Exceptions>
-        <StopOnThrow>_ 0</StopOnThrow>
         <StopOnUncaught>_ 0</StopOnUncaught>
+        <StopOnThrow>_ 0</StopOnThrow>
     </Exceptions>
     <Disassembly>
         <MixedMode>1</MixedMode>
@@ -72,6 +72,13 @@
         <ITMportsLogFile>3</ITMportsLogFile>
         <ITMlogFile>$PROJ_DIR$\ITM.log</ITMlogFile>
     </SWOTraceHWSettings>
+    <struct_types>
+        <Fmt0>Config_t-deviceID	3	0</Fmt0>
+        <Fmt1>Config_t-dhcpMode	3	0</Fmt1>
+    </struct_types>
+    <array_types>
+        <Fmt0>uint8_t[4]	3	0</Fmt0>
+    </array_types>
     <Trace2>
         <Enabled>0</Enabled>
         <ShowSource>0</ShowSource>

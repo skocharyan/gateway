@@ -93,7 +93,7 @@ int main(void)
   MX_DMA_Init();
   MX_USB_DEVICE_Init();
   MX_TIM7_Init();
-  MX_IWDG_Init();
+//  MX_IWDG_Init();
   /* USER CODE BEGIN 2 */
   System_Init();
   /* USER CODE END 2 */
